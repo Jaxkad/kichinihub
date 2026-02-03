@@ -14,8 +14,8 @@ export default function Home() {
       <header 
         className="md-elevation-level4 relative overflow-hidden"
         style={{ 
-          backgroundColor: 'var(--md-sys-color-primary)',
-          color: 'var(--md-sys-color-on-primary)'
+          backgroundColor: '#6D1600',
+          color: '#FFFFFF'
         }}
       >
         {/* Background Pattern */}
@@ -85,8 +85,8 @@ export default function Home() {
       <footer 
         className="md-elevation-level4 mt-16"
         style={{ 
-          backgroundColor: 'var(--md-sys-color-primary)',
-          color: 'var(--md-sys-color-on-primary)'
+          backgroundColor: '#6D1600',
+          color: '#FFFFFF'
         }}
       >
         {/* Social Footer */}
