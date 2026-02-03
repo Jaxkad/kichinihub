@@ -51,6 +51,25 @@
 /* Dark Theme */
 @media (prefers-color-scheme: dark) {
   :root {
+    /* Primary Colors - Dark Mode */
+    --md-sys-color-primary: #F8E4E0;
+    --md-sys-color-on-primary: #4B0E00;
+    --md-sys-color-primary-container: #4B0E00;
+    --md-sys-color-on-primary-container: #F8E4E0;
+    
+    /* Secondary Colors - Dark Mode */
+    --md-sys-color-secondary: #F6F6F6;
+    --md-sys-color-on-secondary: #535353;
+    --md-sys-color-secondary-container: #535353;
+    --md-sys-color-on-secondary-container: #F6F6F6;
+    
+    /* Tertiary Colors - Dark Mode */
+    --md-sys-color-tertiary: #FFDCC9;
+    --md-sys-color-on-tertiary: #5C2D00;
+    --md-sys-color-tertiary-container: #5C2D00;
+    --md-sys-color-on-tertiary-container: #FFDCC9;
+    
+    /* Surface Colors - Dark Mode */
     --md-sys-color-surface: #2D2D2D;
     --md-sys-color-on-surface: #F6F6F6;
     --md-sys-color-surface-variant: #404040;
