@@ -17,7 +17,7 @@ export function SocialFooter({ social }: SocialFooterProps) {
       <div className="flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Social Icons */}
         <div className="flex items-center gap-2">
-          <span className="text-sm font-medium mr-2" style={{ color: 'var(--md-sys-color-on-primary)' }}>
+          <span className="text-sm font-medium mr-2" style={{ color: '#FFFFFF' }}>
             Follow:
           </span>
           <div className="flex gap-1">
@@ -29,7 +29,7 @@ export function SocialFooter({ social }: SocialFooterProps) {
               style={{ color: 'var(--md-sys-color-on-primary)' }}
               aria-label="Instagram"
             >
-              <FaInstagram className="w-4 h-4" style={{ color: '#E4405F' }} />
+              <FaInstagram className="w-6 h-6" style={{ color: '#E4405F' }} />
             </a>
             <a 
               href={`https://facebook.com/${social.facebook}`}
@@ -39,7 +39,7 @@ export function SocialFooter({ social }: SocialFooterProps) {
               style={{ color: 'var(--md-sys-color-on-primary)' }}
               aria-label="Facebook"
             >
-              <FaFacebook className="w-4 h-4" style={{ color: '#1877F2' }} />
+              <FaFacebook className="w-6 h-6" style={{ color: '#1877F2' }} />
             </a>
             <a 
               href={`https://twitter.com/${social.twitter}`}
@@ -49,7 +49,7 @@ export function SocialFooter({ social }: SocialFooterProps) {
               style={{ color: 'var(--md-sys-color-on-primary)' }}
               aria-label="X"
             >
-              <FaX className="w-4 h-4" style={{ color: '#000000' }} />
+              <FaX className="w-6 h-6" style={{ color: '#000000' }} />
             </a>
             <a 
               href={`https://tiktok.com/@${social.tiktok}`}
@@ -59,7 +59,7 @@ export function SocialFooter({ social }: SocialFooterProps) {
               style={{ color: 'var(--md-sys-color-on-primary)' }}
               aria-label="TikTok"
             >
-              <FaTiktok className="w-4 h-4" style={{ color: '#000000' }} />
+              <FaTiktok className="w-6 h-6" style={{ color: '#000000' }} />
             </a>
           </div>
         </div>
@@ -69,9 +69,9 @@ export function SocialFooter({ social }: SocialFooterProps) {
           <a 
             href={`tel:${social.rsvp}`}
             className="flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all duration-200 hover:bg-white/10 active:scale-95 text-sm"
-            style={{ color: 'var(--md-sys-color-on-primary)' }}
+            style={{ color: '#FFFFFF' }}
           >
-            <FaPhone className="w-4 h-4" />
+            <FaPhone className="w-6 h-6" style={{ color: '#FFFFFF' }} />
             <span className="font-medium">{social.rsvp}</span>
           </a>
         </div>

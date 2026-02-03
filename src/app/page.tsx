@@ -10,68 +10,73 @@ export default function Home() {
       {/* Sticky Navigator */}
       <StickyNavigator />
       
-      {/* Header - Beautiful Design with Logo */}
+      {/* Clean Professional Header */}
       <header 
-        className="md-elevation-level4 relative overflow-hidden"
+        className="md-elevation-level3 relative"
         style={{ 
-          backgroundColor: '#6D1600',
+          backgroundColor: '#6D1600', // Brand primary color for consistency
           color: '#FFFFFF'
         }}
       >
-        {/* Background Pattern */}
-        <div 
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
-        
-        <div className="relative max-w-6xl mx-auto px-4 py-12">
-          <div className="text-center space-y-6">
-            {/* Logo */}
-            <div className="flex justify-center mb-6">
+        <div className="relative max-w-6xl mx-auto px-6 py-6">
+          <div className="flex items-center justify-between">
+            {/* Logo and Brand - Left Side */}
+            <div className="flex items-center space-x-5">
+              {/* Logo */}
               <div className="relative">
                 <Image 
                   src="/IMG_4965.jpg" 
                   alt="KHICHINI Hub Logo" 
-                  width={128}
-                  height={128}
-                  className="object-contain drop-shadow-lg rounded-full"
+                  width={64}
+                  height={64}
+                  className="object-contain drop-shadow-lg rounded-full border-2 border-white/20"
                 />
               </div>
-            </div>
-            
-            {/* Restaurant Name */}
-            <div className="space-y-2">
-              <h1 className="md-typescale-display-medium font-bold" style={{ color: '#FFFFFF' }}>
-                <div style={{ fontFamily: 'Zebrazil, sans-serif', textAlign: 'center' }}>
-                  KHICHINI
-                  <div style={{ fontFamily: 'Britanny Signature, cursive', fontSize: '0.7em', marginTop: '-0.2em' }}>
-                    Hub
+              
+              {/* Restaurant Name */}
+              <div>
+                <h1 className="text-3xl font-bold leading-tight" style={{ color: '#FFFFFF' }}>
+                  <div style={{ fontFamily: 'Zebrazil, sans-serif' }}>
+                    KHICHINI
+                    <div style={{ fontFamily: 'Britanny Signature, cursive', fontSize: '0.5em', marginTop: '-0.2em' }}>
+                      Hub
+                    </div>
                   </div>
-                </div>
-              </h1>
-              <div className="w-24 h-1 mx-auto rounded-full" 
-                style={{ backgroundColor: 'var(--md-sys-color-secondary)' }}
-              />
+                </h1>
+                <p className="text-sm opacity-90 mt-2 font-light">
+                  Good food, great service, and all the convenience you crave. Let&apos;s make it easy!
+                </p>
+              </div>
             </div>
-            
-            {/* Tagline */}
-            <div className="space-y-2 max-w-2xl mx-auto">
-              <p className="md-typescale-title-large opacity-95 font-medium">
-                Where Memories Meet Flavor
-              </p>
-              <p className="md-typescale-title-medium opacity-85 italic">
-                Khala&apos;s greatest hits, now part of the Hub-story
-              </p>
-            </div>
-            
-            {/* Decorative Elements */}
-            <div className="flex justify-center items-center space-x-8 text-sm opacity-70">
-              <span className="md-typescale-label-medium">Malawi&apos;s Finest</span>
-              <span>•</span>
-              <span className="md-typescale-label-medium">Hub of Flavors</span>
-            </div>
+
+            {/* Navigation - Right Side */}
+            <nav className="hidden md:flex items-center space-x-8">
+              <a href="#starters" className="text-white opacity-90 hover:opacity-100 transition-opacity font-medium">
+                Starters
+              </a>
+              <a href="#mains" className="text-white opacity-90 hover:opacity-100 transition-opacity font-medium">
+                Mains
+              </a>
+              <a href="#breakfast" className="text-white opacity-90 hover:opacity-100 transition-opacity font-medium">
+                Breakfast
+              </a>
+              <a href="#contact" className="text-white opacity-90 hover:opacity-100 transition-opacity font-medium">
+                Contact
+              </a>
+            </nav>
+
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden p-3 rounded-lg hover:bg-white/10 transition-colors" 
+              style={{ color: '#FFFFFF' }}
+              aria-label="Toggle menu"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
           </div>
         </div>
       </header>

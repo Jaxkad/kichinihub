@@ -32,508 +32,523 @@ export interface MenuData {
 export const menuData: MenuData = {
   sections: [
     {
-      id: 'breakfast',
-      title: 'BREAKFAST (WARM-UP ACTS)',
-      subtitle: "Sun's up, Food's ready Lets Do This",
+      id: 'starters',
+      title: 'Khala pa Khichini',
+      subtitle: 'Where would we be without Memories, Khalas greatest hits, now part of the HUBS-STORY',
       theme: 'red',
       items: [
         {
-          id: 'spanish-omelette',
-          name: 'Spanish Omelette',
-          description: 'Made with fresh veggies and herbs.',
-          price: 17500
+          id: 'tender-beef-ribs-wedges',
+          name: 'Tender Beef Ribs & Wedges',
+          description: 'Fall-off-the-bone ribs + crispy wedges = a match made in food heaven.',
+          price: 40000
         },
         {
-          id: 'bacon-cheese-omelette',
-          name: 'Bacon and Cheese Omelette',
-          description: 'Bacon, cheddar cheese & fluffy eggs.',
-          price: 18500,
-          dietary: { pork: true }
+          id: 'beer-battered-fish-chips',
+          name: 'Beer-Battered Fish & Chips',
+          description: 'Crispy, golden, and oh-so-satisfying. Dip it, crunch it, love it!',
+          price: 18000
         },
         {
-          id: 'hub-full-omelette',
-          name: 'Hub Full Omelette',
-          description: 'Packed with mushrooms, bacon, green pepper & cheddar cheese.',
-          price: 19500,
-          dietary: { pork: true }
+          id: 'tender-goat-ribs-wedges',
+          name: 'Tender Goat Ribs & Wedges',
+          description: 'Tender, spicy, and packed with flavor. Warning: Highly addictive!',
+          price: 23000
         },
         {
-          id: 'full-english-breakfast',
-          name: 'Full English Breakfast',
-          description: 'Sausages, beans, toast, mushrooms, bacon & eggs. Only whose anthem we know get why this is the real breakfast.',
-          price: 25000,
-          dietary: { pork: true }
+          id: 'spicy-chicken-gizzards',
+          name: 'Spicy Chicken Gizzards',
+          description: 'Sticky, smoky, and finger-lickin\' good. Napkins mandatory!',
+          price: 10000
         },
         {
-          id: 'poached-egg-toast',
-          name: 'Poached Egg on Toast',
-          description: 'Fresh eggs poached and served on toasted bread. Doesn\'t get better than this.',
-          price: 15500
+          id: 'avocado-hummus-wrap',
+          name: 'Avocado & Hummus Wrap',
+          description: 'Creamy avocado meets smooth hummus in a wrap that\'s fresh, healthy, and totally delicious.',
+          price: 15000
         }
       ]
     },
     {
-      id: 'salads',
-      title: 'SALADS (GREEN & GREAT)',
-      subtitle: 'FOR WHEN YOU WANNA FEEL GOOD AND EAT GOOD.',
+      id: 'breakfast',
+      title: 'BREAKFAST- "Warm-Up Acts"',
+      subtitle: 'Sun\'s up, food\'s ready—let\'s do this!',
       theme: 'light',
       items: [
         {
-          id: 'beetroot-feta-butternut',
-          name: 'Beetroot, Feta & Butternut Salad',
-          description: 'Sweet, salty and totally Instagram-worthy. Healthy never tasted so good.',
-          price: 18500,
-          dietary: { vegan: false }
+          id: 'spanish-omlet',
+          name: 'Spanish omlet',
+          description: 'Fluffy eggs, potatoes, and peppers. A little slice of Spain to start your day.',
+          price: 18000
         },
         {
-          id: 'sesame-chicken-avocado',
-          name: 'Sesame Chicken & Avocado Salad',
-          description: 'Grilled chicken in creamy avocado & sesame. A salad you\'ll actually crave!',
-          price: 21000
+          id: 'bacon-cheese-omellette',
+          name: 'Bacon and Cheese omellette',
+          description: 'Omellette bliss with crispy bacon and melty cheese. Breakfast just got better!',
+          price: 18000,
+          dietary: { pork: true }
         },
         {
-          id: 'steamed-veggie',
-          name: 'Steamed Mixed Veggie Salad',
-          description: 'The veggie side of champions. A veggie fix from a winner.',
-          price: 16500,
-          dietary: { vegan: true }
+          id: 'hub-full-omellette',
+          name: 'Hub Full omellette',
+          description: 'Packed with all your favorite fillings. The ultimate way to start your day.',
+          price: 19000
+        },
+        {
+          id: 'full-english-breakfast',
+          name: 'Full English Breakfast',
+          description: 'All your brekkie faves on one plate. Because why choose when you can have it all?',
+          price: 33000,
+          dietary: { pork: true }
+        },
+        {
+          id: 'poached-egg-toast',
+          name: 'Poached Egg on toast',
+          description: 'Simple, satisfying, and always a good idea. Breakfast doesn\'t get better than this.',
+          price: 15000
         }
       ]
     },
     {
       id: 'soups',
-      title: 'Hugs in a Bowl (Soups)',
-      subtitle: 'WARM, COZY, AND FULL OF LOVE.',
+      title: 'HUGS IN A BOWL (Soups)',
+      subtitle: 'Warm, cozy, and full of love.',
       theme: 'cream',
       items: [
         {
           id: 'butternut-beetroot',
           name: 'Butternut & Beetroot Soup',
-          description: 'A sweet and savory blend. Comfort in a cup.',
-          price: 16500,
-          dietary: { vegan: true }
+          description: 'Creamy, dreamy, and oh-so-comforting. Like a hug in every spoonful.',
+          price: 14000
         },
         {
           id: 'leek-potato',
           name: 'Leek & Potato Soup',
-          description: 'Creamy, rich and soul-hugging. You\'ll want to sip it slowly.',
-          price: 17000,
-          dietary: { vegan: true }
+          description: 'Creamy, hearty, and full of flavor. Comfort food at its best.',
+          price: 14000
         },
         {
           id: 'carrot-ginger',
           name: 'Carrot Ginger Soup',
-          description: 'Zesty, bright & full of veggie happiness.',
-          price: 16500,
-          dietary: { vegan: true }
+          description: 'Sweet carrots + zesty ginger = a bowl of pure happiness.',
+          price: 15000
         },
         {
           id: 'mushroom',
-          name: 'Creamy Mushroom Soup',
-          description: 'Rich and packed with earthy mushroom goodness.',
-          price: 15000,
-          dietary: { vegan: true }
+          name: 'Creamy Mushroom soup',
+          description: 'Rich, creamy, and packed with earthy mushroom goodness.',
+          price: 15000
         }
       ]
     },
     {
       id: 'finger-foods',
-      title: 'Finger Foods',
-      subtitle: 'SMALL BITES, BIG FLAVORS!',
+      title: 'FINGER FOODS',
+      subtitle: 'Small bites, big flavors!',
       theme: 'teal',
       items: [
         {
           id: 'bbq-wings',
           name: 'BBQ Wings',
           description: 'Sticky, smoky, and finger-lickin\' good. Napkins mandatory!',
-          price: 18500,
-          dietary: { hot: true }
+          price: 20000
+        },
+        {
+          id: 'chicken-kebab',
+          name: 'Chicken Kebab',
+          description: 'Tender, juicy, and packed with flavor. Perfect for snacking or sharing.',
+          price: 20000
         },
         {
           id: 'beef-kebab',
-          name: 'Beef Kebab',
+          name: 'Beef kebab',
           description: 'Savory beef skewers grilled to perfection. A meat lover\'s dream.',
-          price: 18000
+          price: 22000
         },
         {
           id: 'bbq-drumstick',
           name: 'BBQ Drumstick',
           description: 'Juicy, smoky, and totally satisfying. Get your hands on these!',
-          price: 19500
+          price: 20000
         },
         {
-          id: 'spicy-meatballs',
-          name: 'Spicy Meat Balls',
+          id: 'spicy-meat-balls',
+          name: 'Spicy meat balls',
           description: 'Bite-sized, spicy, and full of flavor. Perfect for sharing (or not)!',
-          price: 19500,
-          dietary: { hot: true }
+          price: 19500
         },
         {
           id: 'bbq-pork-ribs',
           name: 'BBQ Pork Ribs',
           description: 'Sticky, smoky, and fall-off-the-bone tender. Ribs done right!',
-          price: 33000,
+          price: 40000,
           dietary: { pork: true }
         }
       ]
     },
     {
-      id: 'mediterranean',
-      title: 'MEDITERRANEAN DELIGHTS',
-      subtitle: 'FRESH, VIBRANT, AND FULL OF FLAVOR - STRAIGHT FROM THE MED KITCHEN TO YOUR PLATE!',
-      theme: 'terracotta',
+      id: 'salads',
+      title: 'SALADS (GREEN & GREAT)',
+      subtitle: 'For when you wanna feel good and eat good.',
+      theme: 'green',
       items: [
         {
-          id: 'falafel-wrap',
-          name: 'Falafel Wrap',
-          description: 'Crispy falafel, fresh veggies, and creamy tahini wrapped in a soft chapati. A handheld taste of the Mediterranean!',
-          price: 23500,
-          dietary: { vegan: true }
+          id: 'beetroot-feta-butternut',
+          name: 'Beetroot, Feta & Butternut Salad',
+          description: 'Sweet, salty, and totally Instagram-worthy. Healthy never tasted so good!',
+          price: 15000
         },
         {
-          id: 'mediterranean-bowl',
-          name: 'Mediterranean Bowl',
-          description: 'A flavor-packed bowl of sunshine! Fluffy couscous, crispy falafel, fresh veggies, and a drizzle of tahini.',
-          price: 35000,
-          dietary: { vegan: true }
+          id: 'sesame-chicken-avocado',
+          name: 'Sesame Chicken & Avocado Salad',
+          description: 'Grilled chicken + creamy avocado = a salad you\'ll actually crave.',
+          price: 17000
         },
         {
-          id: 'tabbouleh',
-          name: 'Tabbouleh',
-          description: 'Fresh parsley, juicy tomatoes, zesty onions, and a hint of mint—light, refreshing, and oh-so-delicious!',
-          price: 12500,
-          dietary: { vegan: true }
-        },
-        {
-          id: 'baba-ganoush',
-          name: 'Baba Ganoush',
-          description: 'Smoky, creamy, and totally addictive! Roasted eggplant blended with tahini, garlic, and lemon.',
-          price: 14500,
-          dietary: { vegan: true }
-        },
-        {
-          id: 'hummus',
-          name: 'Hummus',
-          description: 'Smooth, creamy, and oh-so-satisfying! Classic hummus made with chickpeas, tahini, and a touch of garlic.',
-          price: 12000,
-          dietary: { vegan: true }
+          id: 'steamed-veggie',
+          name: 'Steamed Mixed Veggie salad',
+          description: 'Fresh, light, and full of goodness. A veggie lover\'s dream.',
+          price: 11000
         }
       ]
     },
     {
       id: 'mains',
-      title: 'Mains (The Main Event)',
+      title: 'MAINS "The Main Event"',
+      subtitle: 'For when you\'re serious about eating (and living your best life).',
       theme: 'burgundy',
       items: [
         {
           id: 'large-chambo',
-          name: 'Large Chambo (Grilled)',
-          description: 'Go big, don\'t stop at delicious. Choose grilled or fried — you can\'t go wrong.',
-          price: 30000
+          name: 'Large Chambo',
+          description: 'Fresh, flaky, and oh-so-delicious. Choose grilled or fried—you can\'t go wrong!',
+          price: 50000
         },
         {
           id: 'jumbo-chambo',
           name: 'Jumbo Chambo',
-          description: 'Two whole fish, perfect for the fearless with a side of wedges or salad.',
-          price: 35000
+          description: 'Even bigger, even better. For those who like their fish with a side of wow.',
+          price: 60000
         },
         {
           id: 'large-butterfish',
           name: 'Large Butterfish',
-          description: 'Thick buttery fish — grilled to melt-in-your-mouth good. A seafood lover\'s win.',
-          price: 30000
+          description: 'Buttery, tender, and melt-in-your-mouth good. A seafood lover\'s dream.',
+          price: 45000
         },
         {
           id: 'medium-butterfish',
           name: 'Medium Butterfish',
-          description: 'When you want the butterfish magic in a lighter fit meal.',
-          price: 23000
+          description: 'All the buttery goodness, just right for a lighter meal.',
+          price: 35000
         },
         {
           id: 'hub-chicken-burger',
-          name: 'Hub Styled Chicken Burger',
+          name: 'Hub styled chicken Burger',
           description: 'Juicy chicken, fresh toppings, and a secret sauce that\'ll have you coming back for more.',
-          price: 23500
+          price: 22000
         },
         {
           id: 'hub-beef-burger',
-          name: 'Hub Styled Beef Burger',
-          description: 'A beefy tower of flavor, juicy, savory, flavorful, and totally satisfying.',
-          price: 24500
+          name: 'Hub styled Beef Burger',
+          description: 'A beefy classic done right. Juicy, flavorful, and totally satisfying.',
+          price: 25000
         },
         {
           id: 'quarter-chicken',
           name: 'Quarter Chicken',
-          description: 'Homey, juicy and perfectly seasoned. A quarter of deliciousness!',
-          price: 18500
+          description: 'Tender, juicy, and perfectly seasoned. A quarter of deliciousness!',
+          price: 35000
         },
         {
-          id: 'jerk-chicken',
+          id: 'jamaican-jerk-chicken',
           name: 'Jamaican Jerk Chicken',
-          description: 'Spiced, grilled and full of island vibes. Taste the Caribbean in every bite.',
-          price: 25000,
-          dietary: { hot: true }
+          description: 'Spiced, grilled, and full of island vibes. Taste the Caribbean in every bite!',
+          price: 35000
         },
         {
           id: 'pork-chops',
-          name: 'Pork Chops',
+          name: 'Pork chops',
           description: 'Juicy, flavorful, and grilled to perfection. Pork done right!',
-          price: 25000,
+          price: 24500,
           dietary: { pork: true }
         },
         {
           id: 'flank-steak',
-          name: 'Flank Steak',
-          description: 'Marinated, grilled, and very rare! A steak lover\'s delight.',
-          price: 29000
-        },
-        {
-          id: 't-bone-steak',
-          name: 'Large T-Bone Steak',
-          description: 'For the real meat fans. For those who take their steak with a side of pride.',
+          name: 'Flank steak',
+          description: 'Tender, juicy, and packed with flavor. A steak lover\'s delight.',
           price: 28000
         },
         {
+          id: 'large-tbone-steak',
+          name: 'Large T.Bone steak',
+          description: 'Big, bold, and full of flavor. For those who like their steak with a side of wow.',
+          price: 25000
+        },
+        {
           id: 'beef-stir-fry',
-          name: 'Beef Stir Fry',
-          description: 'Sizzling beef, fresh veggies and a savory sauce. Stir-fried to perfection.',
-          price: 19500
+          name: 'Beef stir fry',
+          description: 'Sizzling beef, fresh veggies, and a savory sauce. Stir-fried to perfection.',
+          price: 25000
         },
         {
           id: 'chicken-stir-fry',
-          name: 'Chicken Stir Fry',
-          description: 'Tender chicken, crisp veggies, and sweet-sour stir-fried just for you.',
-          price: 18500
+          name: 'Chicken stir Fry',
+          description: 'Tender chicken, crisp veggies, and a flavorful sauce. Stir-fried just for you.',
+          price: 23000
+        }
+      ]
+    },
+    {
+      id: 'starches',
+      title: 'Sidekick Spectacular (Starches)',
+      subtitle: 'Because every hero needs a sidekick!',
+      theme: 'brown',
+      items: [
+        {
+          id: 'potato-fries',
+          name: 'Potato fries',
+          description: 'Golden, crispy, and totally irresistible. The ultimate sidekick.',
+          price: 8000
+        },
+        {
+          id: 'yellow-rice',
+          name: 'Yellow rice',
+          description: 'Fluffy, fragrant, and full of flavor. The perfect side for any dish.',
+          price: 7000
+        },
+        {
+          id: 'homemade-nsima',
+          name: 'Homemade nsima',
+          description: 'A traditional favorite, soft, hearty, and oh-so-comforting.',
+          price: 5000
+        },
+        {
+          id: 'rosemary-garlic-potato',
+          name: 'Rosemary Garlic Potato',
+          description: 'Crispy on the outside, fluffy on the inside, and packed with flavor.',
+          price: 10000
+        },
+        {
+          id: 'wedges',
+          name: 'Wedges',
+          description: 'Thick, crispy, and totally satisfying. The perfect side for any meal.',
+          price: 10000
+        },
+        {
+          id: 'fried-plantains',
+          name: 'Fried Plantains',
+          description: 'Sweet, caramelized, and downright delicious. A tropical twist on fries!',
+          price: 8000
         }
       ]
     },
     {
       id: 'platters',
       title: 'PLATTERS (SHARING IS CARING)',
-      subtitle: 'A LITTLE BIT OF EVERYTHING YOU LOVE! PERFECT FOR SHARING (OR NOT).',
+      subtitle: 'A little bit of everything you love! Perfect for sharing (or keeping all to yourself—we won\'t judge). Includes a selection of our most popular bites, from crispy starters to savory mains. Great for small gatherings or big appetites!',
       theme: 'terracotta',
       items: [
         {
           id: 'falafel-platter',
           name: 'Falafel Platter',
-          description: 'Crispy falafel, fresh veggies, and warm pita. Perfect for sharing (or not—we won\'t judge)',
-          price: 55000,
-          dietary: { vegan: true }
+          description: 'Crispy falafel, fresh veggies, and warm pita. Perfect for sharing (or not—we won\'t judge).',
+          price: 45000
         },
         {
-          id: 'mezza-platter',
-          name: 'Mezza Platter',
-          description: 'Mediterranean bites made for the table. Samosas, hummus, baba ganoush, pita and veg.',
-          price: 125000,
-          dietary: { vegan: true }
+          id: 'mezze-platter',
+          name: 'Mezze Platter',
+          description: 'A Mediterranean feast for the table. Samosas, hummus, baba ganoush, and more—dig in!',
+          price: 105000
         },
         {
           id: 'medium-hub-platter',
-          name: 'MediumHub + Platter',
-          description: 'Mixed meat platter: Includes BBQ wings, sticky BBQ gizzards, chicken pieces & fries.',
-          price: 120000
+          name: 'MediumHub- Platter',
+          description: '"The Mix & Match Platter" includes BBQ wings, spicy chicken gizzards, potato fries & beef kebabs',
+          price: 80000
         },
         {
           id: 'big-hub-platter',
-          name: 'Big-Hub + Platter',
-          description: 'Mega platter with BBQ wings, sticky BBQ beef ribs, BBQ pork chops, chicken stir fry, samosas, beef kebabs, pita & fries.',
-          price: 180000,
-          dietary: { pork: true }
+          name: 'Big-Hub-Platter',
+          description: '"The Feast Master Platter" includes Tender beef ribs, BBQ pork ribs, chicken shawarma, fried plantain, Wedges & Beef Strips',
+          price: 120000
         }
       ]
     },
     {
       id: 'sandwiches',
-      title: 'Hand-Held Happiness (Sandwiches)',
-      subtitle: 'GRAB, GO, AND GET HAPPY!',
+      title: 'HAND-HELD HAPPINESS (Sandwiches)',
+      subtitle: 'Grab, go, and get happy!',
       theme: 'slate',
       items: [
         {
           id: 'bacon-cheese-sandwich',
-          name: 'Bacon & Cheese Sandwich',
-          description: 'Bacon meets cheddar in this sandwich that puts happiness first.',
-          price: 19500,
+          name: 'Bacon and Cheese',
+          description: 'Crispy bacon + melty cheese = a sandwich that\'s pure happiness.',
+          price: 19000,
           dietary: { pork: true }
         },
         {
           id: 'egg-mayo-sandwich',
-          name: 'Egg and Mayo Sandwich',
-          description: 'Creamy, dreamy and totally satisfying. A classic done right.',
-          price: 14500
+          name: 'Egg and Mayo',
+          description: 'Creamy, dreamy, and totally satisfying. A classic done right.',
+          price: 16500
         },
         {
           id: 'chicken-mayo-sandwich',
-          name: 'Chicken Mayo Sandwich',
-          description: 'Juicy chicken mayo, served with fresh veggies. Simple, but not basic.',
-          price: 18500
+          name: 'Chicken Mayo',
+          description: 'Tender chicken, creamy mayo, and fresh veggies. Simple, but oh-so-good.',
+          price: 20000
         },
         {
           id: 'chicken-cheese-sandwich',
-          name: 'Chicken and Cheese Sandwich',
-          description: 'Chicken strips meet cheese in a match made in sandwich heaven.',
+          name: 'Chicken and cheese',
+          description: 'Juicy chicken + melty cheese = a match made in sandwich heaven.',
           price: 18500
         },
         {
           id: 'tomato-cheese-sandwich',
-          name: 'Tomato and Cheese Sandwich',
-          description: 'Tomatoes + cheddar = the ultimate morning fix or not!',
+          name: 'Tomato and cheese',
+          description: 'Fresh tomatoes + gooey cheese. Simple, fresh, and totally delicious.',
           price: 15000
         },
         {
           id: 'tomato-onion-sandwich',
-          name: 'Tomato and Onion Sandwich',
-          description: 'A veggie sandwich with fresh tomato and zesty onions. Light and feel-good.',
-          price: 14000,
-          dietary: { vegan: true }
+          name: 'Tomato and Onion',
+          description: 'A veggie delight with fresh tomatoes and zesty onions. Light and tasty!',
+          price: 14000
         },
         {
           id: 'fish-rocket',
-          name: 'Fish on Bed of Rocket',
+          name: 'Fish on bed of Rocket',
           description: 'Flaky fish meets peppery rocket. A sandwich that\'s fresh and flavorful.',
           price: 22000
         },
         {
           id: 'steak-rocket',
-          name: 'Steak on Bed of Rocket',
-          description: 'Steak strips + rocket = a combo for every bite win!',
+          name: 'Steak on bed of Rocket',
+          description: 'Juicy steak + fresh rocket = a sandwich that\'s bold and satisfying.',
           price: 21000
         },
         {
           id: 'steak-sandwich',
-          name: 'Steak Sandwich',
-          description: 'Juicy steak in fresh bread with soft bun & sandwich sauces of choice.',
-          price: 18500
+          name: 'Steak sandwich',
+          description: 'Tender steak, fresh toppings, and a soft bun. A sandwich that\'s pure perfection.',
+          price: 18000
         }
       ]
     },
     {
       id: 'wraps',
-      title: 'Wraps',
-      subtitle: 'GRAB, GO AND GET HAPPY!',
+      title: 'WRAPS',
+      subtitle: 'Grab, go, and get happy!',
       theme: 'forest',
       items: [
         {
           id: 'chicken-chapati',
           name: 'Chicken Chapati',
-          description: 'Chapati wrap filled with spiced chicken. Simple, fresh and tasty. A full meal!',
-          price: 17500
+          description: 'Tender chicken wrapped in soft chapati. Simple, fresh, and totally delicious.',
+          price: 20000
         },
         {
           id: 'chicken-shawarma',
-          name: 'Chicken Shawarma',
-          description: 'Juicy grilled chicken, wrapped in a creamy garlic sauce. Wrapped up & rolled out for you!',
-          price: 18500
+          name: 'Chicken shawarma',
+          description: 'Spiced chicken, fresh veggies, and a creamy garlic sauce. Wrapped up just for you!',
+          price: 20000
         },
         {
           id: 'spicy-beef-wrap',
-          name: 'Spicy Beef Wrap',
-          description: 'Grilled beef strips with some dance. Spicy, savory & filling.',
-          price: 18500,
-          dietary: { hot: true }
+          name: 'Spicy beef wrap',
+          description: 'Beef so good, it\'ll make you wanna dance. Spicy, saucy, and totally satisfying.',
+          price: 22000
         },
         {
           id: 'mixed-veggie-wrap',
-          name: 'Mixed Veggie Wrap',
-          description: 'Hummus, grilled veggies & herb salad. So much flavor!',
-          price: 16500,
-          dietary: { vegan: true }
+          name: 'Mixed Veggie wrap',
+          description: 'A veggie-packed wrap that\'s fresh, healthy, and full of flavor.',
+          price: 20000
         },
         {
           id: 'fish-shawarma',
-          name: 'Fish Shawarma',
+          name: 'Fish shawarma',
           description: 'Flaky fish, fresh veggies, and a tangy sauce. A seafood twist on a classic.',
-          price: 20500
-        }
-      ]
-    },
-    {
-      id: 'starches',
-      title: 'SIDEKICK SPECTACULAR (STARCHES)',
-      subtitle: 'BECAUSE EVERY HERO NEEDS A SIDEKICK!',
-      theme: 'brown',
-      items: [
-        {
-          id: 'potato-fries',
-          name: 'Potato Fries',
-          description: 'Crispy, crispy and totally addictive. Sometimes sidekick, always a hero.',
-          price: 6000,
-          dietary: { vegan: true }
-        },
-        {
-          id: 'yellow-rice',
-          name: 'Yellow Rice',
-          description: 'Fluffy, fragrant, and full of fun. The perfect side for any dish.',
-          price: 8000,
-          dietary: { vegan: true }
-        },
-        {
-          id: 'homemade-nsima',
-          name: 'Homemade Nsima',
-          description: 'A traditional favorite, soft, hearty, and oh-so-comforting.',
-          price: 3000,
-          dietary: { vegan: true }
-        },
-        {
-          id: 'rosemary-garlic-potato',
-          name: 'Rosemary Garlic Potato',
-          description: 'Crispy on the outside, fluffy on the inside, and packed with flavor.',
-          price: 6000,
-          dietary: { vegan: true }
-        },
-        {
-          id: 'wedges',
-          name: 'Wedges',
-          description: 'Thick, crispy, and totally satisfying. The perfect side for any meal.',
-          price: 8000,
-          dietary: { vegan: true }
-        },
-        {
-          id: 'fried-plantains',
-          name: 'Fried Plantains',
-          description: 'Sweet, caramelized and downright delicious. A tropical twist on fries!',
-          price: 7500,
-          dietary: { vegan: true }
+          price: 14000
         }
       ]
     },
     {
       id: 'extra',
-      title: 'EXTRA',
-      subtitle: 'BECAUSE WHY NOT?',
+      title: 'EXTRA (Because Why Not?)',
       theme: 'red',
       items: [
         {
           id: 'egg',
           name: 'Egg',
           description: 'Because everything\'s better with an egg on top!',
-          price: 3000
+          price: 2500
         },
         {
           id: 'plantain',
           name: 'Plantain',
-          description: 'Sweet, caramelized and downright delicious. A tropical treat.',
-          price: 7500,
-          dietary: { vegan: true }
+          description: 'Sweet, caramelized, and downright delicious. A tropical treat!',
+          price: 4500
         },
         {
           id: 'bacon',
           name: 'Bacon',
           description: 'Because everything\'s better with bacon. Period.',
-          price: 8500,
+          price: 3000,
           dietary: { pork: true }
         },
         {
           id: 'cheese',
           name: 'Cheese',
-          description: 'Melty, gooey and always a good idea. Add it to anything!',
-          price: 7500,
-          dietary: { vegan: false }
+          description: 'Melty, gooey, and always a good idea. Add it to anything!',
+          price: 3000
         },
         {
           id: 'hub-lunch-box',
           name: 'The Hub-Lunch Box',
-          description: 'Convenience in a box, flavour in every bite',
+          description: 'Convinience in a box,flavour in every bite',
           price: 1000
+        }
+      ]
+    },
+    {
+      id: 'mediterranean',
+      title: 'Mediterranean Delights',
+      subtitle: 'Fresh, vibrant, and full of flavor—straight from the Mediterranean to your plate!',
+      theme: 'forest',
+      items: [
+        {
+          id: 'falafel-wrap',
+          name: 'Falafel Wrap',
+          description: 'Crispy falafel, fresh veggies, and creamy tahini wrapped in a soft chapati. A handheld taste of the Mediterranean!',
+          price: 15500
+        },
+        {
+          id: 'mediterranean-bowl',
+          name: 'Mediterranean Bowl',
+          description: 'A flavor-packed bowl of sunshine! Fluffy couscous, crispy falafel, fresh veggies, and a drizzle of tahini.',
+          price: 14500
+        },
+        {
+          id: 'tabbouleh',
+          name: 'Tabbouleh',
+          description: 'Fresh parsley, juicy tomatoes, zesty onions, and a hint of mint—light, refreshing, and oh-so-delicious!',
+          price: 8500
+        },
+        {
+          id: 'baba-ganoush',
+          name: 'Baba Ganoush',
+          description: 'Smoky, creamy, and totally addictive! Roasted eggplant blended with tahini, garlic, and lemon.',
+          price: 12500
+        },
+        {
+          id: 'hummus',
+          name: 'Hummus',
+          description: 'Smooth, creamy, and oh-so-satisfying! Classic hummus made with chickpeas, tahini, and a touch of garlic.',
+          price: 9500
         }
       ]
     }

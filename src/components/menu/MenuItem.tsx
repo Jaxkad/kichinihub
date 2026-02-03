@@ -7,7 +7,7 @@ interface MenuItemProps {
   priceColor?: string;
 }
 
-export function MenuItem({ item, priceColor = 'var(--md-sys-color-secondary)' }: MenuItemProps) {
+export function MenuItem({ item, priceColor }: MenuItemProps) {
   const formatPrice = (price: number) => {
     return `K${price.toLocaleString()}`;
   };
@@ -17,7 +17,7 @@ export function MenuItem({ item, priceColor = 'var(--md-sys-color-secondary)' }:
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1">
           <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="md-typescale-title-large">
+            <h3 className="md-typescale-title-large" style={{ color: '#000000' }}>
               {item.name}
             </h3>
             <div className="flex gap-1">
@@ -30,7 +30,7 @@ export function MenuItem({ item, priceColor = 'var(--md-sys-color-secondary)' }:
                     color: '#ffffff'
                   }}
                 >
-                  🐷 Pork
+                  Pork
                 </Badge>
               )}
               {item.dietary?.vegan && (
@@ -61,7 +61,7 @@ export function MenuItem({ item, priceColor = 'var(--md-sys-color-secondary)' }:
               )}
             </div>
           </div>
-          <p className="md-typescale-body-medium mt-2" style={{ color: 'var(--md-sys-color-on-surface-variant)' }}>
+          <p className="md-typescale-body-medium mt-2" style={{ color: '#000000' }}>
             {item.description}
           </p>
         </div>
