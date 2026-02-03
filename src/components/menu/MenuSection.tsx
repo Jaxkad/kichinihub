@@ -96,6 +96,54 @@ const getLogoColorForTheme = (theme: string) => {
         onSurface: '#1F2937',
         priceColor: 'var(--md-sys-color-secondary)'
       };
+    case 'golden':
+      return {
+        background: 'rgba(255, 223, 128, 0.15)', // Subtle golden yellow
+        onBackground: '#B8860B',
+        surface: 'rgba(255, 255, 255, 0.95)',
+        onSurface: '#1F2937',
+        priceColor: '#D4A574'
+      };
+    case 'burnt':
+      return {
+        background: 'rgba(205, 92, 92, 0.12)', // Subtle burnt orange
+        onBackground: '#8B4513',
+        surface: 'rgba(255, 255, 255, 0.95)',
+        onSurface: '#1F2937',
+        priceColor: '#CD5C5C'
+      };
+    case 'sage':
+      return {
+        background: 'rgba(134, 166, 125, 0.12)', // Subtle sage green
+        onBackground: '#6B8E23',
+        surface: 'rgba(255, 255, 255, 0.95)',
+        onSurface: '#1F2937',
+        priceColor: '#8FBC8F'
+      };
+    case 'earth':
+      return {
+        background: 'rgba(160, 128, 96, 0.12)', // Subtle warm earth tones
+        onBackground: '#8B7355',
+        surface: 'rgba(255, 255, 255, 0.95)',
+        onSurface: '#1F2937',
+        priceColor: '#A0826D'
+      };
+    case 'leaf':
+      return {
+        background: 'rgba(124, 169, 124, 0.12)', // Subtle leaf green
+        onBackground: '#556B2F',
+        surface: 'rgba(255, 255, 255, 0.95)',
+        onSurface: '#1F2937',
+        priceColor: '#7CB342'
+      };
+    case 'olive':
+      return {
+        background: 'rgba(128, 128, 96, 0.12)', // Subtle olive
+        onBackground: '#6B8E23',
+        surface: 'rgba(255, 255, 255, 0.95)',
+        onSurface: '#1F2937',
+        priceColor: '#808000'
+      };
     default:
       return {
         background: 'var(--md-sys-color-surface-container-high)',
