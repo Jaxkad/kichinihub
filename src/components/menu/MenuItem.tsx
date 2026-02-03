@@ -68,7 +68,7 @@ export function MenuItem({ item, priceColor = 'var(--md-sys-color-secondary)' }:
         <div className="text-right shrink-0">
           <span 
             className="md-typescale-title-large font-bold"
-            style={{ color: '#6D1600' }}
+            style={{ color: priceColor }}
           >
             {formatPrice(item.price)}
           </span>

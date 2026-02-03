@@ -26,11 +26,11 @@ const getLogoColorForTheme = (theme: string) => {
       };
     case 'burgundy':
       return {
-        background: 'var(--md-sys-color-secondary-container)', // Subtle secondary container
-        onBackground: 'var(--md-sys-color-on-secondary-container)',
-        surface: 'rgba(255, 255, 255, 0.95)',
-        onSurface: '#1F2937',
-        priceColor: 'var(--md-sys-color-secondary)'
+        background: 'var(--md-sys-color-primary-container)', // Subtle burgundy
+        onBackground: 'var(--md-sys-color-on-primary-container)',
+        surface: 'var(--md-sys-color-surface-container)',
+        onSurface: 'var(--md-sys-color-on-surface)',
+        priceColor: 'var(--md-sys-color-primary)'
       };
     case 'terracotta':
       return {
@@ -98,51 +98,51 @@ const getLogoColorForTheme = (theme: string) => {
       };
     case 'golden':
       return {
-        background: 'rgba(255, 223, 128, 0.15)', // Subtle golden yellow
-        onBackground: '#B8860B',
-        surface: 'rgba(255, 255, 255, 0.95)',
-        onSurface: '#1F2937',
-        priceColor: '#D4A574'
+        background: 'var(--md-sys-color-tertiary-container)', // Subtle golden yellow
+        onBackground: 'var(--md-sys-color-on-tertiary-container)',
+        surface: 'var(--md-sys-color-surface-container)',
+        onSurface: 'var(--md-sys-color-on-surface)',
+        priceColor: 'var(--md-sys-color-tertiary)'
       };
     case 'burnt':
       return {
-        background: 'rgba(205, 92, 92, 0.12)', // Subtle burnt orange
-        onBackground: '#8B4513',
-        surface: 'rgba(255, 255, 255, 0.95)',
-        onSurface: '#1F2937',
-        priceColor: '#CD5C5C'
+        background: 'var(--md-sys-color-error-container)', // Subtle burnt orange
+        onBackground: 'var(--md-sys-color-on-error-container)',
+        surface: 'var(--md-sys-color-surface-container)',
+        onSurface: 'var(--md-sys-color-on-surface)',
+        priceColor: 'var(--md-sys-color-error)'
       };
     case 'sage':
       return {
-        background: 'rgba(134, 166, 125, 0.12)', // Subtle sage green
-        onBackground: '#6B8E23',
-        surface: 'rgba(255, 255, 255, 0.95)',
-        onSurface: '#1F2937',
-        priceColor: '#8FBC8F'
+        background: 'var(--md-sys-color-tertiary-container)', // Subtle sage green
+        onBackground: 'var(--md-sys-color-on-tertiary-container)',
+        surface: 'var(--md-sys-color-surface-container)',
+        onSurface: 'var(--md-sys-color-on-surface)',
+        priceColor: 'var(--md-sys-color-tertiary)'
       };
     case 'earth':
       return {
-        background: 'rgba(160, 128, 96, 0.12)', // Subtle warm earth tones
-        onBackground: '#8B7355',
-        surface: 'rgba(255, 255, 255, 0.95)',
-        onSurface: '#1F2937',
-        priceColor: '#A0826D'
+        background: 'var(--md-sys-color-secondary-container)', // Subtle warm earth tones
+        onBackground: 'var(--md-sys-color-on-secondary-container)',
+        surface: 'var(--md-sys-color-surface-container)',
+        onSurface: 'var(--md-sys-color-on-surface)',
+        priceColor: 'var(--md-sys-color-secondary)'
       };
     case 'leaf':
       return {
-        background: 'rgba(124, 169, 124, 0.12)', // Subtle leaf green
-        onBackground: '#556B2F',
-        surface: 'rgba(255, 255, 255, 0.95)',
-        onSurface: '#1F2937',
-        priceColor: '#7CB342'
+        background: 'var(--md-sys-color-tertiary-container)', // Subtle leaf green
+        onBackground: 'var(--md-sys-color-on-tertiary-container)',
+        surface: 'var(--md-sys-color-surface-container)',
+        onSurface: 'var(--md-sys-color-on-surface)',
+        priceColor: 'var(--md-sys-color-tertiary)'
       };
     case 'olive':
       return {
-        background: 'rgba(128, 128, 96, 0.12)', // Subtle olive
-        onBackground: '#6B8E23',
-        surface: 'rgba(255, 255, 255, 0.95)',
-        onSurface: '#1F2937',
-        priceColor: '#808000'
+        background: 'var(--md-sys-color-secondary-container)', // Subtle olive
+        onBackground: 'var(--md-sys-color-on-secondary-container)',
+        surface: 'var(--md-sys-color-surface-container)',
+        onSurface: 'var(--md-sys-color-on-surface)',
+        priceColor: 'var(--md-sys-color-secondary)'
       };
     default:
       return {
