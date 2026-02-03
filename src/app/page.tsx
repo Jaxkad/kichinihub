@@ -43,7 +43,7 @@ export default function Home() {
             
             {/* Restaurant Name */}
             <div className="space-y-2">
-              <h1 className="md-typescale-display-medium font-bold" style={{ color: 'var(--md-sys-color-on-primary)' }}>
+              <h1 className="md-typescale-display-medium font-bold" style={{ color: '#FFFFFF' }}>
                 KHICHINI Hub
               </h1>
               <div className="w-24 h-1 mx-auto rounded-full" 
