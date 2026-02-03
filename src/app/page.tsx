@@ -94,7 +94,7 @@ export default function Home() {
         
         <div className="max-w-6xl mx-auto px-6 py-8">
           <p className="md-typescale-body-medium text-center">
-            © 2026 Kitchini Hub. All rights reserved.
+            © 2026 Kichini Hub. All rights reserved.
           </p>
         </div>
       </footer>
