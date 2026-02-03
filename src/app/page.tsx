@@ -44,7 +44,12 @@ export default function Home() {
             {/* Restaurant Name */}
             <div className="space-y-2">
               <h1 className="md-typescale-display-medium font-bold" style={{ color: '#FFFFFF' }}>
-                KHICHINI Hub
+                <div style={{ fontFamily: 'Zebrazil, sans-serif', textAlign: 'center' }}>
+                  KHICHINI
+                  <div style={{ fontFamily: 'Britanny Signature, cursive', fontSize: '0.7em', marginTop: '-0.2em' }}>
+                    Hub
+                  </div>
+                </div>
               </h1>
               <div className="w-24 h-1 mx-auto rounded-full" 
                 style={{ backgroundColor: 'var(--md-sys-color-secondary)' }}
