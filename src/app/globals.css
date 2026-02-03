@@ -1,26 +1,290 @@
 @import "tailwindcss";
 
+/* Material Design 3 Color System - Brand Colors */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary Colors - Brown Coffee */
+  --md-sys-color-primary: #6D1600;
+  --md-sys-color-on-primary: #FFFFFF;
+  --md-sys-color-primary-container: #F8E4E0;
+  --md-sys-color-on-primary-container: #4B0E00;
+  
+  /* Secondary Colors - Bright Grey */
+  --md-sys-color-secondary: #6B6B6B;
+  --md-sys-color-on-secondary: #FFFFFF;
+  --md-sys-color-secondary-container: #F6F6F6;
+  --md-sys-color-on-secondary-container: #535353;
+  
+  /* Tertiary Colors - Warm Accent */
+  --md-sys-color-tertiary: #8B4513;
+  --md-sys-color-on-tertiary: #FFFFFF;
+  --md-sys-color-tertiary-container: #FFDCC9;
+  --md-sys-color-on-tertiary-container: #5C2D00;
+  
+  /* Surface Colors - White and Grey */
+  --md-sys-color-surface: #FFFFFF;
+  --md-sys-color-on-surface: #1F1F1F;
+  --md-sys-color-surface-variant: #F6F6F6;
+  --md-sys-color-on-surface-variant: #6B6B6B;
+  --md-sys-color-surface-container: #F9F9F9;
+  --md-sys-color-surface-container-high: #F0F0F0;
+  --md-sys-color-surface-container-highest: #E8E8E8;
+  
+  /* Background - Light Yellow Cream */
+  --md-sys-color-background: #FFF8E7;
+  --md-sys-color-on-background: #1F1F1F;
+  
+  /* Outline */
+  --md-sys-color-outline: #D0D0D0;
+  --md-sys-color-outline-variant: #E8E8E8;
+  
+  /* Error */
+  --md-sys-color-error: #BA1A1A;
+  --md-sys-color-on-error: #FFFFFF;
+  
+  /* Brand Colors */
+  --brand-brown-coffee: #6D1600;
+  --brand-bright-grey: #F6F6F6;
+  --brand-white: #FFFFFF;
+  --brand-light-cream: #FFF8E7;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* Dark Theme */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --md-sys-color-surface: #2D2D2D;
+    --md-sys-color-on-surface: #F6F6F6;
+    --md-sys-color-surface-variant: #404040;
+    --md-sys-color-on-surface-variant: #B8B8B8;
+    --md-sys-color-surface-container: #404040;
+    --md-sys-color-surface-container-high: #535353;
+    --md-sys-color-surface-container-highest: #666666;
+    --md-sys-color-background: #1A1A1A;
+    --md-sys-color-on-background: #F6F6F6;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    background-color: var(--md-sys-color-background);
+    color: var(--md-sys-color-on-background);
+    font-family: var(--font-inter), sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Main Headings - Logo Style Font (Montserrat) */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-montserrat), sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    color: var(--md-sys-color-on-surface);
+  }
+  
+  h1 { 
+    font-size: 3rem; 
+    font-weight: 800;
+    letter-spacing: -0.05em;
+  }
+  h2 { 
+    font-size: 2.25rem; 
+    font-weight: 700;
+  }
+  h3 { 
+    font-size: 1.875rem; 
+    font-weight: 600;
+  }
+  h4 { 
+    font-size: 1.5rem; 
+    font-weight: 600;
+  }
+  h5 { 
+    font-size: 1.25rem; 
+    font-weight: 500;
+  }
+  h6 { 
+    font-size: 1.125rem; 
+    font-weight: 500;
+  }
+  
+  /* Material Design 3 Typography Scale */
+  .md-typescale-display-large {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.05em;
+  }
+  
+  .md-typescale-display-medium {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+  
+  .md-typescale-display-small {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0;
+  }
+  
+  .md-typescale-headline-large {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: 0;
+  }
+  
+  .md-typescale-headline-medium {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: 0;
+  }
+  
+  .md-typescale-headline-small {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0;
+  }
+  
+  .md-typescale-title-large {
+    font-family: var(--font-inter), sans-serif;
+    font-size: 1.375rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.015em;
+  }
+  
+  .md-typescale-title-medium {
+    font-family: var(--font-inter), sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.025em;
+  }
+  
+  .md-typescale-title-small {
+    font-family: var(--font-inter), sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.025em;
+  }
+  
+  .md-typescale-body-large {
+    font-family: var(--font-inter), sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+  }
+  
+  .md-typescale-body-medium {
+    font-family: var(--font-inter), sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0.025em;
+  }
+  
+  .md-typescale-body-small {
+    font-family: var(--font-inter), sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0.025em;
+  }
+  
+  .md-typescale-label-large {
+    font-family: var(--font-inter), sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.1em;
+  }
+  
+  .md-typescale-label-medium {
+    font-family: var(--font-inter), sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.1em;
+  }
+  
+  .md-typescale-label-small {
+    font-family: var(--font-inter), sans-serif;
+    font-size: 0.625rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.1em;
+  }
+  
+  /* Material Design 3 Elevation */
+  .md-elevation-level1 {
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  }
+  
+  .md-elevation-level2 {
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+  }
+  
+  .md-elevation-level3 {
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3), 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+  }
+  
+  .md-elevation-level4 {
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 6px 10px 4px rgba(0, 0, 0, 0.15);
+  }
+  
+  .md-elevation-level5 {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.3), 0px 8px 12px 6px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Material Design 3 Shape */
+  .md-shape-corner-none { border-radius: 0; }
+  .md-shape-corner-extra-small { border-radius: 4px; }
+  .md-shape-corner-small { border-radius: 8px; }
+  .md-shape-corner-medium { border-radius: 12px; }
+  .md-shape-corner-large { border-radius: 16px; }
+  .md-shape-corner-extra-large { border-radius: 28px; }
+  
+  /* Material Design 3 State Layers */
+  .md-state-layer {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .md-state-layer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: currentColor;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .md-state-layer:hover::before {
+    opacity: 0.08;
+  }
+  
+  .md-state-layer:focus::before {
+    opacity: 0.12;
+  }
+  
+  .md-state-layer:active::before {
+    opacity: 0.16;
+  }
 }
