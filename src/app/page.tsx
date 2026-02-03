@@ -36,7 +36,7 @@ export default function Home() {
                   alt="KHICHINI Hub Logo" 
                   width={128}
                   height={128}
-                  className="object-contain drop-shadow-lg rounded-full"
+                  className="object-contain drop-shadow-lg rounded-2xl"
                 />
               </div>
             </div>

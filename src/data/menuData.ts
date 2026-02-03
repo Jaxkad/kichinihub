@@ -14,7 +14,7 @@ export interface MenuSection {
   id: string;
   title: string;
   subtitle?: string;
-  theme: 'red' | 'light' | 'brown' | 'green' | 'cream' | 'burgundy' | 'terracotta' | 'teal' | 'slate' | 'forest' | 'golden' | 'burnt' | 'sage' | 'earth' | 'leaf' | 'olive';
+  theme: 'red' | 'light' | 'brown' | 'green' | 'cream' | 'burgundy' | 'terracotta' | 'teal' | 'slate' | 'forest';
   items: MenuItem[];
 }
 
@@ -35,7 +35,7 @@ export const menuData: MenuData = {
       id: 'breakfast',
       title: 'BREAKFAST (WARM-UP ACTS)',
       subtitle: "Sun's up, Food's ready Lets Do This",
-      theme: 'golden',
+      theme: 'red',
       items: [
         {
           id: 'spanish-omelette',
@@ -76,7 +76,7 @@ export const menuData: MenuData = {
       id: 'salads',
       title: 'SALADS (GREEN & GREAT)',
       subtitle: 'FOR WHEN YOU WANNA FEEL GOOD AND EAT GOOD.',
-      theme: 'leaf',
+      theme: 'light',
       items: [
         {
           id: 'beetroot-feta-butternut',
@@ -104,7 +104,7 @@ export const menuData: MenuData = {
       id: 'soups',
       title: 'Hugs in a Bowl (Soups)',
       subtitle: 'WARM, COZY, AND FULL OF LOVE.',
-      theme: 'earth',
+      theme: 'cream',
       items: [
         {
           id: 'butternut-beetroot',
@@ -140,7 +140,7 @@ export const menuData: MenuData = {
       id: 'finger-foods',
       title: 'Finger Foods',
       subtitle: 'SMALL BITES, BIG FLAVORS!',
-      theme: 'burnt',
+      theme: 'teal',
       items: [
         {
           id: 'bbq-wings',
@@ -181,7 +181,7 @@ export const menuData: MenuData = {
       id: 'mediterranean',
       title: 'MEDITERRANEAN DELIGHTS',
       subtitle: 'FRESH, VIBRANT, AND FULL OF FLAVOR - STRAIGHT FROM THE MED KITCHEN TO YOUR PLATE!',
-      theme: 'olive',
+      theme: 'terracotta',
       items: [
         {
           id: 'falafel-wrap',
@@ -311,7 +311,7 @@ export const menuData: MenuData = {
       id: 'platters',
       title: 'PLATTERS (SHARING IS CARING)',
       subtitle: 'A LITTLE BIT OF EVERYTHING YOU LOVE! PERFECT FOR SHARING (OR NOT).',
-      theme: 'olive',
+      theme: 'terracotta',
       items: [
         {
           id: 'falafel-platter',
@@ -346,7 +346,7 @@ export const menuData: MenuData = {
       id: 'sandwiches',
       title: 'Hand-Held Happiness (Sandwiches)',
       subtitle: 'GRAB, GO, AND GET HAPPY!',
-      theme: 'sage',
+      theme: 'slate',
       items: [
         {
           id: 'bacon-cheese-sandwich',
@@ -410,7 +410,7 @@ export const menuData: MenuData = {
       id: 'wraps',
       title: 'Wraps',
       subtitle: 'GRAB, GO AND GET HAPPY!',
-      theme: 'sage',
+      theme: 'forest',
       items: [
         {
           id: 'chicken-chapati',
@@ -500,7 +500,7 @@ export const menuData: MenuData = {
       id: 'extra',
       title: 'EXTRA',
       subtitle: 'BECAUSE WHY NOT?',
-      theme: 'golden',
+      theme: 'red',
       items: [
         {
           id: 'egg',
