@@ -16,14 +16,14 @@
 |------|------|-------|-----|
 | Large Chambo | Fresh, flaky, and oh-so-delicious. Choose grilled or fried—you can't go wrong! | 50000 |  |
 | Jumbo Chambo | Even bigger, even better. For those who like their fish with a side of wow. | 60000 |  |
-| Large Butterfish | Buttery, tender, and melt-in-your-mouth good. A seafood lover's dream. | 45000 |  |
+| Large Butterfish | Buttery, tender, and melt-in-your-mouth good. A seafood lover's dream. | 60000 |  |
 | Medium Butterfish | All the buttery goodness, just right for a lighter meal. | 35000 |  |
 | Hub styled chicken Burger | Juicy chicken, fresh toppings, and a secret sauce that'll have you coming back for more. | 22000 |  |
 | Hub styled Beef Burger | A beefy classic done right. Juicy, flavorful, and totally satisfying. | 25000 |  |
 | Quarter Chicken | Tender, juicy, and perfectly seasoned. A quarter of deliciousness! | 35000 |  |
 | Jamaican Jerk Chicken | Spiced, grilled, and full of island vibes. Taste the Caribbean in every bite! | 35000 |  |
 | Pork chops | Juicy, flavorful, and grilled to perfection. Pork done right! | 24500 | P |
-| Flank steak | Tender, juicy, and packed with flavor. A steak lover's delight. | 28000 |  |
+| Flank steak | Tender, juicy, and packed with flavor. A steak lover's delight. | 28500 |  |
 | Large T.Bone steak | Big, bold, and full of flavor. For those who like their steak with a side of wow. | 25000 |  |
 | Beef stir fry | Sizzling beef, fresh veggies, and a savory sauce. Stir-fried to perfection. | 25000 |  |
 | Chicken stir Fry | Tender chicken, crisp veggies, and a flavorful sauce. Stir-fried just for you. | 23000 |  |
@@ -82,7 +82,7 @@
 | Item | Desc | PRICE | Key |
 |------|------|-------|-----|
 | Chicken Chapati | Tender chicken wrapped in soft chapati. Simple, fresh, and totally delicious. | 20000 |  |
-| Chicken shawarma | Spiced chicken, fresh veggies, and a creamy garlic sauce. Wrapped up just for you! | 20000 |  |
+| Chicken shawarma | Spiced chicken, fresh veggies, and a creamy garlic sauce. Wrapped up just for you! | 22000 |  |
 | Spicy beef wrap | Beef so good, it'll make you wanna dance. Spicy, saucy, and totally satisfying. | 22000 |  |
 | Mixed Veggie wrap | A veggie-packed wrap that's fresh, healthy, and full of flavor. | 20000 |  |
 | Fish shawarma | Flaky fish, fresh veggies, and a tangy sauce. A seafood twist on a classic. | 14000 |  |

@@ -242,7 +242,7 @@ export const menuData: MenuData = {
           id: 'large-butterfish',
           name: 'Large Butterfish',
           description: 'Buttery, tender, and melt-in-your-mouth good. A seafood lover\'s dream.',
-          price: 45000
+          price: 60000
         },
         {
           id: 'medium-butterfish',
@@ -297,7 +297,7 @@ export const menuData: MenuData = {
           id: 'flank-steak',
           name: 'Flank steak',
           description: 'Tender, juicy, and packed with flavor. A steak lover\'s delight.',
-          price: 28000
+          price: 28500
         },
         {
           id: 'beef-stir-fry',
@@ -393,7 +393,7 @@ export const menuData: MenuData = {
           id: 'chicken-shawarma',
           name: 'Chicken shawarma',
           description: 'Spiced chicken, fresh veggies, and a creamy garlic sauce. Wrapped up just for you!',
-          price: 20000
+          price: 22000
         },
         {
           id: 'shawarma-chips',
