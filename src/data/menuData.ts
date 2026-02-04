@@ -251,6 +251,31 @@ export const menuData: MenuData = {
           price: 35000
         },
         {
+          id: 't-bone-small',
+          name: 'T-bone (small)',
+          description: 'Perfectly grilled steak, tender and flavorful. A classic choice for meat lovers.',
+          price: 35000
+        },
+        {
+          id: 't-bone-large',
+          name: 'T-bone (large)',
+          description: 'A generous cut of premium steak for the heartiest appetite. Grilled to perfection.',
+          price: 40000
+        },
+        {
+          id: 'pork-chop',
+          name: 'Pork chop',
+          description: 'Juicy, tender pork chop seasoned and grilled to perfection. A savory delight!',
+          price: 35000,
+          dietary: { pork: true }
+        },
+        {
+          id: 'quarter-chicken',
+          name: 'Quarter chicken',
+          description: 'Tender quarter chicken, perfectly seasoned and cooked. Simple, satisfying, delicious.',
+          price: 25000
+        },
+        {
           id: 'hub-chicken-burger',
           name: 'Hub styled chicken Burger',
           description: 'Juicy chicken, fresh toppings, and a secret sauce that\'ll have you coming back for more.',
@@ -263,35 +288,16 @@ export const menuData: MenuData = {
           price: 25000
         },
         {
-          id: 'quarter-chicken',
-          name: 'Quarter Chicken',
-          description: 'Tender, juicy, and perfectly seasoned. A quarter of deliciousness!',
-          price: 35000
-        },
-        {
           id: 'jamaican-jerk-chicken',
           name: 'Jamaican Jerk Chicken',
           description: 'Spiced, grilled, and full of island vibes. Taste the Caribbean in every bite!',
           price: 35000
         },
         {
-          id: 'pork-chops',
-          name: 'Pork chops',
-          description: 'Juicy, flavorful, and grilled to perfection. Pork done right!',
-          price: 24500,
-          dietary: { pork: true }
-        },
-        {
           id: 'flank-steak',
           name: 'Flank steak',
           description: 'Tender, juicy, and packed with flavor. A steak lover\'s delight.',
           price: 28000
-        },
-        {
-          id: 'large-tbone-steak',
-          name: 'Large T.Bone steak',
-          description: 'Big, bold, and full of flavor. For those who like their steak with a side of wow.',
-          price: 25000
         },
         {
           id: 'beef-stir-fry',
@@ -387,6 +393,12 @@ export const menuData: MenuData = {
           id: 'chicken-shawarma',
           name: 'Chicken shawarma',
           description: 'Spiced chicken, fresh veggies, and a creamy garlic sauce. Wrapped up just for you!',
+          price: 20000
+        },
+        {
+          id: 'shawarma-chips',
+          name: 'Shawarma & chips',
+          description: 'Flavorful shawarma served with crispy chips. A perfect combo of savory and satisfying!',
           price: 20000
         },
         {
@@ -537,16 +549,22 @@ export const menuData: MenuData = {
       theme: 'red',
       items: [
         {
-          id: 'egg',
-          name: 'Egg',
-          description: 'Because everything\'s better with an egg on top!',
-          price: 2500
+          id: 'eggs-large',
+          name: 'Eggs',
+          description: 'Fresh eggs cooked just the way you like them. A perfect addition to any meal!',
+          price: 7000
         },
         {
-          id: 'plantain',
+          id: 'cheese',
+          name: 'Cheese',
+          description: 'Melted, grated, or sliced - add that cheesy goodness to any dish!',
+          price: 5000
+        },
+        {
+          id: 'plantain-large',
           name: 'Plantain',
-          description: 'Sweet, caramelized, and downright delicious. A tropical treat!',
-          price: 4500,
+          description: 'Generous portion of sweet, caramelized plantains. The perfect tropical side!',
+          price: 8500,
           dietary: { vegan: true }
         },
         {
@@ -555,12 +573,6 @@ export const menuData: MenuData = {
           description: 'Because everything\'s better with bacon. Period.',
           price: 3000,
           dietary: { pork: true }
-        },
-        {
-          id: 'cheese',
-          name: 'Cheese',
-          description: 'Melty, gooey, and always a good idea. Add it to anything!',
-          price: 3000
         },
         {
           id: 'hub-lunch-box',

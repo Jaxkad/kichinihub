@@ -10,25 +10,25 @@ const getLogoColorForTheme = (theme: string) => {
   switch (theme) {
     case 'red':
       return {
-        background: '#8B0000', // Deep dark red - stimulates appetite, energy
+        background: '#6D1600', // Brand primary red
         onBackground: '#FFFFFF',
-        surface: 'rgba(255, 255, 255, 0.95)',
+        surface: 'rgba(109, 22, 0, 0.15)', // Less faint red background
         onSurface: '#1F2937',
         priceColor: '#6D1600'
       };
     case 'light':
       return {
-        background: '#F5DEB3', // Warm wheat - breakfast comfort
-        onBackground: '#2C1810',
-        surface: 'rgba(255, 255, 255, 0.95)',
+        background: '#F5F5F5', // Light gray
+        onBackground: '#000000',
+        surface: 'rgba(245, 245, 245, 0.7)', // Less faint light gray
         onSurface: '#1F2937',
         priceColor: '#6D1600'
       };
     case 'burgundy':
       return {
-        background: '#722F37', // Deep burgundy - rich, sophisticated
+        background: '#722F37', // Deep burgundy - rich, elegant
         onBackground: '#FFFFFF',
-        surface: 'rgba(255, 255, 255, 0.95)',
+        surface: 'rgba(114, 47, 55, 0.15)', // Less faint burgundy
         onSurface: '#1F2937',
         priceColor: '#6D1600'
       };
@@ -36,7 +36,7 @@ const getLogoColorForTheme = (theme: string) => {
       return {
         background: '#CB4B16', // Rich terracotta - earthy, warm
         onBackground: '#FFFFFF',
-        surface: 'rgba(255, 255, 255, 0.95)',
+        surface: 'rgba(203, 75, 22, 0.15)', // Less faint terracotta
         onSurface: '#1F2937',
         priceColor: '#6D1600'
       };
@@ -44,7 +44,7 @@ const getLogoColorForTheme = (theme: string) => {
       return {
         background: '#6D1600', // Brand brown coffee - rich, comforting
         onBackground: '#FFFFFF',
-        surface: 'rgba(255, 255, 255, 0.95)',
+        surface: 'rgba(109, 22, 0, 0.15)', // Less faint brown
         onSurface: '#1F2937',
         priceColor: '#6D1600'
       };
@@ -52,7 +52,7 @@ const getLogoColorForTheme = (theme: string) => {
       return {
         background: '#2E7D32', // Deep forest green - fresh, healthy
         onBackground: '#FFFFFF',
-        surface: 'rgba(255, 255, 255, 0.95)',
+        surface: 'rgba(46, 125, 50, 0.15)', // Less faint green
         onSurface: '#1F2937',
         priceColor: '#6D1600'
       };
@@ -60,7 +60,7 @@ const getLogoColorForTheme = (theme: string) => {
       return {
         background: '#D2B48C', // Tan - warm, comforting
         onBackground: '#2C1810',
-        surface: 'rgba(255, 255, 255, 0.95)',
+        surface: 'rgba(210, 180, 140, 0.3)', // Less faint tan
         onSurface: '#1F2937',
         priceColor: '#6D1600'
       };
@@ -68,7 +68,7 @@ const getLogoColorForTheme = (theme: string) => {
       return {
         background: '#006064', // Deep teal - fresh, calming
         onBackground: '#FFFFFF',
-        surface: 'rgba(255, 255, 255, 0.95)',
+        surface: 'rgba(0, 96, 100, 0.15)', // Less faint teal
         onSurface: '#1F2937',
         priceColor: '#6D1600'
       };
@@ -76,15 +76,15 @@ const getLogoColorForTheme = (theme: string) => {
       return {
         background: '#37474F', // Dark slate - sophisticated, neutral
         onBackground: '#FFFFFF',
-        surface: 'rgba(255, 255, 255, 0.95)',
+        surface: 'rgba(55, 71, 79, 0.15)', // Less faint slate
         onSurface: '#1F2937',
         priceColor: '#6D1600'
       };
     case 'forest':
       return {
-        background: '#1B5E20', // Deep forest green - earthy, natural
+        background: '#1B5E20', // Deep forest green
         onBackground: '#FFFFFF',
-        surface: 'rgba(255, 255, 255, 0.95)',
+        surface: 'rgba(27, 94, 32, 0.15)', // Less faint forest green
         onSurface: '#1F2937',
         priceColor: '#6D1600'
       };
@@ -195,14 +195,14 @@ export function MenuSection({ section }: MenuSectionProps) {
       </div>
 
       {/* Subtle Divider */}
-      <div className="w-full h-0.5 mb-8 opacity-30" style={{ backgroundColor: '#6D1600' }} />
+      <div className="w-full h-0.5 opacity-30" style={{ backgroundColor: '#6D1600' }} />
 
       {/* Content - Single Column */}
       <div 
         className="px-6 pb-8"
         style={{ 
-          backgroundColor: '#FFF8E7', // Light yellow background
-          color: '#000000' // Black text for contrast
+          backgroundColor: colors.surface, // Use theme surface color instead of fixed yellow
+          color: colors.onSurface // Use theme text color
         }}
       >
         <div className="space-y-6 max-w-3xl mx-auto">
