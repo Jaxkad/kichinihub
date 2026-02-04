@@ -171,15 +171,24 @@ export function MenuSection({ section }: MenuSectionProps) {
       <div 
         className="px-6 py-8 text-center"
         style={{ 
-          backgroundColor: colors.background,
-          color: section.id === 'breakfast' ? '#000000' : '#FFFFFF' // Black for breakfast, white for all others
+          backgroundColor: colors.background
         }}
       >
-        <h2 className="md-typescale-headline-large font-bold mb-3 tracking-tight">
+        <h2 
+          className="md-typescale-headline-large font-bold mb-3 tracking-tight"
+          style={{ 
+            color: (section.id === 'breakfast' || section.id === 'soups') ? '#000000' : '#FFFFFF' // Black for breakfast and soups, white for all others
+          }}
+        >
           {section.title}
         </h2>
         {section.subtitle && (
-          <p className="md-typescale-title-medium opacity-95 font-medium tracking-wide">
+          <p 
+            className="md-typescale-title-medium opacity-95 font-medium tracking-wide"
+            style={{ 
+              color: (section.id === 'breakfast' || section.id === 'soups') ? '#000000' : '#FFFFFF' // Black for breakfast and soups, white for all others
+            }}
+          >
             {section.subtitle}
           </p>
         )}

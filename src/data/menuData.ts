@@ -70,6 +70,38 @@ export const menuData: MenuData = {
       ]
     },
     {
+      id: 'soups',
+      title: 'HUGS IN A BOWL (Soups)',
+      subtitle: 'Warm, cozy, and full of love.',
+      theme: 'cream',
+      items: [
+        {
+          id: 'butternut-beetroot',
+          name: 'Butternut & Beetroot Soup',
+          description: 'Creamy, dreamy, and oh-so-comforting. Like a hug in every spoonful.',
+          price: 14000
+        },
+        {
+          id: 'leek-potato',
+          name: 'Leek & Potato Soup',
+          description: 'Creamy, hearty, and full of flavor. Comfort food at its best.',
+          price: 14000
+        },
+        {
+          id: 'carrot-ginger',
+          name: 'Carrot Ginger Soup',
+          description: 'Sweet carrots + zesty ginger = a bowl of pure happiness.',
+          price: 15000
+        },
+        {
+          id: 'mushroom',
+          name: 'Creamy Mushroom soup',
+          description: 'Rich, creamy, and packed with earthy mushroom goodness.',
+          price: 15000
+        }
+      ]
+    },
+    {
       id: 'breakfast',
       title: 'BREAKFAST- "Warm-Up Acts"',
       subtitle: 'Sun\'s up, food\'s ready—let\'s do this!',
@@ -110,34 +142,28 @@ export const menuData: MenuData = {
       ]
     },
     {
-      id: 'soups',
-      title: 'HUGS IN A BOWL (Soups)',
-      subtitle: 'Warm, cozy, and full of love.',
-      theme: 'cream',
+      id: 'salads',
+      title: 'SALADS (GREEN & GREAT)',
+      subtitle: 'For when you wanna feel good and eat good.',
+      theme: 'green',
       items: [
         {
-          id: 'butternut-beetroot',
-          name: 'Butternut & Beetroot Soup',
-          description: 'Creamy, dreamy, and oh-so-comforting. Like a hug in every spoonful.',
-          price: 14000
-        },
-        {
-          id: 'leek-potato',
-          name: 'Leek & Potato Soup',
-          description: 'Creamy, hearty, and full of flavor. Comfort food at its best.',
-          price: 14000
-        },
-        {
-          id: 'carrot-ginger',
-          name: 'Carrot Ginger Soup',
-          description: 'Sweet carrots + zesty ginger = a bowl of pure happiness.',
+          id: 'beetroot-feta-butternut',
+          name: 'Beetroot, Feta & Butternut Salad',
+          description: 'Sweet, salty, and totally Instagram-worthy. Healthy never tasted so good!',
           price: 15000
         },
         {
-          id: 'mushroom',
-          name: 'Creamy Mushroom soup',
-          description: 'Rich, creamy, and packed with earthy mushroom goodness.',
-          price: 15000
+          id: 'sesame-chicken-avocado',
+          name: 'Sesame Chicken & Avocado Salad',
+          description: 'Grilled chicken + creamy avocado = a salad you\'ll actually crave.',
+          price: 17000
+        },
+        {
+          id: 'steamed-veggie',
+          name: 'Steamed Mixed Veggie salad',
+          description: 'Fresh, light, and full of goodness. A veggie lover\'s dream.',
+          price: 11000
         }
       ]
     },
@@ -183,32 +209,6 @@ export const menuData: MenuData = {
           description: 'Sticky, smoky, and fall-off-the-bone tender. Ribs done right!',
           price: 40000,
           dietary: { pork: true }
-        }
-      ]
-    },
-    {
-      id: 'salads',
-      title: 'SALADS (GREEN & GREAT)',
-      subtitle: 'For when you wanna feel good and eat good.',
-      theme: 'green',
-      items: [
-        {
-          id: 'beetroot-feta-butternut',
-          name: 'Beetroot, Feta & Butternut Salad',
-          description: 'Sweet, salty, and totally Instagram-worthy. Healthy never tasted so good!',
-          price: 15000
-        },
-        {
-          id: 'sesame-chicken-avocado',
-          name: 'Sesame Chicken & Avocado Salad',
-          description: 'Grilled chicken + creamy avocado = a salad you\'ll actually crave.',
-          price: 17000
-        },
-        {
-          id: 'steamed-veggie',
-          name: 'Steamed Mixed Veggie salad',
-          description: 'Fresh, light, and full of goodness. A veggie lover\'s dream.',
-          price: 11000
         }
       ]
     },
@@ -296,82 +296,6 @@ export const menuData: MenuData = {
           name: 'Chicken stir Fry',
           description: 'Tender chicken, crisp veggies, and a flavorful sauce. Stir-fried just for you.',
           price: 23000
-        }
-      ]
-    },
-    {
-      id: 'starches',
-      title: 'Sidekick Spectacular (Starches)',
-      subtitle: 'Because every hero needs a sidekick!',
-      theme: 'brown',
-      items: [
-        {
-          id: 'potato-fries',
-          name: 'Potato fries',
-          description: 'Golden, crispy, and totally irresistible. The ultimate sidekick.',
-          price: 8000
-        },
-        {
-          id: 'yellow-rice',
-          name: 'Yellow rice',
-          description: 'Fluffy, fragrant, and full of flavor. The perfect side for any dish.',
-          price: 7000
-        },
-        {
-          id: 'homemade-nsima',
-          name: 'Homemade nsima',
-          description: 'A traditional favorite, soft, hearty, and oh-so-comforting.',
-          price: 5000
-        },
-        {
-          id: 'rosemary-garlic-potato',
-          name: 'Rosemary Garlic Potato',
-          description: 'Crispy on the outside, fluffy on the inside, and packed with flavor.',
-          price: 10000
-        },
-        {
-          id: 'wedges',
-          name: 'Wedges',
-          description: 'Thick, crispy, and totally satisfying. The perfect side for any meal.',
-          price: 10000
-        },
-        {
-          id: 'fried-plantains',
-          name: 'Fried Plantains',
-          description: 'Sweet, caramelized, and downright delicious. A tropical twist on fries!',
-          price: 8000
-        }
-      ]
-    },
-    {
-      id: 'platters',
-      title: 'PLATTERS (SHARING IS CARING)',
-      subtitle: 'A little bit of everything you love! Perfect for sharing (or keeping all to yourself—we won\'t judge). Includes a selection of our most popular bites, from crispy starters to savory mains. Great for small gatherings or big appetites!',
-      theme: 'terracotta',
-      items: [
-        {
-          id: 'falafel-platter',
-          name: 'Falafel Platter',
-          description: 'Crispy falafel, fresh veggies, and warm pita. Perfect for sharing (or not—we won\'t judge).',
-          price: 45000
-        },
-        {
-          id: 'mezze-platter',
-          name: 'Mezze Platter',
-          description: 'A Mediterranean feast for the table. Samosas, hummus, baba ganoush, and more—dig in!',
-          price: 105000
-        },
-        {
-          id: 'medium-hub-platter',
-          name: 'MediumHub- Platter',
-          description: '"The Mix & Match Platter" includes BBQ wings, spicy chicken gizzards, potato fries & beef kebabs',
-          price: 80000
-        },
-        {
-          id: 'big-hub-platter',
-          name: 'Big-Hub-Platter',
-          description: '"The Feast Master Platter" includes Tender beef ribs, BBQ pork ribs, chicken shawarma, fried plantain, Wedges & Beef Strips',
-          price: 120000
         }
       ]
     },
@@ -477,40 +401,46 @@ export const menuData: MenuData = {
       ]
     },
     {
-      id: 'extra',
-      title: 'EXTRA (Because Why Not?)',
-      theme: 'red',
+      id: 'starches',
+      title: 'Sidekick Spectacular (Starches)',
+      subtitle: 'Because every hero needs a sidekick!',
+      theme: 'brown',
       items: [
         {
-          id: 'egg',
-          name: 'Egg',
-          description: 'Because everything\'s better with an egg on top!',
-          price: 2500
+          id: 'potato-fries',
+          name: 'Potato fries',
+          description: 'Golden, crispy, and totally irresistible. The ultimate sidekick.',
+          price: 8000
         },
         {
-          id: 'plantain',
-          name: 'Plantain',
-          description: 'Sweet, caramelized, and downright delicious. A tropical treat!',
-          price: 4500
+          id: 'yellow-rice',
+          name: 'Yellow rice',
+          description: 'Fluffy, fragrant, and full of flavor. The perfect side for any dish.',
+          price: 7000
         },
         {
-          id: 'bacon',
-          name: 'Bacon',
-          description: 'Because everything\'s better with bacon. Period.',
-          price: 3000,
-          dietary: { pork: true }
+          id: 'homemade-nsima',
+          name: 'Homemade nsima',
+          description: 'A traditional favorite, soft, hearty, and oh-so-comforting.',
+          price: 5000
         },
         {
-          id: 'cheese',
-          name: 'Cheese',
-          description: 'Melty, gooey, and always a good idea. Add it to anything!',
-          price: 3000
+          id: 'rosemary-garlic-potato',
+          name: 'Rosemary Garlic Potato',
+          description: 'Crispy on the outside, fluffy on the inside, and packed with flavor.',
+          price: 10000
         },
         {
-          id: 'hub-lunch-box',
-          name: 'The Hub-Lunch Box',
-          description: 'Convinience in a box,flavour in every bite',
-          price: 1000
+          id: 'wedges',
+          name: 'Wedges',
+          description: 'Thick, crispy, and totally satisfying. The perfect side for any meal.',
+          price: 10000
+        },
+        {
+          id: 'fried-plantains',
+          name: 'Fried Plantains',
+          description: 'Sweet, caramelized, and downright delicious. A tropical twist on fries!',
+          price: 8000
         }
       ]
     },
@@ -549,6 +479,76 @@ export const menuData: MenuData = {
           name: 'Hummus',
           description: 'Smooth, creamy, and oh-so-satisfying! Classic hummus made with chickpeas, tahini, and a touch of garlic.',
           price: 9500
+        }
+      ]
+    },
+    {
+      id: 'platters',
+      title: 'PLATTERS (SHARING IS CARING)',
+      subtitle: 'A little bit of everything you love! Perfect for sharing (or keeping all to yourself—we won\'t judge). Includes a selection of our most popular bites, from crispy starters to savory mains. Great for small gatherings or big appetites!',
+      theme: 'terracotta',
+      items: [
+        {
+          id: 'falafel-platter',
+          name: 'Falafel Platter',
+          description: 'Crispy falafel, fresh veggies, and warm pita. Perfect for sharing (or not—we won\'t judge).',
+          price: 45000
+        },
+        {
+          id: 'mezze-platter',
+          name: 'Mezze Platter',
+          description: 'A Mediterranean feast for the table. Samosas, hummus, baba ganoush, and more—dig in!',
+          price: 105000
+        },
+        {
+          id: 'medium-hub-platter',
+          name: 'MediumHub- Platter',
+          description: '"The Mix & Match Platter" includes BBQ wings, spicy chicken gizzards, potato fries & beef kebabs',
+          price: 80000
+        },
+        {
+          id: 'big-hub-platter',
+          name: 'Big-Hub-Platter',
+          description: '"The Feast Master Platter" includes Tender beef ribs, BBQ pork ribs, chicken shawarma, fried plantain, Wedges & Beef Strips',
+          price: 120000
+        }
+      ]
+    },
+    {
+      id: 'extra',
+      title: 'EXTRA (Because Why Not?)',
+      theme: 'red',
+      items: [
+        {
+          id: 'egg',
+          name: 'Egg',
+          description: 'Because everything\'s better with an egg on top!',
+          price: 2500
+        },
+        {
+          id: 'plantain',
+          name: 'Plantain',
+          description: 'Sweet, caramelized, and downright delicious. A tropical treat!',
+          price: 4500
+        },
+        {
+          id: 'bacon',
+          name: 'Bacon',
+          description: 'Because everything\'s better with bacon. Period.',
+          price: 3000,
+          dietary: { pork: true }
+        },
+        {
+          id: 'cheese',
+          name: 'Cheese',
+          description: 'Melty, gooey, and always a good idea. Add it to anything!',
+          price: 3000
+        },
+        {
+          id: 'hub-lunch-box',
+          name: 'The Hub-Lunch Box',
+          description: 'Convinience in a box,flavour in every bite',
+          price: 1000
         }
       ]
     }
