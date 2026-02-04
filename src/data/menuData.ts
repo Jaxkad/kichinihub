@@ -59,13 +59,15 @@ export const menuData: MenuData = {
           id: 'spicy-chicken-gizzards',
           name: 'Spicy Chicken Gizzards',
           description: 'Sticky, smoky, and finger-lickin\' good. Napkins mandatory!',
-          price: 10000
+          price: 10000,
+          dietary: { hot: true }
         },
         {
           id: 'avocado-hummus-wrap',
           name: 'Avocado & Hummus Wrap',
           description: 'Creamy avocado meets smooth hummus in a wrap that\'s fresh, healthy, and totally delicious.',
-          price: 15000
+          price: 15000,
+          dietary: { vegan: true }
         }
       ]
     },
@@ -79,25 +81,29 @@ export const menuData: MenuData = {
           id: 'butternut-beetroot',
           name: 'Butternut & Beetroot Soup',
           description: 'Creamy, dreamy, and oh-so-comforting. Like a hug in every spoonful.',
-          price: 14000
+          price: 14000,
+          dietary: { vegan: true }
         },
         {
           id: 'leek-potato',
           name: 'Leek & Potato Soup',
           description: 'Creamy, hearty, and full of flavor. Comfort food at its best.',
-          price: 14000
+          price: 14000,
+          dietary: { vegan: true }
         },
         {
           id: 'carrot-ginger',
           name: 'Carrot Ginger Soup',
           description: 'Sweet carrots + zesty ginger = a bowl of pure happiness.',
-          price: 15000
+          price: 15000,
+          dietary: { vegan: true }
         },
         {
           id: 'mushroom',
           name: 'Creamy Mushroom soup',
           description: 'Rich, creamy, and packed with earthy mushroom goodness.',
-          price: 15000
+          price: 15000,
+          dietary: { vegan: true }
         }
       ]
     },
@@ -163,7 +169,8 @@ export const menuData: MenuData = {
           id: 'steamed-veggie',
           name: 'Steamed Mixed Veggie salad',
           description: 'Fresh, light, and full of goodness. A veggie lover\'s dream.',
-          price: 11000
+          price: 11000,
+          dietary: { vegan: true }
         }
       ]
     },
@@ -201,7 +208,8 @@ export const menuData: MenuData = {
           id: 'spicy-meat-balls',
           name: 'Spicy meat balls',
           description: 'Bite-sized, spicy, and full of flavor. Perfect for sharing (or not)!',
-          price: 19500
+          price: 19500,
+          dietary: { hot: true }
         },
         {
           id: 'bbq-pork-ribs',
@@ -340,7 +348,8 @@ export const menuData: MenuData = {
           id: 'tomato-onion-sandwich',
           name: 'Tomato and Onion',
           description: 'A veggie delight with fresh tomatoes and zesty onions. Light and tasty!',
-          price: 14000
+          price: 14000,
+          dietary: { vegan: true }
         },
         {
           id: 'fish-rocket',
@@ -384,13 +393,15 @@ export const menuData: MenuData = {
           id: 'spicy-beef-wrap',
           name: 'Spicy beef wrap',
           description: 'Beef so good, it\'ll make you wanna dance. Spicy, saucy, and totally satisfying.',
-          price: 22000
+          price: 22000,
+          dietary: { hot: true }
         },
         {
           id: 'mixed-veggie-wrap',
           name: 'Mixed Veggie wrap',
           description: 'A veggie-packed wrap that\'s fresh, healthy, and full of flavor.',
-          price: 20000
+          price: 20000,
+          dietary: { vegan: true }
         },
         {
           id: 'fish-shawarma',
@@ -410,37 +421,43 @@ export const menuData: MenuData = {
           id: 'potato-fries',
           name: 'Potato fries',
           description: 'Golden, crispy, and totally irresistible. The ultimate sidekick.',
-          price: 8000
+          price: 8000,
+          dietary: { vegan: true }
         },
         {
           id: 'yellow-rice',
           name: 'Yellow rice',
           description: 'Fluffy, fragrant, and full of flavor. The perfect side for any dish.',
-          price: 7000
+          price: 7000,
+          dietary: { vegan: true }
         },
         {
           id: 'homemade-nsima',
           name: 'Homemade nsima',
           description: 'A traditional favorite, soft, hearty, and oh-so-comforting.',
-          price: 5000
+          price: 5000,
+          dietary: { vegan: true }
         },
         {
           id: 'rosemary-garlic-potato',
           name: 'Rosemary Garlic Potato',
           description: 'Crispy on the outside, fluffy on the inside, and packed with flavor.',
-          price: 10000
+          price: 10000,
+          dietary: { vegan: true }
         },
         {
           id: 'wedges',
           name: 'Wedges',
           description: 'Thick, crispy, and totally satisfying. The perfect side for any meal.',
-          price: 10000
+          price: 10000,
+          dietary: { vegan: true }
         },
         {
           id: 'fried-plantains',
           name: 'Fried Plantains',
           description: 'Sweet, caramelized, and downright delicious. A tropical twist on fries!',
-          price: 8000
+          price: 8000,
+          dietary: { vegan: true }
         }
       ]
     },
@@ -529,7 +546,8 @@ export const menuData: MenuData = {
           id: 'plantain',
           name: 'Plantain',
           description: 'Sweet, caramelized, and downright delicious. A tropical treat!',
-          price: 4500
+          price: 4500,
+          dietary: { vegan: true }
         },
         {
           id: 'bacon',
