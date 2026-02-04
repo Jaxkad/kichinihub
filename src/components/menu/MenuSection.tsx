@@ -172,7 +172,7 @@ export function MenuSection({ section }: MenuSectionProps) {
         className="px-6 py-8 text-center"
         style={{ 
           backgroundColor: colors.background,
-          color: '#FFFFFF' // Always white text regardless of theme
+          color: section.id === 'breakfast' ? '#000000' : '#FFFFFF' // Black for breakfast, white for all others
         }}
       >
         <h2 className="md-typescale-headline-large font-bold mb-3 tracking-tight">
