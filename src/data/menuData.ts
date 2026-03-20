@@ -47,7 +47,7 @@ export const menuData: MenuData = {
           id: 'beer-battered-fish-chips',
           name: 'Beer-Battered Fish & Chips',
           description: 'Crispy, golden, and oh-so-satisfying. Dip it, crunch it, love it!',
-          price: 18000
+          price: 55000
         },
         {
           id: 'tender-goat-ribs-wedges',
@@ -59,14 +59,14 @@ export const menuData: MenuData = {
           id: 'spicy-chicken-gizzards',
           name: 'Spicy Chicken Gizzards',
           description: 'Sticky, smoky, and finger-lickin\' good. Napkins mandatory!',
-          price: 10000,
+          price: 17500,
           dietary: { hot: true }
         },
         {
           id: 'avocado-hummus-wrap',
           name: 'Avocado & Hummus Wrap',
           description: 'Creamy avocado meets smooth hummus in a wrap that\'s fresh, healthy, and totally delicious.',
-          price: 15000,
+          price: 25000,
           dietary: { vegan: true }
         }
       ]
@@ -169,7 +169,7 @@ export const menuData: MenuData = {
           id: 'steamed-veggie',
           name: 'Steamed Mixed Veggie salad',
           description: 'Fresh, light, and full of goodness. A veggie lover\'s dream.',
-          price: 11000,
+          price: 16500,
           dietary: { vegan: true }
         }
       ]
@@ -184,7 +184,7 @@ export const menuData: MenuData = {
           id: 'bbq-wings',
           name: 'BBQ Wings',
           description: 'Sticky, smoky, and finger-lickin\' good. Napkins mandatory!',
-          price: 20000
+          price: 26000
         },
         {
           id: 'chicken-kebab',
@@ -330,7 +330,7 @@ export const menuData: MenuData = {
           id: 'egg-mayo-sandwich',
           name: 'Egg and Mayo',
           description: 'Creamy, dreamy, and totally satisfying. A classic done right.',
-          price: 16500
+          price: 18000
         },
         {
           id: 'chicken-mayo-sandwich',
@@ -483,7 +483,7 @@ export const menuData: MenuData = {
           id: 'falafel-wrap',
           name: 'Falafel Wrap',
           description: 'Crispy falafel, fresh veggies, and creamy tahini wrapped in a soft chapati. A handheld taste of the Mediterranean!',
-          price: 15500
+          price: 25000
         },
         {
           id: 'mediterranean-bowl',
@@ -571,7 +571,7 @@ export const menuData: MenuData = {
           id: 'bacon',
           name: 'Bacon',
           description: 'Because everything\'s better with bacon. Period.',
-          price: 3000,
+          price: 9500,
           dietary: { pork: true }
         },
         {

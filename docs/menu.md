@@ -4,10 +4,10 @@
 |------|------|-------|-----|
 | **Khala pa Khichini** | *Where would we be without Memories, Khalas greatest hits, now part of the HUBS-STORY* | K0 |  |
 | Tender Beef Ribs & Wedges | Fall-off-the-bone ribs + crispy wedges = a match made in food heaven. | 40000 |  |
-| Beer-Battered Fish & Chips | Crispy, golden, and oh-so-satisfying. Dip it, crunch it, love it! | 18000 |  |
+| Beer-Battered Fish & Chips | Crispy, golden, and oh-so-satisfying. Dip it, crunch it, love it! | 55000 |  |
 | Tender Goat Ribs & Wedges | Tender, spicy, and packed with flavor. Warning: Highly addictive! | 23000 |  |
-| Spicy Chicken Gizzards | Sticky, smoky, and finger-lickin' good. Napkins mandatory! | 10000 |  |
-| Avocado & Hummus Wrap | Creamy avocado meets smooth hummus in a wrap that's fresh, healthy, and totally delicious. | 15000 |  |
+| Spicy Chicken Gizzards | Sticky, smoky, and finger-lickin' good. Napkins mandatory! | 17500 |  |
+| Avocado & Hummus Wrap | Creamy avocado meets smooth hummus in a wrap that's fresh, healthy, and totally delicious. | 25000 |  |
 
 ## MAINS "The Main Event"
 *For when you're serious about eating (and living your best life).*
@@ -45,7 +45,7 @@
 | Item | Desc | PRICE | Key |
 |------|------|-------|-----|
 | Bacon and Cheese | Crispy bacon + melty cheese = a sandwich that's pure happiness. | 19000 | P |
-| Egg and Mayo | Creamy, dreamy, and totally satisfying. A classic done right. | 16500 |  |
+| Egg and Mayo | Creamy, dreamy, and totally satisfying. A classic done right. | 18000 |  |
 | Chicken Mayo | Tender chicken, creamy mayo, and fresh veggies. Simple, but oh-so-good. | 20000 |  |
 | Chicken and cheese | Juicy chicken + melty cheese = a match made in sandwich heaven. | 18500 |  |
 | Tomato and cheese | Fresh tomatoes + gooey cheese. Simple, fresh, and totally delicious. | 15000 |  |
@@ -92,7 +92,7 @@
 
 | Item | Desc | PRICE | Key |
 |------|------|-------|-----|
-| BBQ Wings | Sticky, smoky, and finger-lickin' good. Napkins mandatory! | 20000 |  |
+| BBQ Wings | Sticky, smoky, and finger-lickin' good. Napkins mandatory! | 26000 |  |
 | Chicken Kebab | Tender, juicy, and packed with flavor. Perfect for snacking or sharing. | 20000 |  |
 | Beef kebab | Savory beef skewers grilled to perfection. A meat lover's dream. | 22000 |  |
 | BBQ Drumstick | Juicy, smoky, and totally satisfying. Get your hands on these! | 20000 |  |
@@ -106,7 +106,7 @@
 |------|------|-------|-----|
 | Beetroot, Feta & Butternut Salad | Sweet, salty, and totally Instagram-worthy. Healthy never tasted so good! | 15000 |  |
 | Sesame Chicken & Avocado Salad | Grilled chicken + creamy avocado = a salad you'll actually crave. | 17000 |  |
-| Steamed Mixed Veggie salad | Fresh, light, and full of goodness. A veggie lover's dream. | 11000 |  |
+| Steamed Mixed Veggie salad | Fresh, light, and full of goodness. A veggie lover's dream. | 16500 |  |
 
 ## EXTRA (Because Why Not?)
 
@@ -114,7 +114,7 @@
 |------|------|-------|-----|
 | Egg | Because everything's better with an egg on top! | 2500 |  |
 | Plantain | Sweet, caramelized, and downright delicious. A tropical treat! | 4500 |  |
-| Bacon | Because everything's better with bacon. Period. | 3000 | P |
+| Bacon | Because everything's better with bacon. Period. | 9500 | P |
 | Cheese | Melty, gooey, and always a good idea. Add it to anything! | 3000 |  |
 | The Hub-Lunch Box | Convinience in a box,flavour in every bite | 1000 |  |
 
@@ -133,7 +133,7 @@
 
 | Item | Desc | PRICE | Key |
 |------|------|-------|-----|
-| Falafel Wrap | Crispy falafel, fresh veggies, and creamy tahini wrapped in a soft chapati. A handheld taste of the Mediterranean! | 15500 |  |
+| Falafel Wrap | Crispy falafel, fresh veggies, and creamy tahini wrapped in a soft chapati. A handheld taste of the Mediterranean! | 25000 |  |
 | Mediterranean Bowl | A flavor-packed bowl of sunshine! Fluffy couscous, crispy falafel, fresh veggies, and a drizzle of tahini. | 14500 |  |
 | Tabbouleh | Fresh parsley, juicy tomatoes, zesty onions, and a hint of mint—light, refreshing, and oh-so-delicious! | 8500 |  |
 | Baba Ganoush | Smoky, creamy, and totally addictive! Roasted eggplant blended with tahini, garlic, and lemon. | 12500 |  |
