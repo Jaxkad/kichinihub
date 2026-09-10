@@ -22,7 +22,7 @@ export function SocialFooter({ social }: SocialFooterProps) {
           </span>
           <div className="flex gap-1">
             <a 
-              href="https://www.instagram.com/khichini_hub/?hl=en"
+              href={`https://www.instagram.com/${encodeURIComponent(social.instagram.replace(/^@/, ""))}/`}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg transition-all duration-200 hover:bg-white/10 active:scale-95"
@@ -32,7 +32,7 @@ export function SocialFooter({ social }: SocialFooterProps) {
               <FaInstagram className="w-6 h-6" style={{ color: '#E4405F' }} />
             </a>
             <a 
-              href={`https://facebook.com/${social.facebook}`}
+              href={`https://facebook.com/${encodeURIComponent(social.facebook.replace(/^@/, ""))}`}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg transition-all duration-200 hover:bg-white/10 active:scale-95"
@@ -42,7 +42,7 @@ export function SocialFooter({ social }: SocialFooterProps) {
               <FaFacebook className="w-6 h-6" style={{ color: '#1877F2' }} />
             </a>
             <a 
-              href={`https://twitter.com/${social.twitter}`}
+              href={`https://twitter.com/${encodeURIComponent(social.twitter.replace(/^@/, ""))}`}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg transition-all duration-200 hover:bg-white/10 active:scale-95"
@@ -52,7 +52,7 @@ export function SocialFooter({ social }: SocialFooterProps) {
               <FaX className="w-6 h-6" style={{ color: '#000000' }} />
             </a>
             <a 
-              href={`https://tiktok.com/@${social.tiktok}`}
+              href={`https://tiktok.com/@${encodeURIComponent(social.tiktok.replace(/^@/, ""))}`}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg transition-all duration-200 hover:bg-white/10 active:scale-95"
