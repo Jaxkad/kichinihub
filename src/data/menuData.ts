@@ -3,6 +3,8 @@ export interface MenuItem {
   name: string;
   description: string;
   price: number;
+  available?: boolean;
+  photo?: { url: string; alt: string } | null;
   dietary?: {
     pork?: boolean;
     vegan?: boolean;

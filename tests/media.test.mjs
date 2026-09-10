@@ -1,0 +1,3 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {mediaType,IMAGE_LIMIT,VIDEO_LIMIT} from '../src/lib/media.ts';
+test('Apple and common formats recognized case-insensitively',()=>{assert.equal(mediaType('PHOTO.HEIC'),'image/heic');assert.equal(mediaType('photo.heif'),'image/heif');assert.equal(mediaType('clip.MOV'),'video/quicktime');assert.equal(mediaType('clip.mp4'),'video/mp4');assert.equal(mediaType('photo.webp'),'image/webp');assert.equal(mediaType('scan.TIFF'),'image/tiff');});
+test('unsupported files rejected and upload limits are distinct',()=>{assert.equal(mediaType('script.html'),undefined);assert.equal(mediaType('photo.jpg.exe'),undefined);assert.equal(IMAGE_LIMIT,25*1024*1024);assert.equal(VIDEO_LIMIT,250*1024*1024);});
