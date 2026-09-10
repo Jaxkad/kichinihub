@@ -33,10 +33,12 @@ export function SiteTracking() {
         for (const entry of entries)
           if (entry.isIntersecting) {
             const el = entry.target as HTMLElement;
+            const kind = el.dataset.metric;
+            if (!kind) continue;
             track(
-              el.dataset.metric!,
-              el.dataset.metricId!,
-              el.dataset.metricLabel!,
+              kind,
+              el.dataset.metricId || "unknown",
+              el.dataset.metricLabel || el.textContent || "",
               true,
             );
           }
@@ -49,10 +51,8 @@ export function SiteTracking() {
         .forEach((el) => observer.observe(el));
     watch();
     const mutation = new MutationObserver(watch);
-    mutation.observe(document.querySelector("main")!, {
-      childList: true,
-      subtree: true,
-    });
+    const main = document.querySelector("main");
+    if (main) mutation.observe(main, { childList: true, subtree: true });
     const click = (e: MouseEvent) => {
       const el = (e.target as HTMLElement).closest<HTMLElement>("[data-track]");
       if (el)

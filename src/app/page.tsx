@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { menuData } from "@/data/menuData";
+import { menuSchema } from "@/lib/admin-schema";
 import Image from "next/image";
 import {
   ArrowDown,
@@ -33,6 +34,46 @@ const categoryNames: Record<string, string> = {
   wraps: "Wraps",
   starches: "Sides",
 };
+const sanitizePhone = (value: string) =>
+  value.replace(/[^0-9+]/g, "").slice(0, 20);
+const socialHandle = (value: string) =>
+  encodeURIComponent(value.replace(/^@/, "").trim());
+const socialLinks: {
+  key: keyof typeof menuData.social;
+  url: (handle: string) => string;
+  Icon: typeof FaInstagram;
+  label: string;
+  trackId: string;
+}[] = [
+  {
+    key: "instagram",
+    url: (h) => `https://instagram.com/${h}`,
+    Icon: FaInstagram,
+    label: "Instagram",
+    trackId: "instagram",
+  },
+  {
+    key: "facebook",
+    url: (h) => `https://facebook.com/${h}`,
+    Icon: FaFacebook,
+    label: "Facebook",
+    trackId: "facebook",
+  },
+  {
+    key: "tiktok",
+    url: (h) => `https://tiktok.com/@${h}`,
+    Icon: FaTiktok,
+    label: "TikTok",
+    trackId: "tiktok",
+  },
+  {
+    key: "twitter",
+    url: (h) => `https://x.com/${h}`,
+    Icon: FaInstagram,
+    label: "X / Twitter",
+    trackId: "x",
+  },
+];
 export default function Home() {
   const [menu, setMenu] = useState(menuData),
     [query, setQuery] = useState(""),
@@ -45,8 +86,13 @@ export default function Home() {
         doc(db, "menu/current"),
         (snapshot) => {
           if (snapshot.exists()) {
-            setMenu(snapshot.data() as typeof menuData);
-            setConnection("live");
+            const parsed = menuSchema.safeParse(snapshot.data());
+            if (parsed.success) {
+              setMenu(parsed.data as typeof menuData);
+              setConnection("live");
+            } else {
+              setConnection("fallback");
+            }
           } else setConnection("fallback");
         },
         () => setConnection("fallback"),
@@ -111,7 +157,7 @@ export default function Home() {
           data-track="contact_click"
           data-track-id="phone"
           data-track-label="Call the Hub"
-          href={`tel:${menu.social.rsvp}`}
+          href={`tel:${sanitizePhone(menu.social.rsvp)}`}
         >
           <Phone size={14} />
           <span>Let’s make a plan</span>
@@ -403,7 +449,7 @@ export default function Home() {
               data-track="contact_click"
               data-track-id="phone"
               data-track-label="Call the Hub"
-              href={`tel:${menu.social.rsvp}`}
+              href={`tel:${sanitizePhone(menu.social.rsvp)}`}
               className="kh-button"
             >
               <Phone size={16} />
@@ -435,52 +481,26 @@ export default function Home() {
           <span>Flavour brings us together.</span>
         </div>
         <div className="kh-socials">
-          <a
-            data-track="social_click"
-            data-track-id="instagram"
-            data-track-label="Instagram"
-            aria-label="Instagram"
-            target="_blank"
-            rel="noreferrer"
-            href={`https://instagram.com/${encodeURIComponent(menu.social.instagram.replace(/^@/, ""))}`}
-          >
-            <FaInstagram />
-          </a>
-          <a
-            data-track="social_click"
-            data-track-id="facebook"
-            data-track-label="Facebook"
-            aria-label="Facebook"
-            target="_blank"
-            rel="noreferrer"
-            href={`https://facebook.com/${encodeURIComponent(menu.social.facebook.replace(/^@/, ""))}`}
-          >
-            <FaFacebook />
-          </a>
-          <a
-            data-track="social_click"
-            data-track-id="tiktok"
-            data-track-label="TikTok"
-            aria-label="TikTok"
-            target="_blank"
-            rel="noreferrer"
-            href={`https://tiktok.com/@${encodeURIComponent(menu.social.tiktok.replace(/^@/, ""))}`}
-          >
-            <FaTiktok />
-          </a>
-          <a
-            data-track="social_click"
-            data-track-id="x"
-            data-track-label="X / Twitter"
-            aria-label="X / Twitter"
-            target="_blank"
-            rel="noreferrer"
-            href={`https://x.com/${encodeURIComponent(menu.social.twitter.replace(/^@/, ""))}`}
-          >
-            𝕏
-          </a>
+          {socialLinks.map(({ key, url, Icon, label, trackId }) => {
+            const handle = socialHandle(menu.social[key]);
+            if (!handle) return null;
+            return (
+              <a
+                key={key}
+                data-track="social_click"
+                data-track-id={trackId}
+                data-track-label={label}
+                aria-label={label}
+                target="_blank"
+                rel="noreferrer"
+                href={url(handle)}
+              >
+                {trackId === "x" ? "𝕏" : <Icon />}
+              </a>
+            );
+          })}
         </div>
-        <div className="kh-footer-credit">
+        <div className="kh-footer-credit" suppressHydrationWarning>
           <small>© {new Date().getFullYear()} Khichini Hub</small>
           <small>Website developed and managed by{" "}
             <a href="https://25points.us/" target="_blank" rel="noopener noreferrer">25Points</a>

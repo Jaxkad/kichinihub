@@ -74,7 +74,9 @@ export async function POST(req: NextRequest) {
           { error: "This site is not authorized to upload." },
           { status: 403 },
         );
-      const access = await getApp().options.credential!.getAccessToken();
+      const access = await getApp().options.credential?.getAccessToken();
+      if (!access?.access_token)
+        throw new Error("Server credentials are not configured for uploads.");
       const initiated = await fetch(
         `https://storage.googleapis.com/upload/storage/v1/b/${bucket.name}/o?uploadType=resumable&name=${encodeURIComponent(path)}`,
         {
