@@ -160,7 +160,7 @@ export default function Home() {
           href={`tel:${sanitizePhone(menu.social.rsvp)}`}
         >
           <Phone size={14} />
-          <span>Let’s make a plan</span>
+          <span>Call us</span>
           <ArrowUpRight size={16} />
         </a>
       </header>
