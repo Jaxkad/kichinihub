@@ -19,11 +19,11 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.gstatic.com https://*.firebaseapp.com`,
+      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}${isDev ? " https://vercel.live" : ""} https://www.gstatic.com https://*.firebaseapp.com`,
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "img-src 'self' blob: data: https://firebasestorage.googleapis.com https://*.googleusercontent.com",
       "font-src 'self' data:",
-      `connect-src 'self' https://*.firebaseio.com https://*.firebaseapp.com https://firestore.googleapis.com https://firebasestorage.googleapis.com https://www.googleapis.com`,
+      `connect-src 'self' https://*.firebaseio.com https://*.firebaseapp.com https://firestore.googleapis.com https://firebasestorage.googleapis.com https://www.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com${isDev ? " https://vercel.live wss://vercel.live" : ""}`,
       "frame-src 'self' https://*.firebaseapp.com",
       "media-src 'self' blob: https://firebasestorage.googleapis.com",
       "object-src 'none'",
