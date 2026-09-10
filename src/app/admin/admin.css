@@ -10,6 +10,7 @@
   font-size: 14px;
   line-height: 1.5;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 .admin * {
   box-sizing: border-box;
@@ -138,6 +139,7 @@
 }
 .workspace {
   display: flex;
+  min-width: 0;
 }
 .sidebar {
   width: 240px;
@@ -148,6 +150,7 @@
   padding: 30px 22px;
   display: flex;
   flex-direction: column;
+  z-index: 20;
 }
 .workspace-label {
   font-size: 9px;
@@ -212,6 +215,10 @@
 .workspace-main {
   margin-left: 240px;
   width: calc(100% - 240px);
+  min-width: 0;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .topbar {
   height: 76px;
@@ -222,6 +229,7 @@
   align-items: center;
   background: #fff;
   font-size: 12px;
+  flex-shrink: 0;
 }
 .crumb {
   color: #92968f;
@@ -245,6 +253,8 @@
   padding: 38px 42px 24px;
   max-width: 1500px;
   margin: auto;
+  min-width: 0;
+  flex: 1;
 }
 .page-heading {
   display: flex;
@@ -349,7 +359,7 @@
 }
 .metric-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 15px;
   margin-bottom: 27px;
 }
@@ -377,7 +387,7 @@
 }
 .overview-grid {
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: 24px;
 }
 .panel {
@@ -560,6 +570,7 @@
   display: flex;
   gap: 12px;
   padding: 20px;
+  min-width: 0;
 }
 .filters select {
   width: 180px;
@@ -581,6 +592,7 @@
 }
 .table-scroll {
   overflow-x: auto;
+  min-width: 0;
 }
 table {
   width: 100%;
@@ -608,7 +620,7 @@ td b {
   display: flex;
   align-items: center;
   gap: 12px;
-  min-width: 210px;
+  min-width: 0;
 }
 .item-monogram {
   width: 39px;
@@ -629,6 +641,7 @@ td b {
   color: #8a8f84;
   font-size: 10px;
   max-width: 270px;
+  min-width: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -943,6 +956,8 @@ td b {
   .workspace-main {
     margin-left: 200px;
     width: calc(100% - 200px);
+    min-width: 0;
+    overflow-x: hidden;
   }
   .brand {
     font-size: 17px;
@@ -1014,6 +1029,8 @@ td b {
   .workspace-main {
     margin-left: 75px;
     width: calc(100% - 75px);
+    min-width: 0;
+    overflow-x: hidden;
   }
   .page-heading {
     align-items: flex-start;
@@ -1022,7 +1039,7 @@ td b {
     font-size: 11px;
   }
   .metric-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
   .overview-grid {
     grid-template-columns: 1fr;

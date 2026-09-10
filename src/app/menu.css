@@ -10,6 +10,7 @@
   font-family: var(--font-geist-sans), Arial, sans-serif;
   line-height: 1.5;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 .kh-menu * {
   box-sizing: border-box;
@@ -109,7 +110,7 @@
 }
 .kh-hero h1 {
   font:
-    clamp(58px, 6.7vw, 91px)/0.99 Georgia,
+    clamp(40px, 6.7vw, 91px)/0.99 Georgia,
     serif;
   letter-spacing: -4px;
   color: var(--wine);
@@ -481,7 +482,7 @@
 }
 .kh-item-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   column-gap: 35px;
 }
 .kh-dish {
@@ -563,11 +564,13 @@
 }
 .kh-visit {
   background: #e9dfc9;
-  padding: 58px max(54px, calc((100vw - 1212px) / 2));
+  padding: 58px max(54px, calc((100% - 1212px) / 2));
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 35px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 .kh-visit .kh-kicker {
   color: #71553e;
@@ -746,7 +749,7 @@
     letter-spacing: 1.5px;
   }
   .kh-hero h1 {
-    font-size: 65px;
+    font-size: 56px;
     margin-top: 20px;
     letter-spacing: -3px;
   }
