@@ -149,8 +149,8 @@ export default function Home() {
         </a>
         <nav aria-label="Main navigation">
           <a href="#menu">The menu</a>
-          <a href="#events">What’s on</a>
-          <a href="#visit">Find your people</a>
+          <a href="#events">Events</a>
+          <a href="#visit">Plan something special here</a>
         </nav>
         <a
           className="kh-reserve"
