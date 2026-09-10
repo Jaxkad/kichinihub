@@ -742,7 +742,7 @@ export default function Admin() {
                         <tbody>
                           {rows.map((i) => (
                             <tr key={i.id}>
-                              <td>
+                              <td data-label="Item">
                                 <div className="item-cell">
                                   {i.photo ? (
                                     <Image
@@ -777,9 +777,11 @@ export default function Admin() {
                                   </div>
                                 </div>
                               </td>
-                              <td>{i.sectionTitle}</td>
-                              <td className="price">{money(i.price)}</td>
-                              <td>
+                              <td data-label="Category">{i.sectionTitle}</td>
+                              <td data-label="Price" className="price">
+                                {money(i.price)}
+                              </td>
+                              <td data-label="Availability">
                                 <button
                                   disabled={!canEdit}
                                   className={`pill ${i.available === false ? "off" : ""}`}
@@ -807,7 +809,7 @@ export default function Admin() {
                                     : "Available"}
                                 </button>
                               </td>
-                              <td>
+                              <td data-label="Actions">
                                 {canEdit && (
                                   <button
                                     className="text-button"

@@ -1141,6 +1141,94 @@ td b {
   .category-manage > div:first-child {
     max-width: 55%;
   }
+  .category-manage > div:last-child {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  /*
+   * Responsive table → stacked cards (Menu library).
+   * CSS-only technique: each row becomes a card, each cell a labelled
+   * row using the `data-label` attribute set on the <td> in the markup.
+   * `thead` is visually hidden (not display:none) to keep the table
+   * semantically announced by screen readers. Desktop layout is untouched.
+   * Refs: CSS-Tricks "Responsive Data Tables", MDN display, quackit
+   * "Stacked Rows on Mobile Table".
+   */
+  .library-panel .table-scroll {
+    overflow-x: visible;
+  }
+  .library-panel table,
+  .library-panel thead,
+  .library-panel tbody,
+  .library-panel th,
+  .library-panel td,
+  .library-panel tr {
+    display: block;
+  }
+  .library-panel thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .library-panel tbody tr {
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    margin: 12px;
+    padding: 6px 14px;
+    background: #fff;
+  }
+  .library-panel tbody tr:last-child {
+    margin-bottom: 0;
+  }
+  .library-panel td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid #eef0e9;
+    text-align: right;
+  }
+  .library-panel td:last-child {
+    border-bottom: 0;
+  }
+  .library-panel td::before {
+    content: attr(data-label);
+    font-size: 10px;
+    font-weight: 500;
+    color: #82897e;
+    text-align: left;
+    flex-shrink: 0;
+  }
+  /* The Item cell holds the photo + name; let it lead the card and span full width. */
+  .library-panel td[data-label="Item"] {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    padding-top: 14px;
+  }
+  .library-panel td[data-label="Item"]::before {
+    display: none;
+  }
+  .library-panel .item-cell small {
+    max-width: 100%;
+    white-space: normal;
+  }
+  .library-panel td[data-label="Actions"] {
+    justify-content: flex-end;
+  }
+  .library-panel td[data-label="Actions"]:empty {
+    display: none;
+  }
+  .library-panel .table-footer {
+    text-align: center;
+  }
   .modal-backdrop {
     padding: 12px;
   }
