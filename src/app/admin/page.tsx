@@ -907,7 +907,7 @@ export default function Admin() {
                       Add user
                     </button>
                   </div>
-                  <section className="panel table-scroll">
+                  <section className="panel team-panel table-scroll">
                     <table>
                       <thead>
                         <tr>
@@ -921,19 +921,19 @@ export default function Admin() {
                       <tbody>
                         {members.map((m) => (
                           <tr key={m.uid}>
-                            <td>
+                            <td data-label="Name">
                               <b>{m.displayName || "Unnamed user"}</b>
                             </td>
-                            <td>{m.email}</td>
-                            <td>{m.role}</td>
-                            <td>
+                            <td data-label="Email">{m.email}</td>
+                            <td data-label="Role">{m.role}</td>
+                            <td data-label="Status">
                               <span
                                 className={`pill ${m.disabled ? "off" : ""}`}
                               >
                                 {m.disabled ? "Disabled" : "Active"}
                               </span>
                             </td>
-                            <td>
+                            <td data-label="Actions">
                               <button onClick={() => setMember(m)}>
                                 Manage
                               </button>
