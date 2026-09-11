@@ -1,19 +1,17 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { menuData } from "@/data/menuData";
 import { menuSchema } from "@/lib/admin-schema";
 import Image from "next/image";
 import {
-  ArrowDown,
   ArrowUpRight,
   Search,
   X,
   Leaf,
   Flame,
   Phone,
-  Utensils,
   SlidersHorizontal,
 } from "lucide-react";
 import { FaInstagram, FaFacebook, FaTiktok } from "react-icons/fa";
@@ -23,21 +21,37 @@ import { SiteTracking } from "@/components/analytics/SiteTracking";
 import { track } from "@/lib/tracking";
 import { PublicEvents } from "@/components/events/PublicEvents";
 
-const categoryNames: Record<string, string> = {
-  starters: "Khala favourites",
-  soups: "Soups",
-  breakfast: "Breakfast",
-  salads: "Salads",
-  "finger-foods": "Finger foods",
-  mains: "Mains",
-  sandwiches: "Sandwiches",
-  wraps: "Wraps",
-  starches: "Sides",
-};
 const sanitizePhone = (value: string) =>
   value.replace(/[^0-9+]/g, "").slice(0, 20);
 const socialHandle = (value: string) =>
   encodeURIComponent(value.replace(/^@/, "").trim());
+/*
+ * Per-section theme colors — ported from the original MenuSection component.
+ * Each section's `theme` field maps to a rich background colour for the header
+ * bar, a readable text colour on that background, and a very faded version of
+ * the header colour used as the section body background.
+ */
+const themeColors: Record<string, { bg: string; onBg: string; surface: string }> = {
+  red: { bg: "#6D1600", onBg: "#FFFFFF", surface: "rgba(109, 22, 0, 0.08)" },
+  light: { bg: "#F5F5F5", onBg: "#000000", surface: "rgba(245, 245, 245, 0.5)" },
+  burgundy: { bg: "#722F37", onBg: "#FFFFFF", surface: "rgba(114, 47, 55, 0.08)" },
+  terracotta: { bg: "#CB4B16", onBg: "#FFFFFF", surface: "rgba(203, 75, 22, 0.08)" },
+  brown: { bg: "#6D1600", onBg: "#FFFFFF", surface: "rgba(109, 22, 0, 0.08)" },
+  green: { bg: "#2E7D32", onBg: "#FFFFFF", surface: "rgba(46, 125, 50, 0.08)" },
+  cream: { bg: "#D2B48C", onBg: "#2C1810", surface: "rgba(210, 180, 140, 0.15)" },
+  teal: { bg: "#006064", onBg: "#FFFFFF", surface: "rgba(0, 96, 100, 0.08)" },
+  slate: { bg: "#37474F", onBg: "#FFFFFF", surface: "rgba(55, 71, 79, 0.08)" },
+  forest: { bg: "#1B5E20", onBg: "#FFFFFF", surface: "rgba(27, 94, 32, 0.08)" },
+  pink: { bg: "#AD1457", onBg: "#FFFFFF", surface: "rgba(173, 20, 87, 0.08)" },
+  golden: { bg: "#FF8F00", onBg: "#FFFFFF", surface: "rgba(255, 143, 0, 0.08)" },
+  burnt: { bg: "#BF360C", onBg: "#FFFFFF", surface: "rgba(191, 54, 12, 0.08)" },
+  sage: { bg: "#689F38", onBg: "#FFFFFF", surface: "rgba(104, 159, 56, 0.08)" },
+  earth: { bg: "#5D4037", onBg: "#FFFFFF", surface: "rgba(93, 64, 55, 0.08)" },
+  leaf: { bg: "#33691E", onBg: "#FFFFFF", surface: "rgba(51, 105, 30, 0.08)" },
+  olive: { bg: "#558B2F", onBg: "#FFFFFF", surface: "rgba(85, 139, 47, 0.08)" },
+};
+const themeFor = (theme: string) =>
+  themeColors[theme] || { bg: "#6D1600", onBg: "#FFFFFF", surface: "rgba(109, 22, 0, 0.08)" };
 const socialLinks: {
   key: keyof typeof menuData.social;
   url: (handle: string) => string;
@@ -79,7 +93,9 @@ export default function Home() {
     [query, setQuery] = useState(""),
     [category, setCategory] = useState("all"),
     [diet, setDiet] = useState("all"),
-    [connection, setConnection] = useState("loading");
+    [connection, setConnection] = useState("loading"),
+    [activeSection, setActiveSection] = useState<string>("");
+  const categoryNavRef = useRef<HTMLElement>(null);
   useEffect(
     () =>
       onSnapshot(
@@ -117,7 +133,13 @@ export default function Home() {
       items: s.items.filter(
         (i) =>
           (diet === "all" ||
-            (diet === "vegan" ? i.dietary?.vegan : i.dietary?.hot)) &&
+            (diet === "vegan"
+              ? i.dietary?.vegan
+              : diet === "hot"
+                ? i.dietary?.hot
+                : diet === "pork"
+                  ? i.dietary?.pork
+                  : false)) &&
           `${i.name} ${i.description} ${s.title}`
             .toLowerCase()
             .includes(query.toLowerCase()),
@@ -125,10 +147,114 @@ export default function Home() {
     }))
     .filter((s) => s.items.length);
   const total = sections.reduce((n, s) => n + s.items.length, 0);
+  const sectionIds = sections.map((s) => s.id).join(",");
+  /*
+   * Scroll-spy: highlights the category in the side nav that the user is
+   * currently scrolling through.
+   *
+   * Implementation follows MDN Intersection Observer API guidance and
+   * established scroll-spy best practices (Bootstrap PR #42557,
+   * Flavio Copes, Maxime Heckel):
+   *
+   * - rootMargin shrinks the viewport to a narrow "activation band" in the
+   *   upper portion of the screen so only one section is active at a time.
+   * - threshold: 0 fires as soon as any part of the section enters the band
+   *   (threshold: 1 breaks on sections taller than the viewport).
+   * - A Map tracks which sections are currently intersecting. The active
+   *   section is the deepest (last in document order) intersecting one —
+   *   IO delivers entries in no guaranteed order, so this is more
+   *   deterministic than sorting by intersectionRatio.
+   * - When nothing intersects (content gaps), the last active section stays.
+   * - A passive scroll listener handles the bottom-of-page edge case where
+   *   a short last section never reaches the activation band.
+   *
+   * Only runs in "Whole menu" mode so single-category views don't fight
+   * the click-selected highlight.
+   */
+  useEffect(() => {
+    if (category !== "all") return;
+    const sectionEls = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-section-id]"),
+    );
+    if (!sectionEls.length) return;
+    const intersecting = new Map<string, boolean>();
+    let rafId = 0;
+    let pendingActive: string | null = null;
+    const updateActive = (id: string) => {
+      if (id === pendingActive) return;
+      pendingActive = id;
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => setActiveSection(id));
+    };
+    const pickActive = () => {
+      const activeId = sectionEls
+        .map((el) => el.getAttribute("data-section-id"))
+        .filter((id) => id && intersecting.get(id))
+        .pop();
+      if (activeId) updateActive(activeId);
+    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.getAttribute("data-section-id");
+          if (id) intersecting.set(id, entry.isIntersecting);
+        });
+        pickActive();
+      },
+      { rootMargin: "-20% 0px -70% 0px", threshold: 0 },
+    );
+    sectionEls.forEach((el) => observer.observe(el));
+    let scrollRaf = 0;
+    let scrollPending = false;
+    const handleScroll = () => {
+      if (scrollPending) return;
+      scrollPending = true;
+      cancelAnimationFrame(scrollRaf);
+      scrollRaf = requestAnimationFrame(() => {
+        scrollPending = false;
+        const atBottom =
+          window.scrollY + window.innerHeight >=
+          document.documentElement.scrollHeight - 10;
+        if (atBottom) {
+          const lastId = sectionEls[sectionEls.length - 1].getAttribute(
+            "data-section-id",
+          );
+          if (lastId) updateActive(lastId);
+        }
+      });
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(rafId);
+      cancelAnimationFrame(scrollRaf);
+    };
+  }, [category, sectionIds]);
+  /*
+   * Auto-scroll the horizontal category nav (mobile) so the active
+   * category tab is brought into view when the scroll-spy updates.
+   * Uses scrollLeft on the nav container directly (not scrollIntoView,
+   * which would also scroll the page vertically).
+   */
+  useEffect(() => {
+    if (!activeSection || !categoryNavRef.current) return;
+    const nav = categoryNavRef.current;
+    const activeBtn = nav.querySelector<HTMLButtonElement>(
+      `button[data-cat="${activeSection}"]`,
+    );
+    if (!activeBtn) return;
+    const navRect = nav.getBoundingClientRect();
+    const btnRect = activeBtn.getBoundingClientRect();
+    const target =
+      nav.scrollLeft + (btnRect.left - navRect.left) - nav.clientWidth / 2 + btnRect.width / 2;
+    nav.scrollTo({ left: Math.max(0, target), behavior: "smooth" });
+  }, [activeSection]);
   const reset = () => {
     setQuery("");
     setCategory("all");
     setDiet("all");
+    setActiveSection("");
   };
   return (
     <div className="kh-menu" id="top">
@@ -165,73 +291,14 @@ export default function Home() {
         </a>
       </header>
       <main>
-        <section
-          className="kh-hero"
-          data-metric="section_view"
-          data-metric-id="hero"
-          data-metric-label="Welcome"
-        >
-          <div className="kh-hero-copy">
-            <div className="kh-kicker">
-              <span />
-              GOOD FOOD. BETTER COMPANY.
-            </div>
-            <h1>
-              Come hungry.
-              <br />
-              Leave <em>happy.</em>
-            </h1>
-            <p>
-              Big flavours. Familiar favourites. A little something for everyone
-              at the table. Welcome to Khichini Hub.
-            </p>
-            <a href="#menu" className="kh-button">
-              Find your next favourite <ArrowDown size={17} />
-            </a>
-            <div className="kh-hero-note">
-              <span>Made for sharing.</span>
-              <span>Or keeping all to yourself.</span>
-            </div>
-          </div>
-          <div className="kh-hero-art">
-            <span className="kh-art-label">
-              A LITTLE SAUCY.
-              <br />A LOT TO LOVE.
-            </span>
-            <div className="kh-plate">
-              <Image
-                src="/bowl.PNG"
-                alt="A bowl of glazed bites garnished with sesame and herbs"
-                fill
-                priority
-                sizes="(max-width: 700px) 85vw, 470px"
-              />
-            </div>
-            <span className="kh-stamp">
-              GOOD MOOD
-              <br />
-              <b>food.</b>
-              <span>THE KHICHINI WAY</span>
-            </span>
-            <svg
-              className="kh-scribble"
-              viewBox="0 0 130 70"
-              aria-hidden="true"
-            >
-              <path d="M6 9c37 8 44 43 102 36m-21-20 27 19-21 20" />
-            </svg>
-          </div>
-        </section>
-        <div className="kh-ribbon" aria-hidden="true">
-          <span>A SEAT AT THE TABLE</span>
-          <b>✳</b>
-          <span>A LITTLE SPICE</span>
-          <b>✳</b>
-          <span>A LOT OF SOUL</span>
-          <b>✳</b>
-          <span>ALWAYS KHICHINI</span>
-          <b>✳</b>
-        </div>
+        <Image
+          src="/header.jpg"
+          alt="Khichini Hub"
+          width={1343}
+          height={544}
+          className="kh-menu-banner"
+          priority
+        />
         <section
           className="kh-menu-section"
           id="menu"
@@ -239,17 +306,6 @@ export default function Home() {
           data-metric-id="menu"
           data-metric-label="Menu"
         >
-          <div className="kh-menu-heading">
-            <div>
-              <span className="kh-kicker">FIND WHAT YOU’RE CRAVING</span>
-              <h2>The good stuff.</h2>
-            </div>
-            <p>
-              From the first bite to the last.
-              <br />
-              All prices in Malawian kwacha (MWK).
-            </p>
-          </div>
           <div className="kh-toolbar">
             <label className="kh-search">
               <Search size={19} />
@@ -267,23 +323,26 @@ export default function Home() {
               )}
             </label>
             <div className="kh-diet" aria-label="Dietary filters">
-              <SlidersHorizontal size={17} />
+              <SlidersHorizontal size={12} />
               {[
-                ["all", "Everything"],
-                ["vegan", "Vegan"],
-                ["hot", "Spicy"],
-              ].map(([value, label]) => (
+                ["all", "Everything", "all"],
+                ["vegan", "Vegan", "vegan"],
+                ["hot", "Spicy", "hot"],
+                ["pork", "Pork", "pork"],
+              ].map(([value, label, cls]) => (
                 <button
                   key={value}
                   aria-pressed={diet === value}
-                  className={diet === value ? "active" : ""}
+                  className={`kh-diet-chip ${diet === value ? "active" : ""} kh-diet-${cls}`}
                   onClick={() => {
                     setDiet(value);
                     track("filter_select", value, label);
                   }}
                 >
-                  {value === "vegan" && <Leaf size={14} />}{" "}
-                  {value === "hot" && <Flame size={14} />} {label}
+                  {value === "vegan" && <Leaf size={10} />}
+                  {value === "hot" && <Flame size={10} />}
+                  {value === "pork" && <span className="kh-diet-dot" />}
+                  {label}
                 </button>
               ))}
             </div>
@@ -291,35 +350,62 @@ export default function Home() {
           <div className="kh-menu-layout">
             <aside className="kh-categories">
               <span className="kh-kicker">ON THE MENU</span>
-              <nav aria-label="Menu categories">
+              <nav aria-label="Menu categories" ref={categoryNavRef}>
                 <button
+                  data-cat="all"
                   className={category === "all" ? "active" : ""}
                   aria-pressed={category === "all"}
-                  onClick={() => setCategory("all")}
+                  onClick={() => {
+                    setCategory("all");
+                    setActiveSection("");
+                    document
+                      .getElementById("menu")
+                      ?.scrollIntoView({ behavior: "smooth" });
+                  }}
                 >
                   The whole menu{" "}
                   <span>
                     {available.reduce((n, s) => n + s.items.length, 0)}
                   </span>
                 </button>
-                {available.map((s) => (
-                  <button
-                    key={s.id}
-                    aria-pressed={category === s.id}
-                    className={category === s.id ? "active" : ""}
-                    onClick={() => {
-                      setCategory(s.id);
-                      track(
-                        "category_select",
-                        s.id,
-                        categoryNames[s.id] || s.title,
-                      );
-                    }}
-                  >
-                    {categoryNames[s.id] || s.title}
-                    <span>{s.items.length}</span>
-                  </button>
-                ))}
+                {available.map((s) => {
+                  const colors = themeFor(s.theme);
+                  const isActive = category === s.id || (category === "all" && activeSection === s.id);
+                  return (
+                    <button
+                      key={s.id}
+                      data-cat={s.id}
+                      aria-pressed={isActive}
+                      className={isActive ? "active" : ""}
+                      style={
+                        isActive
+                          ? {
+                              backgroundColor: colors.bg,
+                              color: colors.onBg,
+                              borderColor: colors.bg,
+                            }
+                          : {
+                              borderColor: colors.bg,
+                            }
+                      }
+                      onClick={() => {
+                        setCategory("all");
+                        setActiveSection(s.id);
+                        document
+                          .getElementById(`section-${s.id}`)
+                          ?.scrollIntoView({ behavior: "smooth" });
+                        track(
+                          "category_select",
+                          s.id,
+                          s.title,
+                        );
+                      }}
+                    >
+                      {s.title}
+                      <span>{s.items.length}</span>
+                    </button>
+                  );
+                })}
               </nav>
               <div className="kh-diet-key">
                 <span>
@@ -350,68 +436,84 @@ export default function Home() {
                   availability with the team.
                 </p>
               )}
-              {sections.map((s, index) => (
-                <section
-                  key={s.id}
-                  className="kh-category-section"
-                  data-metric="category_view"
-                  data-metric-id={s.id}
-                  data-metric-label={categoryNames[s.id] || s.title}
-                >
-                  <div className="kh-category-title">
-                    <span className="kh-section-number">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <h3>{categoryNames[s.id] || s.title}</h3>
-                      <p>{s.subtitle || "Something delicious starts here."}</p>
+              {sections.map((s) => {
+                const colors = themeFor(s.theme);
+                return (
+                  <section
+                    key={s.id}
+                    id={`section-${s.id}`}
+                    className="kh-old-section"
+                    data-section-id={s.id}
+                    data-metric="category_view"
+                    data-metric-id={s.id}
+                    data-metric-label={s.title}
+                  >
+                    <div
+                      className="kh-old-section-header"
+                      style={{ backgroundColor: colors.bg }}
+                    >
+                      <h3 style={{ color: colors.onBg }}>
+                        {s.title}
+                      </h3>
+                      {s.subtitle && (
+                        <p style={{ color: colors.onBg }}>{s.subtitle}</p>
+                      )}
                     </div>
-                    <Utensils size={21} />
-                  </div>
-                  <div className="kh-item-grid">
-                    {s.items.map((i) => (
-                      <article
-                        className="kh-dish"
-                        key={i.id}
-                        data-metric="dish_view"
-                        data-metric-id={i.id}
-                        data-metric-label={i.name}
-                      >
-                        {i.photo && (
-                          <DishPhoto key={i.photo.url} photo={i.photo} />
-                        )}
-                        <div className="kh-dish-top">
-                          <h4>{i.name}</h4>
-                          <span className="kh-price">
-                            <small>K</small>
-                            {i.price.toLocaleString("en-MW")}
-                          </span>
-                        </div>
-                        <p>{i.description}</p>
-                        {(i.dietary?.vegan ||
-                          i.dietary?.hot ||
-                          i.dietary?.pork) && (
-                          <div className="kh-tags">
-                            {i.dietary?.vegan && (
-                              <span className="vegan">
-                                <Leaf size={12} />
-                                Vegan
+                    <div className="kh-old-section-divider" />
+                    <div
+                      className="kh-old-section-body"
+                      style={{ backgroundColor: colors.surface }}
+                    >
+                      {s.items.map((i) => (
+                        <article
+                          className="kh-old-item"
+                          key={i.id}
+                          data-metric="dish_view"
+                          data-metric-id={i.id}
+                          data-metric-label={i.name}
+                        >
+                          <div className="kh-old-item-main">
+                            <div className="kh-old-item-top">
+                              <div className="kh-old-item-name">
+                                <h4>{i.name}</h4>
+                                {(i.dietary?.vegan ||
+                                  i.dietary?.hot ||
+                                  i.dietary?.pork) && (
+                                  <div className="kh-tags">
+                                    {i.dietary?.vegan && (
+                                      <span className="vegan">
+                                        <Leaf size={12} />
+                                        Vegan
+                                      </span>
+                                    )}
+                                    {i.dietary?.hot && (
+                                      <span>
+                                        <Flame size={12} />
+                                        Spicy
+                                      </span>
+                                    )}
+                                    {i.dietary?.pork && (
+                                      <span>Contains pork</span>
+                                    )}
+                                  </div>
+                                )}
+                              </div>
+                              <span className="kh-old-price">
+                                <span className="kh-old-price-k">K</span>
+                                {i.price.toLocaleString("en-MW")}
                               </span>
-                            )}
-                            {i.dietary?.hot && (
-                              <span>
-                                <Flame size={12} />
-                                Spicy
-                              </span>
-                            )}
-                            {i.dietary?.pork && <span>Contains pork</span>}
+                            </div>
+                            <p>{i.description}</p>
                           </div>
-                        )}
-                      </article>
-                    ))}
-                  </div>
-                </section>
-              ))}
+                          {i.photo && (
+                            <DishPhoto key={i.photo.url} photo={i.photo} />
+                          )}
+                        </article>
+                      ))}
+                    </div>
+                  </section>
+                );
+              })}
               {!sections.length && (
                 <div className="kh-empty">
                   <Search size={30} />
@@ -468,6 +570,13 @@ export default function Home() {
           </div>
         </section>
       </main>
+      <Image
+        src="/socials.jpg"
+        alt="Follow Khichini Hub on social media"
+        width={1200}
+        height={400}
+        className="kh-socials-banner"
+      />
       <SiteTracking />
       <footer className="kh-footer">
         <div>

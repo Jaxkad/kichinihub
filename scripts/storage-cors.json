@@ -1,0 +1,20 @@
+[
+  {
+    "origin": [
+      "http://localhost:3000",
+      "https://kichinihub-sage.vercel.app",
+      "https://kichinihub-jacksonk-25pointscoms-projects.vercel.app"
+    ],
+    "method": ["PUT", "POST", "GET", "HEAD", "DELETE", "OPTIONS"],
+    "responseHeader": [
+      "Content-Type",
+      "Content-Range",
+      "Content-Length",
+      "Range",
+      "X-Upload-Content-Type",
+      "X-Upload-Content-Length",
+      "Authorization"
+    ],
+    "maxAgeSeconds": 3600
+  }
+]

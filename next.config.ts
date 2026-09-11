@@ -23,7 +23,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "img-src 'self' blob: data: https://firebasestorage.googleapis.com https://*.googleusercontent.com",
       "font-src 'self' data:",
-      `connect-src 'self' https://*.firebaseio.com https://*.firebaseapp.com https://firestore.googleapis.com https://firebasestorage.googleapis.com https://www.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com${isDev ? " https://vercel.live wss://vercel.live" : ""}`,
+      `connect-src 'self' https://*.firebaseio.com https://*.firebaseapp.com https://firestore.googleapis.com https://firebasestorage.googleapis.com https://storage.googleapis.com https://www.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com${isDev ? " https://vercel.live wss://vercel.live" : ""}`,
       "frame-src 'self' https://*.firebaseapp.com",
       "media-src 'self' blob: https://firebasestorage.googleapis.com",
       "object-src 'none'",
