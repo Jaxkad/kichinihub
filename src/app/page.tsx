@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { menuData } from "@/data/menuData";
@@ -96,6 +96,28 @@ export default function Home() {
     [connection, setConnection] = useState("loading"),
     [activeSection, setActiveSection] = useState<string>("");
   const categoryNavRef = useRef<HTMLElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchToolbarRef = useRef<HTMLDivElement>(null);
+  const [editingSearch, setEditingSearch] = useState(false);
+  const searching = Boolean(query.trim()) || editingSearch;
+
+  // Account for the actual toolbar height, including wrapped filters and zoom.
+  useEffect(() => {
+    if (!searching || !searchToolbarRef.current) return;
+    const toolbar = searchToolbarRef.current;
+    const root = document.documentElement;
+    const previous = root.style.scrollPaddingTop;
+    const update = () => {
+      root.style.scrollPaddingTop = `${toolbar.getBoundingClientRect().height + 12}px`;
+    };
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(toolbar);
+    return () => {
+      observer.disconnect();
+      root.style.scrollPaddingTop = previous;
+    };
+  }, [searching]);
   useEffect(
     () =>
       onSnapshot(
@@ -251,10 +273,22 @@ export default function Home() {
     nav.scrollTo({ left: Math.max(0, target), behavior: "smooth" });
   }, [activeSection]);
   const reset = () => {
+    setEditingSearch(false);
     setQuery("");
     setCategory("all");
     setDiet("all");
     setActiveSection("");
+  };
+  /*
+   * Search commit (Enter / keyboard Search): dismiss the virtual keyboard so
+   * results are visible. HTML implicit form submission + input.blur() is the
+   * web equivalent of Apple's searchBarSearchButtonClicked / resignFirstResponder.
+   * Live filtering still updates as the user types.
+   */
+  const commitSearch = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const field = e.currentTarget.elements.namedItem("q");
+    if (field instanceof HTMLElement) field.blur();
   };
   return (
     <div className="kh-menu" id="top">
@@ -300,28 +334,60 @@ export default function Home() {
           priority
         />
         <section
-          className="kh-menu-section"
+          className={`kh-menu-section${searching ? " kh-searching" : ""}`}
           id="menu"
           data-metric="section_view"
           data-metric-id="menu"
           data-metric-label="Menu"
         >
-          <div className="kh-toolbar">
-            <label className="kh-search">
+          <div className="kh-toolbar" ref={searchToolbarRef}>
+            <form className="kh-search" role="search" onSubmit={commitSearch}
+              onBlur={(e) => {
+                if (!e.currentTarget.contains(e.relatedTarget)) setEditingSearch(false);
+              }}
+            >
               <Search size={19} />
               <input
                 type="search"
+                ref={searchInputRef}
+                name="q"
                 placeholder="What are you in the mood for?"
                 aria-label="Search dishes"
+                enterKeyHint="search"
+                inputMode="search"
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="none"
+                spellCheck={false}
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onFocus={() => {
+                  if (query.trim()) setEditingSearch(true);
+                }}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  if (e.target.value.trim()) setEditingSearch(true);
+                }}
               />
               {query && (
-                <button onClick={() => setQuery("")} aria-label="Clear search">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEditingSearch(true);
+                    setQuery("");
+                    searchInputRef.current?.focus();
+                  }}
+                  aria-label="Clear search"
+                >
                   <X size={16} />
                 </button>
               )}
-            </label>
+            </form>
+            {searching && (diet !== "all" || category !== "all") && (
+              <span className="kh-search-scope">
+                Searching: {category === "all" ? "Whole menu" : available.find((s) => s.id === category)?.title}
+                {diet !== "all" && ` · ${diet === "hot" ? "Spicy" : diet === "vegan" ? "Vegan" : "Pork"}`}
+              </span>
+            )}
             <div className="kh-diet" aria-label="Dietary filters">
               <SlidersHorizontal size={12} />
               {[

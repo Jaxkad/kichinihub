@@ -172,6 +172,7 @@
   align-items: center;
   gap: 10px;
   flex: 1;
+  margin: 0;
   background: #fffdf8;
   border: 0;
   border-radius: 3px;
@@ -1144,6 +1145,38 @@
 }
 .kh-dish-photo img {
   object-fit: cover;
+}
+
+/* The menu section bounds persistence; search never follows into Events. */
+.kh-searching .kh-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--paper);
+  box-shadow: 0 2px 0 var(--line);
+}
+.kh-search-scope {
+  font-size: 12px;
+  color: var(--sub);
+}
+.kh-searching .kh-categories,
+.kh-searching .kh-old-section-header {
+  position: static;
+}
+.kh-searching [data-section-id] {
+  scroll-margin-top: 12px;
+}
+.kh-search button {
+  min-width: 44px;
+  min-height: 44px;
+}
+@media (max-width: 700px) {
+  .kh-searching .kh-toolbar {
+    padding-bottom: 8px;
+  }
+  .kh-search-scope {
+    padding: 6px 12px 0;
+  }
 }
 
 .kh-footer-credit{display:flex;flex-direction:column;gap:6px;font-size:11px;line-height:1.6}.kh-footer-credit small{font-size:inherit}.kh-footer-credit a{color:var(--wine);font-weight:600;text-decoration:underline;text-underline-offset:3px}.kh-footer-credit a:hover{text-decoration-thickness:2px}@media(max-width:700px){.kh-footer-credit{flex-basis:100%;order:3}}
