@@ -176,6 +176,8 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
     }))
     .filter((s) => s.items.length);
   const total = sections.reduce((n, s) => n + s.items.length, 0);
+  const selectedCategory = menu.sections.find((s) => s.id === categoryId);
+  const categoryColors = themeFor(selectedCategory?.theme || "red");
   const reset = () => {
     setEditingSearch(false);
     setQuery("");
@@ -213,7 +215,7 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
         <nav aria-label="Main navigation">
           <Link href="/#menu">The menu</Link>
           <Link href="/#events">Events</Link>
-          <a href="#plan-something-special">Plan something special here</a>
+          <Link href={categoryId ? "/#plan-something-special" : "#plan-something-special"}>Plan something special here</Link>
         </nav>
         <a
           className="kh-reserve"
@@ -246,10 +248,6 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
         >
           {!categoryId ? (
             <>
-              <div className="kh-category-intro">
-                <span className="kh-kicker">FIND YOUR FAVOURITES</span>
-                <h1>Explore our menus</h1>
-              </div>
               <div className="kh-category-grid">
                 {available.map((section) => (
                   <Link className="kh-category-card" key={section.id}
@@ -271,7 +269,10 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
             <>
               <div className="kh-category-intro">
                 <Link className="kh-menu-back" href="/#menu">← All menus</Link>
-                <h1>{menu.sections.find((s) => s.id === categoryId)?.title || (connection === "loading" ? "Loading menu…" : "Menu unavailable")}</h1>
+                <div className="kh-category-title" style={{ backgroundColor: categoryColors.bg, color: cardTextColor(categoryColors.bg) }}>
+                  <h1>{selectedCategory?.title || (connection === "loading" ? "Loading menu…" : "Menu unavailable")}</h1>
+                  {selectedCategory?.subtitle && <p>{selectedCategory.subtitle}</p>}
+                </div>
               </div>
           <div className="kh-toolbar" ref={searchToolbarRef}>
             <form className="kh-search" role="search" onSubmit={commitSearch}
@@ -284,7 +285,7 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
                 type="search"
                 ref={searchInputRef}
                 name="q"
-                placeholder="What are you in the mood for?"
+                placeholder="Search this menu"
                 aria-label="Search dishes"
                 enterKeyHint="search"
                 inputMode="search"
@@ -315,10 +316,9 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
                 </button>
               )}
             </form>
-            {searching && (diet !== "all" || categoryId) && (
+            {diet !== "all" && (
               <span className="kh-search-scope">
-                Searching: {menu.sections.find((s) => s.id === category)?.title || "This menu"}
-                {diet !== "all" && ` · ${diet === "hot" ? "Spicy" : diet === "vegan" ? "Vegan" : "Pork"}`}
+                Filter: {diet === "hot" ? "Spicy" : diet === "vegan" ? "Vegan" : "Pork"}
               </span>
             )}
             <div className="kh-diet" aria-label="Dietary filters">
@@ -348,8 +348,8 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
           </div>
           <div className="kh-category-content">
             <div className="kh-dishes">
-              <div className="kh-results" role="status">
-                <span>{total} dishes to discover</span>
+              <div className={query || diet !== "all" ? "kh-results" : "sr-only"} role="status">
+                <span>{total} {total === 1 ? "dish" : "dishes"}</span>
                 {(query || diet !== "all") && (
                   <button onClick={reset}>
                     Clear filters <X size={13} />
@@ -375,20 +375,8 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
                     data-metric-label={s.title}
                   >
                     <div
-                      className="kh-old-section-header"
-                      style={{ backgroundColor: colors.bg }}
-                    >
-                      <h3 style={{ color: colors.onBg }}>
-                        {s.title}
-                      </h3>
-                      {s.subtitle && (
-                        <p style={{ color: colors.onBg }}>{s.subtitle}</p>
-                      )}
-                    </div>
-                    <div className="kh-old-section-divider" />
-                    <div
                       className="kh-old-section-body"
-                      style={{ backgroundColor: colors.surface }}
+                      style={{ borderTop: `3px solid ${colors.bg}` }}
                     >
                       {s.items.map((i) => (
                         <article
@@ -401,7 +389,7 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
                           <div className="kh-old-item-main">
                             <div className="kh-old-item-top">
                               <div className="kh-old-item-name">
-                                <h4>{i.name}</h4>
+                                <h2>{i.name}</h2>
                                 {(i.dietary?.vegan ||
                                   i.dietary?.hot ||
                                   i.dietary?.pork) && (
@@ -424,7 +412,7 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
                                   </div>
                                 )}
                               </div>
-                              <span className="kh-old-price">
+                              <span className="kh-old-price" style={{ color: cardTextColor(colors.bg) === "#FFFFFF" ? colors.bg : `color-mix(in srgb, ${colors.bg}, black 65%)` }}>
                                 <span className="kh-old-price-k">K</span>
                                 {i.price.toLocaleString("en-MW")}
                               </span>
@@ -443,7 +431,7 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
               {!sections.length && (
                 <div className="kh-empty">
                   <Search size={30} />
-                  <h3>No bites found.</h3>
+                  <h2>No dishes found.</h2>
                   <p>Try a different search or choose another menu.</p>
                   {(query || diet !== "all") && <button className="kh-button" onClick={reset}>
                     Clear filters <X size={16} />
@@ -458,16 +446,17 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
         </section>
         {!categoryId && <PublicEvents phone={menu.social.rsvp} />}
       </main>
-      <Image
+      {!categoryId && <Image
         id="plan-something-special"
         src="/socials.jpg"
         alt="Follow Khichini Hub on social media"
         width={1200}
         height={400}
         className="kh-socials-banner"
-      />
-      <SiteTracking />
+      />}
+      <SiteTracking showPreferences={!categoryId} />
       <footer className="kh-footer">
+        {!categoryId && <>
         <div>
           <Image
             src="/Khichinihublogo.png"
@@ -503,6 +492,7 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
             <a href="https://25points.us/" target="_blank" rel="noopener noreferrer">25Points</a>
           </small>
         </div>
+        </>}
         <a href="#top">Back to top ↑</a>
       </footer>
     </div>

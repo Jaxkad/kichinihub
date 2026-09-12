@@ -16,7 +16,7 @@ function readChoice() {
     return "no";
   }
 }
-export function SiteTracking() {
+export function SiteTracking({ showPreferences = true }: { showPreferences?: boolean }) {
   const choice = useSyncExternalStore(subscribe, readChoice, () => "pending");
   const setChoice = (value: string | null) => {
     try {
@@ -84,6 +84,7 @@ export function SiteTracking() {
     if (value === "no") resetTracking();
     setChoice(value);
   };
+  if (!showPreferences) return null;
   return (
     <div className="kh-privacy">
       {choice === null ? (
