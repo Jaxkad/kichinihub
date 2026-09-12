@@ -684,6 +684,18 @@
   .kh-diet {
     display: none;
   }
+  /*
+   * iOS Safari (and some Android browsers) auto-zoom the page when a focused
+   * form control's computed font-size is under 16px, and often leave it zoomed
+   * after blur. Keep the control at 1rem so focus does not change scale.
+   * Do not disable zoom via maximum-scale / user-scalable — that fails WCAG 1.4.4.
+   */
+  .kh-search {
+    padding: 10px 12px;
+  }
+  .kh-search input {
+    font-size: 1rem;
+  }
   .kh-menu-layout {
     display: flex;
     flex-direction: column;
