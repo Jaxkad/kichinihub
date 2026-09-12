@@ -1,9 +1,9 @@
 .kh-menu {
   --wine: #672c28;
-  --paper: #fbf7ee;
-  --ink: #332820;
-  --sub: #746458;
-  --line: #dfd5c5;
+  --paper: #fafaf8;
+  --ink: #292724;
+  --sub: #686863;
+  --line: #e2e2de;
   background: var(--paper);
   color: var(--ink);
   color-scheme: light;
@@ -173,7 +173,7 @@
   gap: 10px;
   flex: 1;
   margin: 0;
-  background: #fffdf8;
+  background: #ffffff;
   border: 0;
   border-radius: 3px;
   padding: 7px 12px;
@@ -823,7 +823,7 @@
 .kh-event {
   border: 1px solid var(--line);
   padding: 30px;
-  background: #f5edde;
+  background: #f2f2ef;
   border-top: 4px solid var(--wine);
 }
 .kh-event-date {
@@ -836,8 +836,7 @@
 }
 .kh-event h3 {
   font:
-    32px/1.2 Georgia,
-    serif;
+    700 28px/1.2 var(--font-geist-sans), Arial, sans-serif;
   color: var(--wine);
   margin: 18px 0 10px;
 }
@@ -882,8 +881,7 @@
 }
 .kh-events-empty h3 {
   font:
-    25px Georgia,
-    serif;
+    700 22px/1.3 var(--font-geist-sans), Arial, sans-serif;
   color: var(--wine);
 }
 .kh-events-empty p {
@@ -926,7 +924,7 @@
 }
 .kh-event-feature {
   padding: 0;
-  background: #fffdf8;
+  background: #ffffff;
   overflow: hidden;
   border-top: 0;
   border-radius: 10px;
@@ -1045,7 +1043,7 @@
   right: 18px;
   max-width: 940px;
   margin: auto;
-  background: #fffdf8;
+  background: #ffffff;
   border: 1px solid #b7a28d;
   box-shadow: 0 10px 40px #33282033;
   padding: 22px;
@@ -1180,3 +1178,76 @@
 }
 
 .kh-footer-credit{display:flex;flex-direction:column;gap:6px;font-size:11px;line-height:1.6}.kh-footer-credit small{font-size:inherit}.kh-footer-credit a{color:var(--wine);font-weight:600;text-decoration:underline;text-underline-offset:3px}.kh-footer-credit a:hover{text-decoration-thickness:2px}@media(max-width:700px){.kh-footer-credit{flex-basis:100%;order:3}}
+
+.kh-category-intro { padding: 32px 0 24px; }
+.kh-category-intro h1 { font-size: clamp(28px, 4vw, 44px); line-height: 1.15; margin: 12px 0; }
+.kh-category-intro p { color: var(--sub); }
+.kh-category-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.kh-category-card { display: flex; flex-direction: column; padding: 26px; border: 1px solid var(--line); border-radius: 4px; background: #ffffff; color: inherit; text-decoration: none; }
+.kh-category-card h2 { font-size: 22px; line-height: 1.25; margin: 0 0 12px; }
+.kh-category-card p { font-size: 14px; line-height: 1.6; color: inherit; margin: 0 0 24px; }
+.kh-category-card > span { display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 12px; font-weight: 600; }
+.kh-category-card:hover { box-shadow: 0 4px 12px #0002; }
+.kh-category-card:hover > span { text-decoration: underline; text-underline-offset: 4px; }
+.kh-category-card:focus-visible, .kh-menu-back:focus-visible { outline: 3px solid var(--wine); outline-offset: 4px; }
+.kh-menu-back { display: inline-block; padding: 12px 0; color: var(--wine); font-weight: 600; }
+.kh-category-content .kh-old-section-header { position: static; }
+@media (max-width: 1000px) { .kh-category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .kh-category-grid { grid-template-columns: 1fr; gap: 12px; } .kh-category-card { padding: 20px; } }
+
+/* Match the straightforward menu typography throughout the events section. */
+.kh-events .kh-menu-heading h2 {
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: normal;
+  color: inherit;
+  margin-top: 0;
+}
+.kh-events .kh-menu-heading > p,
+.kh-events-empty p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.kh-header-image {
+  position: relative;
+  background: #fff;
+}
+.kh-header-overlay {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 2;
+  height: 72px;
+  border: 0;
+  gap: 16px;
+}
+.kh-header-overlay nav {
+  font-weight: 650;
+}
+.kh-header-overlay nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.kh-header-overlay .kh-reserve {
+  background: var(--paper);
+}
+@media (max-width: 700px) {
+  .kh-header-overlay {
+    height: 52px;
+    padding: 0 16px;
+  }
+  .kh-header-overlay nav {
+    gap: 20px;
+    font-size: 13px;
+  }
+  .kh-header-overlay .kh-reserve {
+    min-height: 44px;
+    font-size: 12px;
+  }
+  .kh-header-image .kh-menu-banner {
+    padding-top: 28px;
+  }
+}

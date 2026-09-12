@@ -130,7 +130,7 @@ function EventCard({ event, phone }: { event: PublicEvent; phone: string }) {
             if (!open) track("event_open", event.id, event.title);
           }}
         >
-          {open ? "Hide details" : "Explore this event"}
+          {open ? "Hide details" : "View event details"}
           <ArrowUpRight size={16} />
         </button>
         {open && (
@@ -216,22 +216,19 @@ export function PublicEvents({ phone }: { phone: string }) {
     >
       <div className="kh-menu-heading">
         <div>
-          <span className="kh-kicker">MORE THAN A GREAT MEAL</span>
-          <h2>Meet you at the Hub.</h2>
+          <h2>Upcoming events</h2>
         </div>
         <p>
-          Your next good memory starts here.
-          <br />
-          Explore upcoming events and gatherings.
+          See what’s on at Khichini Hub.
         </p>
       </div>
       {state === "loading" ? (
-        <p role="status">Finding the latest happenings…</p>
+        <p role="status">Loading events…</p>
       ) : state === "error" ? (
         <div className="kh-events-empty">
           <CalendarDays />
           <div>
-            <h3>Let’s find out what’s on.</h3>
+            <h3>Couldn’t load events.</h3>
             <p>
               We couldn’t load the event calendar. Give the team a call for the
               latest details.
@@ -245,10 +242,9 @@ export function PublicEvents({ phone }: { phone: string }) {
         <div className="kh-events-empty">
           <CalendarDays />
           <div>
-            <h3>More good times to come.</h3>
+            <h3>No upcoming events yet.</h3>
             <p>
-              Our next events will appear here once announced. Check back soon,
-              or get in touch with the team.
+              New events will be posted here. Check back soon.
             </p>
           </div>
           <a href={`tel:${phone}`}>
