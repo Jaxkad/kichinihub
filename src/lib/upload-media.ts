@@ -7,14 +7,14 @@ async function normalize(
   let type = mediaType(file.name);
   if (!type)
     throw new Error(
-      "Unsupported format. Choose a supported image or video file.",
+      "This file type is not supported. Please choose a photo or video in a common format like JPG, PNG, or MP4.",
     );
   const kind = type.startsWith("video/") ? "video" : "image";
   if (file.size > (kind === "video" ? VIDEO_LIMIT : IMAGE_LIMIT))
     throw new Error(
       kind === "video"
-        ? "Videos must be under 250 MB."
-        : "Photos must be under 25 MB.",
+        ? "This video is too large. Please choose a video under 250 MB."
+        : "This photo is too large. Please choose a photo under 25 MB.",
     );
   if (kind === "video") return { blob: file, type, kind };
   let blob: Blob = file;
@@ -27,25 +27,25 @@ async function normalize(
     const UTIF = await import("utif");
     const bytes = await file.arrayBuffer();
     const frames = UTIF.decode(bytes);
-    if (!frames[0]) throw new Error("Unable to read this TIFF.");
+    if (!frames[0]) throw new Error("We could not read this TIFF file. Please try a different photo.");
     const frame = frames[0];
     const tags = frame as unknown as { t256?: number[]; t257?: number[] };
     const width = tags.t256?.[0],
       height = tags.t257?.[0];
     if (!width || !height || width * height > 40000000)
-      throw new Error("TIFF images must be under 40 megapixels.");
+      throw new Error("This TIFF photo is too large. Please use a photo under 40 megapixels.");
     UTIF.decodeImage(bytes, frame);
     const canvas = document.createElement("canvas");
     canvas.width = frame.width;
     canvas.height = frame.height;
     const ctx = canvas.getContext("2d");
-    if (!ctx) throw new Error("Image conversion is unavailable.");
+    if (!ctx) throw new Error("We could not convert this photo. Please try a different format.");
     const data = ctx.createImageData(frame.width, frame.height);
     data.data.set(UTIF.toRGBA8(frame));
     ctx.putImageData(data, 0, 0);
     blob = await new Promise<Blob>((resolve, reject) =>
       canvas.toBlob(
-        (b) => (b ? resolve(b) : reject(new Error("TIFF conversion failed."))),
+        (b) => (b ? resolve(b) : reject(new Error("We could not convert this TIFF photo. Please try a different format."))),
         "image/png",
       ),
     );
@@ -59,7 +59,7 @@ async function normalize(
     image.src = url;
     await image.decode();
     if (image.naturalWidth * image.naturalHeight > 40000000)
-      throw new Error("Photos must be under 40 megapixels.");
+      throw new Error("This photo is too large. Please use a photo under 40 megapixels.");
     const ratio = Math.min(
       1,
       2400 / Math.max(image.naturalWidth, image.naturalHeight),
@@ -72,7 +72,7 @@ async function normalize(
       .drawImage(image, 0, 0, canvas.width, canvas.height);
     blob = await new Promise<Blob>((resolve, reject) =>
       canvas.toBlob(
-        (b) => (b ? resolve(b) : reject(new Error("Photo conversion failed."))),
+        (b) => (b ? resolve(b) : reject(new Error("We could not convert this photo. Please try a different format."))),
         "image/webp",
         0.9,
       ),
@@ -117,7 +117,7 @@ export async function uploadMedia(
         body: blob.slice(offset, end),
       });
       if (r.status !== 308 && !r.ok)
-        throw new Error("Storage rejected upload.");
+        throw new Error("The upload could not be completed. Please try again.");
       offset = end;
       retries = 0;
       progress(
@@ -125,7 +125,7 @@ export async function uploadMedia(
       );
     } catch {
       if (++retries > 3)
-        throw new Error("Upload interrupted. Please try again.");
+        throw new Error("The upload was interrupted. Please check your internet and try again.");
       await new Promise((r) => setTimeout(r, 1000 * retries));
       const state = await fetch(session.uploadUrl, {
         method: "PUT",
@@ -136,7 +136,7 @@ export async function uploadMedia(
         break;
       }
       if (state.status !== 308)
-        throw new Error("Upload session expired. Please try again.");
+        throw new Error("Your upload session has expired. Please try uploading again.");
       const last = state.headers.get("Range")?.match(/bytes=0-(\d+)/)?.[1];
       offset = last ? Number(last) + 1 : 0;
     }

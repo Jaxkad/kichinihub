@@ -1,8 +1,10 @@
 "use client";
 import Link from "next/link";
+import { useAdminKeyboard } from "@/lib/admin-keyboard";
 import { DishPhotoEditor } from "@/components/menu/DishPhotoEditor";
 import { Insights } from "@/components/analytics/Insights";
 import { EventsManager } from "@/components/events/EventsManager";
+import { PasswordField } from "@/components/ui/PasswordField";
 import { CalendarDays } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
@@ -61,6 +63,7 @@ const tabs = [
   ["Help", LifeBuoy],
 ] as const;
 export default function Admin() {
+  useAdminKeyboard();
   const [user, setUser] = useState<User | null>(null),
     [ready, setReady] = useState(false),
     [role, setRole] = useState(""),
@@ -76,7 +79,7 @@ export default function Admin() {
   const [query, setQuery] = useState(""),
     [category, setCategory] = useState("all"),
     [filter, setFilter] = useState("all");
-  const [item, setItem] = useState<(MenuItem & { sectionId: string }) | null>(
+  const [item, setItem] = useState<(Omit<MenuItem, "price"> & { price: string; sectionId: string }) | null>(
       null,
     ),
     [section, setSection] = useState<MenuSection | null>(null),
@@ -92,13 +95,16 @@ export default function Admin() {
           "button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled])",
         ) || [],
       );
-    focusable()[0]?.focus();
+    // Start on the dialog title: announce context without opening a touch keyboard.
+    const heading = dialog?.querySelector<HTMLElement>("h2");
+    heading?.setAttribute("tabindex", "-1");
+    (heading || focusable()[0])?.focus({ preventScroll: true });
     const trap = (event: KeyboardEvent) => {
       if (event.key !== "Tab") return;
       const nodes = focusable();
       const first = nodes[0],
         last = nodes[nodes.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === heading)) {
         event.preventDefault();
         last?.focus();
       } else if (!event.shiftKey && document.activeElement === last) {
@@ -109,7 +115,7 @@ export default function Admin() {
     document.addEventListener("keydown", trap);
     return () => {
       document.removeEventListener("keydown", trap);
-      previous?.focus();
+      if (previous?.isConnected) previous.focus({ preventScroll: true });
     };
   }, [modalOpen]);
   const [email, setEmail] = useState(""),
@@ -127,7 +133,7 @@ export default function Admin() {
           if (u)
             setRole(String((await u.getIdTokenResult(true)).claims.role || ""));
         } catch {
-          setError("Could not verify your access. Please sign in again.");
+          setError("We couldn't verify your account. Please try signing in again.");
         } finally {
           setReady(true);
         }
@@ -146,7 +152,7 @@ export default function Admin() {
         ...(body ? { body: JSON.stringify(body) } : {}),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Request failed.");
+      if (!res.ok) throw new Error(data.error || "Something went wrong. Please try again.");
       return data;
     },
     [],
@@ -158,7 +164,7 @@ export default function Admin() {
     try {
       await fn();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Something went wrong.");
+      setError(e instanceof Error ? e.message : "We encountered a problem. Please try again.");
     } finally {
       setBusy(false);
     }
@@ -219,7 +225,7 @@ export default function Admin() {
         updatedAt: new Date().toISOString(),
       });
       setDirty(false);
-      setNotice("Your menu is published. Customers can see the changes now.");
+      setNotice("Your menu has been published successfully. Customers can now see your changes.");
       try {
         setActivity(await api("activity"));
       } catch {
@@ -295,33 +301,55 @@ export default function Admin() {
             onSubmit={(e) => {
               e.preventDefault();
               void run(async () => {
-                await signInWithEmailAndPassword(auth, email, password);
+                try {
+                  await signInWithEmailAndPassword(auth, email, password);
+                } catch (firebaseError: unknown) {
+                  // Translate Firebase errors to human-friendly messages
+                  const errorMessages: Record<string, string> = {
+                    'auth/invalid-credential': 'Invalid email or password. Please check your details and try again.',
+                    'auth/user-not-found': 'We could not find an account with that email address.',
+                    'auth/wrong-password': 'Incorrect password. Please try again.',
+                    'auth/invalid-email': 'Please enter a valid email address.',
+                    'auth/user-disabled': 'This account has been disabled. Please contact support.',
+                    'auth/too-many-requests': 'Too many failed attempts. Please try again later.',
+                    'auth/email-already-in-use': 'This email is already in use.',
+                    'auth/weak-password': 'Password is too weak. Please use a stronger password.',
+                    'auth/operation-not-allowed': 'This operation is not allowed.',
+                    'auth/network-request-failed': 'Network error. Please check your internet connection.',
+                  };
+                  const errorCode = firebaseError instanceof Error && 'code' in firebaseError ? firebaseError.code as string : undefined;
+                  const friendlyMessage = errorCode && errorMessages[errorCode] ? 
+                    errorMessages[errorCode] : 
+                    'We could not sign you in. Please check your email and password and try again.';
+                  throw new Error(friendlyMessage);
+                }
               });
             }}
           >
             <ShieldCheck size={30} />
             <h2>Welcome back.</h2>
-            <p>Sign in to manage your menu and your team.</p>
+            <p>Sign in to manage your menu and team.</p>
             <label>
               Email address
               <input
                 type="email"
                 required
                 autoComplete="username"
+                autoCapitalize="none"
+                autoCorrect="off"
+                spellCheck={false}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </label>
-            <label>
-              Password
-              <input
-                type="password"
-                required
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
+            <PasswordField
+              label="Password"
+              required
+              autoComplete="current-password"
+              enterKeyHint="go"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
             {error && (
               <div className="alert error" role="alert">
                 {error}
@@ -333,7 +361,7 @@ export default function Admin() {
               </div>
             )}
             <button className="primary" disabled={busy}>
-              {busy ? "Signing in…" : "Sign in"} <ChevronRight size={17} />
+              {busy ? "Signing in…" : "Get started"} <ChevronRight size={17} />
             </button>
             <button
               type="button"
@@ -342,11 +370,25 @@ export default function Admin() {
               onClick={() =>
                 void run(async () => {
                   if (!email)
-                    throw new Error("Enter your email address first.");
-                  await sendPasswordResetEmail(auth, email);
-                  setNotice(
-                    "If this account exists, a password reset email will arrive shortly.",
-                  );
+                    throw new Error("Please enter your email address first.");
+                  try {
+                    await sendPasswordResetEmail(auth, email);
+                    setNotice(
+                      "If this account exists, we'll send you an email to reset your password.",
+                    );
+                  } catch (firebaseError: unknown) {
+                    // Translate Firebase errors to human-friendly messages
+                    const errorMessages: Record<string, string> = {
+                      'auth/invalid-email': 'Please enter a valid email address.',
+                      'auth/user-not-found': 'We could not find an account with that email address.',
+                      'auth/network-request-failed': 'Network error. Please check your internet connection.',
+                    };
+                    const errorCode = firebaseError instanceof Error && 'code' in firebaseError ? firebaseError.code as string : undefined;
+                    const friendlyMessage = errorCode && errorMessages[errorCode] ? 
+                      errorMessages[errorCode] : 
+                      'We could not send the reset email. Please try again.';
+                    throw new Error(friendlyMessage);
+                  }
                 })
               }
             >
@@ -372,13 +414,14 @@ export default function Admin() {
           />
         </a>
         <div className="workspace-label">BUSINESS WORKSPACE</div>
-        <nav>
+        <nav aria-label="Workspace sections">
           {tabs
             .filter(([name]) => name !== "Team & access" || role === "admin")
             .map(([name, Icon]) => (
               <button
                 key={name}
                 className={tab === name ? "selected" : ""}
+                aria-current={tab === name ? "page" : undefined}
                 onClick={() => setTab(name)}
               >
                 <Icon size={19} />
@@ -482,7 +525,7 @@ export default function Admin() {
               </h2>
               <p>
                 {error
-                  ? "Check your server connection and Firebase setup."
+                  ? "We're having trouble connecting. Please check your internet and try again."
                   : "Getting your latest menu and activity."}
               </p>
               <button
@@ -680,7 +723,7 @@ export default function Admin() {
                                 id: crypto.randomUUID(),
                                 name: "",
                                 description: "",
-                                price: 0,
+                                price: "",
                                 available: true,
                                 sectionId: menu.sections[0].id,
                               })
@@ -698,6 +741,10 @@ export default function Admin() {
                       <label className="search">
                         <Search size={18} />
                         <input
+                          type="search"
+                          enterKeyHint="search"
+                          autoCapitalize="none"
+                          autoCorrect="off"
                           aria-label="Search menu"
                           placeholder="Search items…"
                           value={query}
@@ -813,7 +860,7 @@ export default function Admin() {
                                 {canEdit && (
                                   <button
                                     className="text-button"
-                                    onClick={() => setItem(i)}
+                                    onClick={() => setItem({ ...i, price: String(i.price) })}
                                   >
                                     Edit
                                   </button>
@@ -904,7 +951,7 @@ export default function Admin() {
                       }
                     >
                       <Plus size={17} />
-                      Add user
+                      Add team member
                     </button>
                   </div>
                   <section className="panel team-panel table-scroll">
@@ -983,6 +1030,11 @@ export default function Admin() {
                           ? "X / Twitter"
                           : key.charAt(0).toUpperCase() + key.slice(1)}
                       <input
+                        type={key === "rsvp" ? "tel" : "text"}
+                        autoCapitalize="none"
+                        autoCorrect="off"
+                        spellCheck={false}
+                        autoComplete={key === "rsvp" ? "tel" : "off"}
                         disabled={!canEdit}
                         value={value}
                         onChange={(e) =>
@@ -1082,7 +1134,10 @@ export default function Admin() {
             onSubmit={(e) => {
               e.preventDefault();
               if (busy) return;
-              const { sectionId, ...data } = item;
+              const { sectionId, price, ...fields } = item;
+              // Keep an empty editing value distinct from an intentionally entered zero.
+              if (!price.trim() || !Number.isFinite(Number(price))) return;
+              const data: MenuItem = { ...fields, price: Number(price) };
               edit({
                 ...menu,
                 sections: menu.sections.map((s) => ({
@@ -1112,7 +1167,6 @@ export default function Admin() {
             <label>
               Item name
               <input
-                autoFocus
                 required
                 maxLength={160}
                 value={item.name}
@@ -1134,13 +1188,15 @@ export default function Admin() {
                 Price (MWK)
                 <input
                   type="number"
+                  inputMode="decimal"
                   min="0"
                   max="100000000"
                   step="0.01"
+                  placeholder="0"
                   required
                   value={item.price}
                   onChange={(e) =>
-                    setItem({ ...item, price: Number(e.target.value) })
+                    setItem({ ...item, price: e.target.value })
                   }
                 />
               </label>
@@ -1255,7 +1311,6 @@ export default function Admin() {
             <label>
               Title
               <input
-                autoFocus
                 required
                 value={section.title}
                 maxLength={160}
@@ -1345,13 +1400,13 @@ export default function Admin() {
                 setMembers(d.users);
                 setPageToken(d.pageToken);
                 setMember(null);
-                setNotice("User account saved.");
+                setNotice("Team member saved successfully.");
               });
             }}
           >
             <div className="section-heading">
               <h2 id="member-title">
-                {member.uid ? "Manage user" : "Add user"}
+                {member.uid ? "Edit team member" : "Add team member"}
               </h2>
               <button
                 disabled={busy}
@@ -1370,7 +1425,6 @@ export default function Admin() {
             <label>
               Full name
               <input
-                autoFocus
                 required
                 maxLength={100}
                 value={member.displayName}
@@ -1385,26 +1439,27 @@ export default function Admin() {
                 type="email"
                 required
                 value={member.email}
+                autoCapitalize="none"
+                autoCorrect="off"
+                spellCheck={false}
+                autoComplete="off"
                 onChange={(e) =>
                   setMember({ ...member, email: e.target.value })
                 }
               />
             </label>
             {!member.uid && (
-              <label>
-                Temporary password (12+ characters)
-                <input
-                  type="password"
-                  required
-                  minLength={12}
-                  maxLength={128}
-                  autoComplete="new-password"
-                  value={member.password}
-                  onChange={(e) =>
-                    setMember({ ...member, password: e.target.value })
-                  }
-                />
-              </label>
+              <PasswordField
+                label="Temporary password (12+ characters)"
+                required
+                minLength={12}
+                maxLength={128}
+                autoComplete="new-password"
+                value={member.password}
+                onChange={(e) =>
+                  setMember({ ...member, password: e.target.value })
+                }
+              />
             )}
             <label>
               Access role
@@ -1445,7 +1500,7 @@ export default function Admin() {
                         await api("users", "DELETE", { uid: member.uid });
                         setMembers(members.filter((m) => m.uid !== member.uid));
                         setMember(null);
-                        setNotice("User deleted.");
+                        setNotice("Team member removed successfully.");
                       });
                   }}
                 >

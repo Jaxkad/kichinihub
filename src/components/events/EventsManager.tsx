@@ -47,7 +47,7 @@ export function EventsManager({ api, canEdit }: Props) {
     try {
       await fn();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Unable to save event.");
+      setError(e instanceof Error ? e.message : "We could not save your event. Please try again.");
     } finally {
       setBusy(false);
     }
@@ -128,7 +128,6 @@ export function EventsManager({ api, canEdit }: Props) {
             <input
               required
               maxLength={120}
-              autoFocus
               value={editing.title}
               onChange={(e) =>
                 setEditing({ ...editing, title: e.target.value })
@@ -198,7 +197,7 @@ export function EventsManager({ api, canEdit }: Props) {
                   e.target.value = "";
                   void run(async () => {
                     if (files.length + (editing.images || []).length > 6)
-                      throw new Error("Maximum 6 media files per event.");
+                      throw new Error("You can add up to 6 photos or videos for each event.");
                     for (const file of files) {
                       const result = await uploadMedia(file, setUploadProgress);
                       setEditing((current) =>

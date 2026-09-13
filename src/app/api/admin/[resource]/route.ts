@@ -21,27 +21,27 @@ async function handle(
   try {
     const { resource } = await context.params;
     if (!["menu", "users", "activity", "events", "insights"].includes(resource))
-      throw new ApiError(404, "Not found.");
+      throw new ApiError(404, "Page not found.");
     const token = req.headers.get("authorization")?.match(/^Bearer (.+)$/)?.[1];
-    if (!token) throw new ApiError(401, "Please sign in.");
+    if (!token) throw new ApiError(401, "Please sign in to continue.");
     const { auth, db } = adminServices();
     let uid: string;
     try {
       uid = (await auth.verifyIdToken(token, true)).uid;
     } catch {
-      throw new ApiError(401, "Your session expired. Sign in again.");
+      throw new ApiError(401, "Your session has expired. Please sign in again.");
     }
     const actor = await auth.getUser(uid);
     const role = actor.customClaims?.role;
     if (actor.disabled || !["admin", "editor", "viewer"].includes(role))
       throw new ApiError(
         403,
-        "An administrator must grant you console access.",
+        "You need administrator permission to access this area.",
       );
     if (resource === "users" && role !== "admin")
-      throw new ApiError(403, "Only administrators can manage users.");
+      throw new ApiError(403, "Only administrators can manage team members.");
     if (req.method !== "GET" && role === "viewer")
-      throw new ApiError(403, "Your account has read-only access.");
+      throw new ApiError(403, "Your account can only view information, not make changes.");
     const ref = db.doc("menu/current");
     if (req.method === "GET") {
       if (resource === "insights") {
@@ -119,7 +119,7 @@ async function handle(
         if ((previous.data()?.revision || 0) !== data.revision)
           throw new ApiError(
             409,
-            "This event changed in another session. Reload events before saving.",
+            "This event was updated by someone else. Please refresh and try again.",
           );
         if (req.method === "DELETE") tx.delete(eventRef);
         else tx.set(eventRef, { ...data, revision: data.revision + 1 });
@@ -144,7 +144,7 @@ async function handle(
         if ((previous.data()?.revision || 0) !== revision)
           throw new ApiError(
             409,
-            "The menu changed in another session. Reload before saving.",
+            "The menu was updated by someone else. Please refresh and try again.",
           );
         tx.set(ref, {
           ...menu,
@@ -163,7 +163,7 @@ async function handle(
       if (req.method === "DELETE") {
         const target = z.string().min(1).parse(body.uid);
         if (target === uid)
-          throw new ApiError(400, "You cannot delete your own account.");
+          throw new ApiError(400, "You cannot remove your own account.");
         await auth.deleteUser(target);
         return NextResponse.json({ ok: true });
       }
@@ -172,7 +172,7 @@ async function handle(
         if (data.uid === uid && (data.disabled || data.role !== "admin"))
           throw new ApiError(
             400,
-            "You cannot remove your own administrator access.",
+            "You cannot change your own administrator permissions.",
           );
         const updates = {
           email: data.email,
@@ -183,7 +183,7 @@ async function handle(
           if (!data.password)
             throw new ApiError(
               400,
-              "A temporary password of at least 12 characters is required.",
+              "Please create a password with at least 12 characters.",
             );
           const created = await auth.createUser({
             ...updates,
@@ -196,7 +196,7 @@ async function handle(
             throw error;
           }
         } else {
-          if (!data.uid) throw new ApiError(400, "Select a user.");
+          if (!data.uid) throw new ApiError(400, "Please select a team member to update.");
           const existing = await auth.getUser(data.uid);
           await auth.updateUser(data.uid, updates);
           await auth.setCustomUserClaims(data.uid, {
@@ -221,10 +221,24 @@ async function handle(
         { status: 400 },
       );
     const code = (error as { code?: string }).code;
-    if (code === "auth/email-already-exists")
+    // Translate Firebase error codes to human-friendly messages
+    const firebaseErrorMessages: Record<string, string> = {
+      'auth/email-already-exists': 'This email address is already in use by another team member.',
+      'auth/invalid-email': 'Please enter a valid email address.',
+      'auth/weak-password': 'Password is too weak. Please use a stronger password with at least 12 characters.',
+      'auth/invalid-credential': 'Invalid email or password.',
+      'auth/user-not-found': 'We could not find an account with that email address.',
+      'auth/wrong-password': 'Incorrect password.',
+      'auth/user-disabled': 'This account has been disabled.',
+      'auth/too-many-requests': 'Too many attempts. Please try again later.',
+      'auth/network-request-failed': 'Network error. Please check your internet connection.',
+      'auth/operation-not-allowed': 'This operation is not allowed.',
+      'auth/email-already-in-use': 'This email is already in use.',
+    };
+    if (code && firebaseErrorMessages[code])
       return NextResponse.json(
-        { error: "This email already has an account." },
-        { status: 409 },
+        { error: firebaseErrorMessages[code] },
+        { status: 400 },
       );
     console.error(
       "Admin request failed:",
@@ -233,7 +247,7 @@ async function handle(
     return NextResponse.json(
       {
         error:
-          "The request could not be completed. Check the server’s Firebase credentials and permissions, then try again.",
+          "We could not complete your request. Please try again or contact support if the problem continues.",
       },
       { status: 503 },
     );

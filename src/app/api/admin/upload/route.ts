@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
         const ref = db.doc(`uploadQuota/${uid}_${day}`);
         const doc = await tx.get(ref);
         const count = doc.data()?.count || 0;
-        if (count >= 100) throw new Error("Daily upload limit reached.");
+        if (count >= 100) throw new Error("You've reached your daily upload limit. Please try again tomorrow.");
         tx.set(ref, { count: count + 1 });
       });
       const id = randomUUID();
@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
         );
       const access = await getApp().options.credential?.getAccessToken();
       if (!access?.access_token)
-        throw new Error("Server credentials are not configured for uploads.");
+        throw new Error("We could not set up the upload. Please contact support.");
       const initiated = await fetch(
         `https://storage.googleapis.com/upload/storage/v1/b/${bucket.name}/o?uploadType=resumable&name=${encodeURIComponent(path)}`,
         {
@@ -96,7 +96,7 @@ export async function POST(req: NextRequest) {
       );
       const uploadUrl = initiated.headers.get("location");
       if (!initiated.ok || !uploadUrl)
-        throw new Error("Unable to initiate upload.");
+        throw new Error("We could not start the upload. Please try again.");
       await db
         .doc(`mediaUploads/${id}`)
         .set({
@@ -115,7 +115,7 @@ export async function POST(req: NextRequest) {
       const data = doc.data();
       if (!data || data.uid !== uid || Date.now() - data.createdAt > 86400000)
         return NextResponse.json(
-          { error: "Upload session expired." },
+          { error: "Your upload session has expired. Please try uploading again." },
           { status: 400 },
         );
       const file = bucket.file(data.path);
@@ -124,7 +124,7 @@ export async function POST(req: NextRequest) {
         await file.delete();
         await ref.delete();
         return NextResponse.json(
-          { error: "Upload did not match the approved file." },
+          { error: "The uploaded file does not match what we expected. Please try again." },
           { status: 400 },
         );
       }
@@ -140,7 +140,7 @@ export async function POST(req: NextRequest) {
       });
     }
     return NextResponse.json(
-      { error: "Invalid upload action." },
+      { error: "We could not understand your upload request. Please try again." },
       { status: 400 },
     );
   } catch (e) {

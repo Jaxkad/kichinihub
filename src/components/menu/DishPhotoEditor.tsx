@@ -84,7 +84,7 @@ export function DishPhotoEditor({
               setError(
                 err instanceof Error
                   ? err.message
-                  : "Upload failed. Please try again.",
+                  : "We could not upload your photo. Please try again.",
               );
             } finally {
               setUploading(false);
