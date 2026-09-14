@@ -40,7 +40,7 @@ import {
   Users,
   X,
 } from "lucide-react";
-import "./admin.css";
+import "./admin.css?v=2";
 
 type Menu = MenuData & { revision: number; updatedAt?: string };
 type Member = {
