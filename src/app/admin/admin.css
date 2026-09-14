@@ -740,6 +740,9 @@ td b {
 }
 .settings-panel {
   max-width: 650px;
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
 }
 .settings-panel > p {
   margin: 9px 0 25px;

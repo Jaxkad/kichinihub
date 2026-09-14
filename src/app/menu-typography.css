@@ -67,7 +67,7 @@
 .kh-menu .kh-old-item-top { flex-wrap: wrap; }
 .typography-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 16px; }
 .typography-settings select { width: 100%; min-width: 0; font-size: 1rem; }
-.typography-settings { margin-bottom: 24px; max-width: 100%; overflow-x: hidden; }
+.typography-settings { margin-bottom: 24px; max-width: 100%; overflow-x: hidden; width: 100%; min-width: 0; }
 .typography-settings small { display: block; font-weight: 400; line-height: 1.5; margin-top: 6px; color: #62605c; }
 .typography-details { margin: 16px 0 24px; border-block: 1px solid #e2e2de; padding: 16px 0; }
 .typography-details summary { cursor: pointer; font-weight: 600; min-height: 32px; }
@@ -87,12 +87,15 @@
   padding: 12px; 
   background: #f4f2ee; 
   max-width: 100%; 
+  width: 100%;
+  min-width: 0;
 }
 .typography-preview-frame { 
   container-type: inline-size; 
   width: 360px; 
   max-width: 100%; 
   margin-inline: auto; 
+  min-width: 0;
 }
 .typography-preview { --menu-fluid: 1cqi; background: #fff; color: #1a1a1a; padding: 16px; min-width: 0; }
 .typography-preview .menu-type-header { background: #6d1600; color: white; padding: 24px; border-radius: 4px; }
