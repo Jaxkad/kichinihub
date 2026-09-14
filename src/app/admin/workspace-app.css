@@ -1,0 +1,12 @@
+.admin .workspace-app { width: 100%; max-width: 650px; margin: 24px 0 0; padding: 20px; background: #fbf7ee; border: 1px solid #e5ddd1; border-radius: 12px; color: #292724; }
+.admin .login-side > .workspace-app { max-width: 390px; }
+.admin .workspace-app h2 { font-size: 16px; line-height: 1.4; margin: 0 0 8px; }
+.admin .workspace-app p { font-size: 13px; line-height: 1.6; margin: 0 0 12px; }
+.admin .workspace-app-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.admin .workspace-app-actions button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 12px; background: #fff; color: #672c28; border: 1px solid #cbbdb0; border-radius: 6px; font-size: 13px; }
+.admin .workspace-app-actions button:focus-visible { outline: 3px solid #672c28; outline-offset: 3px; }
+.admin .workspace-install-help { margin-top: 16px; }
+.admin .workspace-install-help small { font-size: 12px; }
+.admin .workspace-app .workspace-app-status:empty { display: none; }
+.admin .workspace-app .workspace-app-status { margin-top: 12px; }
+.admin .workspace-app input { width: 100%; min-width: 0; font-size: 16px; }

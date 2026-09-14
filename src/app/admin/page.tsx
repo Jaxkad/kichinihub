@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { WorkspaceApp } from "@/components/workspace/WorkspaceApp";
 import { TypographySettings } from "@/components/menu/TypographySettings";
 import { useAdminKeyboard } from "@/lib/admin-keyboard";
 import { DishPhotoEditor } from "@/components/menu/DishPhotoEditor";
@@ -395,6 +396,7 @@ export default function Admin() {
             </button>
             <Link href="/">Back to the public menu ↗</Link>
           </form>
+          <WorkspaceApp />
         </div>
       </div>
     );
@@ -1014,6 +1016,7 @@ export default function Admin() {
               )}
               {tab === "Settings" && (
                 <>
+                <WorkspaceApp />
                 <TypographySettings value={menu.typography} disabled={!canEdit || busy} onChange={(typography) => edit({ ...menu, typography })} />
                 <section className="panel settings-panel">
                   <h2>Contact & social profiles</h2>
