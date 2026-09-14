@@ -9,7 +9,6 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { HubEvent, eventDate, eventTime } from "@/lib/events";
-import { track } from "@/lib/tracking";
 type PublicEvent = Pick<
   HubEvent,
   "id" | "title" | "description" | "venue" | "startsAt" | "endsAt" | "images"
@@ -45,14 +44,10 @@ function EventCard({ event, phone }: { event: PublicEvent; phone: string }) {
   const current = images[Math.min(photo, images.length - 1)];
   const select = (index: number) => {
     setPhoto(index);
-    track("gallery_view", event.id, event.title);
   };
   return (
     <article
       className="kh-event kh-event-feature"
-      data-metric="event_view"
-      data-metric-id={event.id}
-      data-metric-label={event.title}
     >
       <div className="kh-event-media">
         {current ? (
@@ -127,7 +122,6 @@ function EventCard({ event, phone }: { event: PublicEvent; phone: string }) {
           aria-controls={`details-${event.id}`}
           onClick={() => {
             setOpen(!open);
-            if (!open) track("event_open", event.id, event.title);
           }}
         >
           {open ? "Hide details" : "View event details"}
@@ -164,9 +158,6 @@ function EventCard({ event, phone }: { event: PublicEvent; phone: string }) {
             )}
             <a
               href={`tel:${phone}`}
-              data-track="contact_click"
-              data-track-id={event.id}
-              data-track-label={event.title}
             >
               Ask the team about this event <ArrowUpRight size={16} />
             </a>
@@ -210,9 +201,6 @@ export function PublicEvents({ phone }: { phone: string }) {
     <section
       className="kh-events"
       id="events"
-      data-metric="section_view"
-      data-metric-id="events"
-      data-metric-label="Events"
     >
       <div className="kh-menu-heading">
         <div>

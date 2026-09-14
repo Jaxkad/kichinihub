@@ -144,3 +144,67 @@ For when you're serious about eating (and living your best life).
 ## Tagline Options
 - Convenience served fresh, with a side of awesome service. Dig in!
 - Good food, great service, and all the convenience you crave. Let's make it easy!
+## Workspace typography
+
+Settings → Menu fonts offers ten families: Georgia, Geist, Barlow, Oswald,
+Roboto Slab, Nunito Sans, Work Sans, DM Sans, Bitter, and Archivo. Editors and
+administrators can choose category titles, category subtext, dish names (including
+prices), and dish descriptions independently. The live preview is draft-only;
+“Publish changes” saves typography with the menu through the existing authenticated,
+revision-checked transaction. Viewers cannot edit. Restore original fonts is also
+a draft change until published.
+
+Both landing cards and category detail headers share typography rules, including
+responsive heading size and wrapping. Existing documents need no migration:
+missing settings retain Georgia headings and Geist supporting text. The API accepts
+only the ten allowlisted font IDs; partial settings fill in the original defaults.
+Public Firestore subscriptions pick up published typography automatically.
+Additional fonts use next/font self-hosting with optional preloading disabled.
+
+### Font research (14 September 2026)
+
+Interpretation: “rough dining” means casual, hearty, rustic dining. Suggested
+pairing: Roboto Slab headings + Barlow text; alternative Oswald headings + Work Sans
+text. These are design recommendations for this site's warm colours and informal
+menu copy, rather than claims that particular fonts improve sales.
+
+Google Design recommends choosing expressive faces for headings and legible,
+low-contrast workhorse faces for smaller text:
+https://design.google/library/choosing-web-fonts-beginners-guide
+
+Font specimens:
+- https://fonts.google.com/specimen/Barlow
+- https://fonts.google.com/specimen/Oswald
+- https://fonts.google.com/specimen/Roboto+Slab
+
+Keep one or two families for a cohesive menu. Oswald is best reserved for short
+headings; Geist, Barlow, Work Sans, DM Sans, and Nunito Sans are suitable supporting
+text options. Georgia remains available as the original title style.
+
+### Appearance controls and interaction design
+
+Menu fonts is now **Menu appearance**. The initial view contains only overall text
+size and dish spacing, followed by the preview. **Fine-tune text** reveals one text
+role at a time, with font, size, and weight controls. Prices share the dish-name
+font but have independent size and weight. Header alignment applies to both pages.
+
+The overall size selector shows **Custom sizes** after individual sizes diverge;
+choosing an overall size intentionally replaces those size overrides, leaving
+fonts, weights, and layout choices intact. Mobile/Desktop changes only the sample
+preview width, not the saved settings. Desktop previews scroll within their own
+region on narrow screens. Reset clears typography and layout overrides as a draft;
+publication still uses the existing revision-checked menu transaction.
+
+Sizes use bounded rem values with responsive category headings. Small body text is
+13px at the default browser size; Standard descriptions are 14px. Font weights are
+400/600/700. Dish spacing is 12/18/28px. There are no raw CSS or numeric inputs.
+Missing appearance fields receive the shared defaults without a data migration.
+
+Design research:
+- NN/g, Progressive Disclosure: show common choices first, expose detailed options
+  on request: https://www.nngroup.com/articles/progressive-disclosure/
+- GOV.UK, Question pages: focused questions and short, useful hints:
+  https://design-system.service.gov.uk/patterns/question-pages/
+
+Applied as an optional disclosure within one settings panel, rather than a mandatory
+multi-page wizard. The preview and existing Publish changes action complete the flow.

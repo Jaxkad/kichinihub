@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Barlow, Oswald, Roboto_Slab, Nunito_Sans, Work_Sans, DM_Sans, Bitter, Archivo } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -11,6 +11,15 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const barlow = Barlow({ variable: "--font-barlow", subsets: ["latin"], preload: false, display: "swap", weight: ["400", "600", "700"] });
+const oswald = Oswald({ variable: "--font-oswald", subsets: ["latin"], preload: false, display: "swap" });
+const robotoSlab = Roboto_Slab({ variable: "--font-roboto-slab", subsets: ["latin"], preload: false, display: "swap" });
+const nunitoSans = Nunito_Sans({ variable: "--font-nunito-sans", subsets: ["latin"], preload: false, display: "swap" });
+const workSans = Work_Sans({ variable: "--font-work-sans", subsets: ["latin"], preload: false, display: "swap" });
+const dmSans = DM_Sans({ variable: "--font-dm-sans", subsets: ["latin"], preload: false, display: "swap" });
+const bitter = Bitter({ variable: "--font-bitter", subsets: ["latin"], preload: false, display: "swap" });
+const archivo = Archivo({ variable: "--font-archivo", subsets: ["latin"], preload: false, display: "swap" });
 
 export const metadata: Metadata = {
   title: "Kichinihub",
@@ -35,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${barlow.variable} ${oswald.variable} ${robotoSlab.variable} ${nunitoSans.variable} ${workSans.variable} ${dmSans.variable} ${bitter.variable} ${archivo.variable} antialiased`}
       >
         {children}
       </body>

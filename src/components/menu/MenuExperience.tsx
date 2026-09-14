@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { menuData } from "@/data/menuData";
+import { menuTypographyStyle } from "@/lib/menu-typography";
 import { menuSchema } from "@/lib/admin-schema";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,9 +18,8 @@ import {
 } from "lucide-react";
 import { FaInstagram, FaFacebook, FaTiktok } from "react-icons/fa";
 import "@/app/menu.css";
+import "@/app/menu-typography.css";
 import { DishPhoto } from "@/components/menu/DishPhoto";
-import { SiteTracking } from "@/components/analytics/SiteTracking";
-import { track } from "@/lib/tracking";
 import { PublicEvents } from "@/components/events/PublicEvents";
 
 const sanitizePhone = (value: string) =>
@@ -66,35 +66,35 @@ const socialLinks: {
   url: (handle: string) => string;
   Icon: typeof FaInstagram;
   label: string;
-  trackId: string;
+  socialId: string;
 }[] = [
   {
     key: "instagram",
     url: (h) => `https://instagram.com/${h}`,
     Icon: FaInstagram,
     label: "Instagram",
-    trackId: "instagram",
+    socialId: "instagram",
   },
   {
     key: "facebook",
     url: (h) => `https://facebook.com/${h}`,
     Icon: FaFacebook,
     label: "Facebook",
-    trackId: "facebook",
+    socialId: "facebook",
   },
   {
     key: "tiktok",
     url: (h) => `https://tiktok.com/@${h}`,
     Icon: FaTiktok,
     label: "TikTok",
-    trackId: "tiktok",
+    socialId: "tiktok",
   },
   {
     key: "twitter",
     url: (h) => `https://x.com/${h}`,
     Icon: FaInstagram,
     label: "X / Twitter",
-    trackId: "x",
+    socialId: "x",
   },
 ];
 export default function MenuExperience({ categoryId }: { categoryId?: string }) {
@@ -144,14 +144,6 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
       ),
     [],
   );
-  useEffect(() => {
-    if (!query.trim()) return;
-    const timer = setTimeout(
-      () => track("search", "menu-search", "Menu searches"),
-      900,
-    );
-    return () => clearTimeout(timer);
-  }, [query]);
   const available = menu.sections
     .map((s) => ({ ...s, items: s.items.filter((i) => i.available !== false) }))
     .filter((s) => s.items.length);
@@ -195,7 +187,7 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
     if (field instanceof HTMLElement) field.blur();
   };
   return (
-    <div className="kh-menu" id="top">
+    <div className="kh-menu" id="top" style={menuTypographyStyle(menu.typography)}>
       <a className="kh-skip" href="#menu">
         Skip to menu
       </a>
@@ -219,9 +211,9 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
         </nav>
         <a
           className="kh-reserve"
-          data-track="contact_click"
-          data-track-id="phone"
-          data-track-label="Call the Hub"
+
+
+
           href={`tel:${sanitizePhone(menu.social.rsvp)}`}
         >
           <Phone size={14} />
@@ -242,9 +234,6 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
         <section
           className={`kh-menu-section${searching ? " kh-searching" : ""}`}
           id="menu"
-          data-metric="section_view"
-          data-metric-id="menu"
-          data-metric-label="Menu"
         >
           {!categoryId ? (
             <>
@@ -252,7 +241,6 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
                 {available.map((section) => (
                   <Link className="kh-category-card" key={section.id}
                     href={`/menu/${encodeURIComponent(section.id)}`}
-                    onClick={() => track("category_select", section.id, section.title)}
                     style={{
                       backgroundColor: themeFor(section.theme).bg,
                       color: cardTextColor(themeFor(section.theme).bg),
@@ -335,7 +323,6 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
                   className={`kh-diet-chip ${diet === value ? "active" : ""} kh-diet-${cls}`}
                   onClick={() => {
                     setDiet(value);
-                    track("filter_select", value, label);
                   }}
                 >
                   {value === "vegan" && <Leaf size={10} />}
@@ -370,9 +357,6 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
                     id={`section-${s.id}`}
                     className="kh-old-section"
                     data-section-id={s.id}
-                    data-metric="category_view"
-                    data-metric-id={s.id}
-                    data-metric-label={s.title}
                   >
                     <div
                       className="kh-old-section-body"
@@ -382,9 +366,6 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
                         <article
                           className="kh-old-item"
                           key={i.id}
-                          data-metric="dish_view"
-                          data-metric-id={i.id}
-                          data-metric-label={i.name}
                         >
                           <div className="kh-old-item-main">
                             <div className="kh-old-item-top">
@@ -454,7 +435,6 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
         height={400}
         className="kh-socials-banner"
       />}
-      <SiteTracking showPreferences={!categoryId} />
       <footer className="kh-footer">
         {!categoryId && <>
         <div>
@@ -467,21 +447,21 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
           />
         </div>
         <div className="kh-socials">
-          {socialLinks.map(({ key, url, Icon, label, trackId }) => {
+          {socialLinks.map(({ key, url, Icon, label, socialId }) => {
             const handle = socialHandle(menu.social[key]);
             if (!handle) return null;
             return (
               <a
                 key={key}
-                data-track="social_click"
-                data-track-id={trackId}
-                data-track-label={label}
+
+
+
                 aria-label={label}
                 target="_blank"
                 rel="noreferrer"
                 href={url(handle)}
               >
-                {trackId === "x" ? "𝕏" : <Icon />}
+                {socialId === "x" ? "𝕏" : <Icon />}
               </a>
             );
           })}

@@ -1,0 +1,103 @@
+/* Shared rules keep landing cards, category headers and the draft preview aligned. */
+.kh-menu .kh-category-card h2,
+.kh-menu .kh-category-intro .kh-category-title h1,
+.typography-preview .menu-type-title {
+  font-family: var(--menu-categoryTitle, Georgia, serif);
+  font-size: var(--menu-categoryTitle-size, clamp(1.5rem, 1.25rem + 1vw, 1.75rem));
+  font-weight: var(--menu-categoryTitle-weight, 700);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+  margin: 0 0 12px;
+}
+.kh-menu .kh-category-card p,
+.kh-menu .kh-category-intro .kh-category-title p,
+.typography-preview .menu-type-subtitle {
+  font-family: var(--menu-categorySubtitle, var(--font-geist-sans)), Arial, sans-serif;
+  font-size: var(--menu-categorySubtitle-size, 0.875rem);
+  font-weight: var(--menu-categorySubtitle-weight, 400);
+  line-height: 1.6;
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+  margin: 0 0 24px;
+}
+.kh-menu .kh-old-item-name h2,
+.kh-menu .kh-old-item-name h4,
+.kh-menu .kh-old-price,
+.typography-preview .menu-type-item {
+  font-family: var(--menu-itemName, var(--font-geist-sans)), Arial, sans-serif;
+  overflow-wrap: anywhere;
+}
+.kh-menu .kh-old-item-main > p,
+.typography-preview .menu-type-description {
+  font-family: var(--menu-itemDescription, var(--font-geist-sans)), Arial, sans-serif;
+  overflow-wrap: anywhere;
+}
+
+.kh-menu .kh-category-card h2,
+.kh-menu .kh-category-card p,
+.kh-menu .kh-category-title,
+.typography-preview .menu-type-header { text-align: var(--menu-header-align, left); }
+.kh-menu .kh-old-item-name h2,
+.kh-menu .kh-old-item-name h4,
+.typography-preview .menu-type-item {
+  font-size: var(--menu-itemName-size, 1rem);
+  font-weight: var(--menu-itemName-weight, 600);
+  line-height: 1.4;
+  margin: 0;
+}
+.kh-menu .kh-old-item-main > p,
+.typography-preview .menu-type-description {
+  font-size: var(--menu-itemDescription-size, 0.875rem);
+  font-weight: var(--menu-itemDescription-weight, 400);
+  line-height: 1.7;
+  margin: 8px 0 0;
+}
+.kh-menu .kh-old-price,
+.typography-preview .menu-type-price {
+  font-family: var(--menu-itemName, var(--font-geist-sans)), Arial, sans-serif;
+  font-size: var(--menu-price-size, 1.125rem);
+  font-weight: var(--menu-price-weight, 700);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.kh-menu .kh-old-price-k { font-size: inherit; font-weight: inherit; }
+.kh-menu .kh-old-item,
+.typography-preview .menu-type-dish { padding-block: var(--menu-row-space, 18px); }
+.kh-menu .kh-old-item-top { flex-wrap: wrap; }
+.typography-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 16px; }
+.typography-settings select { width: 100%; min-width: 0; font-size: 1rem; }
+.typography-settings { margin-bottom: 24px; }
+.typography-settings small { display: block; font-weight: 400; line-height: 1.5; margin-top: 6px; color: #62605c; }
+.typography-details { margin: 16px 0 24px; border-block: 1px solid #e2e2de; padding: 16px 0; }
+.typography-details summary { cursor: pointer; font-weight: 600; min-height: 32px; }
+.typography-details summary span { display: block; font-size: 12px; font-weight: 400; margin: 6px 0 0 16px; color: #62605c; }
+.typography-fieldset { border: 0; padding: 0; margin: 20px 0 0; min-width: 0; }
+.typography-fieldset legend { font-weight: 600; }
+.typography-settings .typography-preview-heading { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.typography-preview-heading h3 { font-size: 16px; margin: 0; }
+.typography-device { display: flex; gap: 4px; }
+.typography-device button { min-height: 44px; padding: 8px 12px; border: 1px solid #d7d1ca; border-radius: 6px; }
+.typography-device button[aria-pressed="true"] { background: #672c28; color: #fff; border-color: #672c28; }
+.typography-settings .typography-preview-hint { font-size: 12px; margin: 8px 0 12px; }
+.typography-preview-scroll { overflow-x: auto; border: 1px solid #ddd5cc; border-radius: 6px; padding: 12px; background: #f4f2ee; }
+.typography-preview-frame { container-type: inline-size; width: 360px; max-width: 100%; margin-inline: auto; }
+.typography-preview-frame[data-device="desktop"] { width: 720px; max-width: none; }
+.typography-preview { --menu-fluid: 1cqi; background: #fff; color: #1a1a1a; padding: 16px; min-width: 0; }
+.typography-preview .menu-type-header { background: #6d1600; color: white; padding: 24px; border-radius: 4px; }
+.typography-preview .menu-type-title,
+.typography-preview .menu-type-subtitle { color: inherit; }
+.typography-preview .menu-type-dish { border-bottom: 1px solid #e2e2de; }
+.typography-preview .menu-type-dish:last-child { border-bottom: 0; }
+.typography-preview .menu-type-dish-top { display: flex; flex-wrap: wrap; align-items: start; gap: 12px; justify-content: space-between; }
+.typography-preview .menu-type-item { flex: 1; min-width: 0; color: #1a1a1a; }
+.typography-preview .menu-type-price { color: #6d1600; }
+.typography-preview .menu-type-description { color: #2d2d2d; }
+.typography-settings .typography-reset { margin-top: 20px; min-height: 44px; text-decoration: underline; text-underline-offset: 3px; }
+.typography-settings :is(summary, button, select, .typography-preview-scroll):focus-visible { outline: 3px solid #672c28; outline-offset: 3px; }
+@container (max-width: 420px) {
+  .typography-preview .menu-type-item { flex-basis: 100%; }
+}
+@media (max-width: 420px) {
+  .kh-old-item-name { flex-basis: 100%; }
+}

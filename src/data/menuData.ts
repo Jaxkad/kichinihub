@@ -1,3 +1,4 @@
+import type { MenuTypography } from "../lib/menu-typography";
 export interface MenuItem {
   id: string;
   name: string;
@@ -21,6 +22,7 @@ export interface MenuSection {
 }
 
 export interface MenuData {
+  typography?: MenuTypography;
   sections: MenuSection[];
   social: {
     instagram: string;

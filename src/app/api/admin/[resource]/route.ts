@@ -20,7 +20,7 @@ async function handle(
 ) {
   try {
     const { resource } = await context.params;
-    if (!["menu", "users", "activity", "events", "insights"].includes(resource))
+    if (!["menu", "users", "activity", "events"].includes(resource))
       throw new ApiError(404, "Page not found.");
     const token = req.headers.get("authorization")?.match(/^Bearer (.+)$/)?.[1];
     if (!token) throw new ApiError(401, "Please sign in to continue.");
@@ -44,27 +44,6 @@ async function handle(
       throw new ApiError(403, "Your account can only view information, not make changes.");
     const ref = db.doc("menu/current");
     if (req.method === "GET") {
-      if (resource === "insights") {
-        const days = Math.min(
-          30,
-          Math.max(1, Number(req.nextUrl.searchParams.get("days")) || 7),
-        );
-        const results = await Promise.all(
-          Array.from({ length: days }, (_, i) => {
-            const d = new Date(Date.now() - i * 86400000);
-            const day = new Intl.DateTimeFormat("en-CA", {
-              timeZone: "Africa/Blantyre",
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-            }).format(d);
-            return db.collection(`analytics/${day}/metrics`).get();
-          }),
-        );
-        return NextResponse.json(
-          results.flatMap((r) => r.docs.map((d) => d.data())),
-        );
-      }
       if (resource === "events") {
         const events = await db.collection("events").get();
         return NextResponse.json(events.docs.map((d) => d.data()));

@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
+import { TypographySettings } from "@/components/menu/TypographySettings";
 import { useAdminKeyboard } from "@/lib/admin-keyboard";
 import { DishPhotoEditor } from "@/components/menu/DishPhotoEditor";
-import { Insights } from "@/components/analytics/Insights";
 import { EventsManager } from "@/components/events/EventsManager";
 import { PasswordField } from "@/components/ui/PasswordField";
 import { CalendarDays } from "lucide-react";
@@ -59,7 +59,6 @@ const tabs = [
   ["Team & access", Users],
   ["Settings", Settings],
   ["Events", CalendarDays],
-  ["Audience insights", BarChart3],
   ["Help", LifeBuoy],
 ] as const;
 export default function Admin() {
@@ -478,7 +477,6 @@ export default function Admin() {
             {canEdit &&
               menu &&
               tab !== "Events" &&
-              tab !== "Audience insights" &&
               tab !== "Help" && (
                 <button
                   className="primary"
@@ -1011,11 +1009,12 @@ export default function Admin() {
                   </section>
                 </>
               )}
-              {tab === "Audience insights" && <Insights api={api} />}
               {tab === "Events" && (
                 <EventsManager api={api} canEdit={canEdit} />
               )}
               {tab === "Settings" && (
+                <>
+                <TypographySettings value={menu.typography} disabled={!canEdit || busy} onChange={(typography) => edit({ ...menu, typography })} />
                 <section className="panel settings-panel">
                   <h2>Contact & social profiles</h2>
                   <p className="muted">
@@ -1054,6 +1053,7 @@ export default function Admin() {
                     </p>
                   </div>
                 </section>
+                </>
               )}
               {tab === "Help" && (
                 <section className="panel help-panel">

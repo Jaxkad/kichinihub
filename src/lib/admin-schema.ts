@@ -1,4 +1,16 @@
 import { z } from "zod";
+import { menuFontIds, textRoles } from "./menu-typography.ts";
+const font = z.enum(menuFontIds);
+export const menuTypographySchema = z.object({
+  categoryTitle: font.default("georgia"),
+  categorySubtitle: font.default("geist"),
+  itemName: font.default("geist"),
+  itemDescription: font.default("geist"),
+  sizes: z.partialRecord(z.enum(textRoles), z.enum(["small", "standard", "large"])).optional(),
+  weights: z.partialRecord(z.enum(textRoles), z.enum(["regular", "medium", "bold"])).optional(),
+  spacing: z.enum(["compact", "comfortable", "spacious"]).optional(),
+  headerAlign: z.enum(["left", "center"]).optional(),
+});
 const id = z
   .string()
   .min(1)
@@ -6,6 +18,7 @@ const id = z
   .regex(/^[a-zA-Z0-9_-]+$/);
 export const menuSchema = z
   .object({
+    typography: menuTypographySchema.optional(),
     sections: z
       .array(
         z.object({

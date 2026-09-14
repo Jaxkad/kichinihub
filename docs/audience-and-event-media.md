@@ -1,5 +1,13 @@
 # Audience insights and event media
 
+> **Current status: analytics disabled (14 September 2026).** The workspace
+> Audience insights tab, public consent/preferences UI, and browser collection
+> have been removed. The insights API is unavailable. POST /api/track discards
+> legacy requests with 204 without reading payloads or accessing Firestore.
+> Historical analytics data is retained. Event management and menu overview
+> counts remain available. The analytics description below is historical.
+
+
 Implemented locally; no deployment or live test data was created.
 
 ## Audience reports
