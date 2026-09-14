@@ -10,3 +10,7 @@
 .admin .workspace-app .workspace-app-status:empty { display: none; }
 .admin .workspace-app .workspace-app-status { margin-top: 12px; }
 .admin .workspace-app input { width: 100%; min-width: 0; font-size: 16px; }
+
+.admin .settings-panel > .workspace-app { margin-top: 0; }
+.admin .workspace-app-actions button { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+.admin .workspace-app-actions button svg { flex-shrink: 0; }

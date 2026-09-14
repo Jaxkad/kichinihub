@@ -283,6 +283,7 @@
   border-radius: 50%;
 }
 .admin-main {
+  width: 100%;
   padding: 38px 42px 24px;
   max-width: 1500px;
   margin: auto;
@@ -742,7 +743,6 @@ td b {
   max-width: 650px;
   width: 100%;
   min-width: 0;
-  overflow-x: hidden;
 }
 .settings-panel > p {
   margin: 9px 0 25px;

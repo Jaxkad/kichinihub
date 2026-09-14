@@ -83,3 +83,25 @@ opened on its heading. No menu, account, or event test data was published.
 Desktop browser emulation cannot certify actual iPhone keyboard animation or
 Safari auto-zoom behavior. A physical iPhone/iPad check remains appropriate for
 keyboard open/close, landscape dialogs, pinch zoom, and password autofill.
+
+## Settings overflow repair — 14 September 2026
+
+Reproduced with the Settings component hierarchy at 320px: .admin-main measured
+502px, while .workspace-main was 320px and clipped the excess. Its auto width and
+auto margins allowed the flex child to size from its content.
+
+Set the main content width to 100% (with the existing border-box and min-width: 0),
+removed the redundant outer appearance panel, allowed form grid children to shrink,
+and removed panel-level overflow hiding that could clip focus outlines. Install
+buttons wrap and the workspace app card no longer adds unnecessary top spacing
+inside its settings panel. Removed the manual CSS query suffix; Next handles CSS
+asset versioning.
+
+Production-rendered component checks, with Fine-tune text expanded: no horizontal
+overflow in the main container, settings panels, install card, selects or preview
+at 320, 390, 768, 1024 and 1440px. The temporary fixture used no live writes and was
+removed after verification.
+
+References:
+- https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex
+- https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/min-width

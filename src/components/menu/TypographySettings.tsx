@@ -2,7 +2,7 @@
 
 import { useId, useState } from "react";
 import { defaultMenuTypography, defaultTextWeights, menuFonts, menuTypographyStyle, textRoles, type TextRole, type TextSize, type TextWeight, type MenuFontId, type MenuTypography } from "@/lib/menu-typography";
-import "@/app/menu-typography.css?v=2";
+import "@/app/menu-typography.css";
 
 const labels: Record<TextRole, string> = {
   categoryTitle: "Category titles", categorySubtitle: "Category subtext",
