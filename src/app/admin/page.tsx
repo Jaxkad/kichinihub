@@ -1016,8 +1016,12 @@ export default function Admin() {
               )}
               {tab === "Settings" && (
                 <>
-                <WorkspaceApp />
-                <TypographySettings value={menu.typography} disabled={!canEdit || busy} onChange={(typography) => edit({ ...menu, typography })} />
+                <section className="panel settings-panel">
+                  <WorkspaceApp />
+                </section>
+                <section className="panel settings-panel">
+                  <TypographySettings value={menu.typography} disabled={!canEdit || busy} onChange={(typography) => edit({ ...menu, typography })} />
+                </section>
                 <section className="panel settings-panel">
                   <h2>Contact & social profiles</h2>
                   <p className="muted">

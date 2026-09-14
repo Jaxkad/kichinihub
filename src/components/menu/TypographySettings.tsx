@@ -18,7 +18,6 @@ export function TypographySettings({ value, disabled, onChange }: {
 }) {
   const settings = { ...defaultMenuTypography, ...value };
   const [role, setRole] = useState<TextRole>("categoryTitle");
-  const [device, setDevice] = useState<"mobile" | "desktop">("mobile");
   const hintId = useId();
   const overallSize = textRoles.every((key) => (settings.sizes?.[key] || "standard") === (settings.sizes?.categoryTitle || "standard"))
     ? settings.sizes?.categoryTitle || "standard" : "custom";
@@ -78,13 +77,10 @@ export function TypographySettings({ value, disabled, onChange }: {
       </details>
       <div className="typography-preview-heading">
         <h3>Draft preview</h3>
-        <div className="typography-device" role="group" aria-label="Preview width">
-          {(["mobile", "desktop"] as const).map((mode) => <button key={mode} type="button" aria-pressed={device === mode} onClick={() => setDevice(mode)}>{capitalise(mode)}</button>)}
-        </div>
       </div>
-      <p className="muted typography-preview-hint" id={hintId}>Sample content · {device === "desktop" ? "Scroll across if the preview is wider than your screen." : "Adapts to your screen width."}</p>
+      <p className="muted typography-preview-hint" id={hintId}>Sample content · Adapts to your screen width.</p>
       <div className="typography-preview-scroll" tabIndex={0} role="region" aria-label="Menu appearance preview" aria-describedby={hintId}>
-        <div className="typography-preview-frame" data-device={device}>
+        <div className="typography-preview-frame">
           <div className="typography-preview" style={menuTypographyStyle(settings)}>
             <div className="menu-type-header">
               <h2 className="menu-type-title">From the grill</h2>
