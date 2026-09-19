@@ -1505,3 +1505,8 @@ td b {
   .admin .dish-photo-preview { flex-wrap: wrap; }
   .admin .dish-photo-preview > div { flex-basis: 100%; }
 }
+
+.category-image-editor .dish-photo-preview { display: block; }
+.category-image-editor .dish-photo-preview > img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; border-radius: 4px; margin-bottom: 12px; }
+.dish-photo-editor progress { width: 100%; margin-top: 12px; accent-color: var(--wine); }
+.dish-photo-editor [role="status"] { font-size: 12px; line-height: 1.6; }

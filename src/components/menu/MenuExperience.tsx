@@ -19,6 +19,7 @@ import {
 import { FaInstagram, FaFacebook, FaTiktok } from "react-icons/fa";
 import "@/app/menu.css";
 import "@/app/menu-typography.css";
+import { CategoryCard } from "@/components/menu/CategoryCard";
 import { DishPhoto } from "@/components/menu/DishPhoto";
 import { PublicEvents } from "@/components/events/PublicEvents";
 
@@ -239,8 +240,7 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
             <>
               <div className="kh-category-grid">
                 {available.map((section) => (
-                  <Link className="kh-category-card" key={section.id}
-                    href={`/menu/${encodeURIComponent(section.id)}`}
+                  <CategoryCard section={section} key={section.id}
                     style={{
                       backgroundColor: themeFor(section.theme).bg,
                       color: cardTextColor(themeFor(section.theme).bg),
@@ -248,7 +248,7 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
                     <h2>{section.title}</h2>
                     {section.subtitle && <p>{section.subtitle}</p>}
                     <span>View menu <ArrowUpRight size={18} /></span>
-                  </Link>
+                  </CategoryCard>
                 ))}
               </div>
               {!available.length && <p>Our menus are being updated. Please check back soon.</p>}

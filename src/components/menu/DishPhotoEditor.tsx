@@ -6,11 +6,13 @@ import { uploadMedia } from "@/lib/upload-media";
 type Photo = { url: string; alt: string };
 export function DishPhotoEditor({
   photo,
+  categoryCard = false,
   name,
   onChange,
   onBusy,
 }: {
   photo?: Photo | null;
+  categoryCard?: boolean;
   name: string;
   onChange: (photo: Photo | null) => void;
   onBusy: (busy: boolean) => void;
@@ -19,26 +21,28 @@ export function DishPhotoEditor({
     [progress, setProgress] = useState(""),
     [error, setError] = useState("");
   return (
-    <fieldset className="dish-photo-editor">
+    <fieldset className={`dish-photo-editor${categoryCard ? " category-image-editor" : ""}`} aria-busy={uploading}>
       <legend>
-        Dish photo <span>Optional</span>
+        {categoryCard ? "Menu card image" : "Dish photo"} <span>Optional</span>
       </legend>
       <p>
-        Add a photo when you have one. Dishes without photos keep their clean
-        text layout. Use a clear, centred shot of the actual dish.
+        {categoryCard
+          ? "This image fills the whole card on the main menu, replacing its title and text. Include the category name in your artwork. Clicking anywhere on the card opens this category. The detail page keeps its heading."
+          : "Add a photo when you have one. Dishes without photos keep their clean text layout. Use a clear, centred shot of the actual dish."}
       </p>
+      {categoryCard && <p><strong>Recommended: 1200 × 600 pixels (2:1).</strong> Cards resize to fit the screen. Other shapes are cropped at the centre; keep words away from the edges.</p>}
       {photo && (
         <div className="dish-photo-preview">
           <Image
             unoptimized
             src={photo.url}
             alt={photo.alt}
-            width={140}
-            height={140}
+            width={categoryCard ? 1200 : 140}
+            height={categoryCard ? 600 : 140}
           />
           <div>
             <label>
-              Photo description
+              {categoryCard ? "Image description (for people using screen readers)" : "Photo description"}
               <input
                 required
                 maxLength={200}
@@ -50,15 +54,15 @@ export function DishPhotoEditor({
             <button
               type="button"
               disabled={uploading}
-              onClick={() => onChange(null)}
+              onClick={() => { onChange(null); setError(""); setProgress(categoryCard ? "Image removed. The original text card will return when you publish." : "Photo removed from your draft."); }}
             >
-              Remove photo
+              {categoryCard ? "Remove image · use text card" : "Remove photo"}
             </button>
           </div>
         </div>
       )}
       <label className="dish-photo-upload">
-        {photo ? "Replace photo" : "Add photo"}
+        {categoryCard ? (photo ? "Change card image" : "Upload card image") : (photo ? "Replace photo" : "Add photo")}
         <input
           type="file"
           disabled={uploading}
@@ -71,6 +75,7 @@ export function DishPhotoEditor({
             e.target.value = "";
             if (!file) return;
             setError("");
+            setProgress("");
             if (!mediaType(file.name)?.startsWith("image/")) {
               setError("Please choose a photo rather than a video.");
               return;
@@ -79,7 +84,8 @@ export function DishPhotoEditor({
             onBusy(true);
             try {
               const result = await uploadMedia(file, setProgress);
-              onChange({ url: result.url, alt: name.trim() || "Dish photo" });
+              onChange({ url: result.url, alt: name.trim() || (categoryCard ? "Menu category" : "Dish photo") });
+              setProgress("Upload complete. Check the preview, then save to draft and publish your changes.");
             } catch (err) {
               setError(
                 err instanceof Error
@@ -97,7 +103,10 @@ export function DishPhotoEditor({
         Up to 25 MB. Includes JPG, PNG, WebP, HEIC and HEIF. The photo goes on
         the menu when you publish your changes.
       </small>
-      {uploading && <p role="status">{progress}</p>}
+      <div role="status" aria-live="polite">
+        {uploading && <progress aria-label="Image upload" max={100} value={progress.match(/(\d+)%/) ? Number(progress.match(/(\d+)%/)![1]) : undefined} />}
+        {progress && !error && <p>{progress}</p>}
+      </div>
       {error && (
         <p role="alert" className="photo-error">
           {error}

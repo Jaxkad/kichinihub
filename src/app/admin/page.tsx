@@ -923,7 +923,7 @@ export default function Admin() {
                             >
                               <ArrowDown size={16} />
                             </button>
-                            <button onClick={() => setSection(s)}>Edit</button>
+                            <button onClick={() => setSection(s)}>Edit category / image</button>
                           </div>
                         )}
                       </div>
@@ -1292,6 +1292,7 @@ export default function Admin() {
             aria-labelledby="category-title"
             onSubmit={(e) => {
               e.preventDefault();
+              if (busy) return;
               edit({
                 ...menu,
                 sections: menu.sections.some((s) => s.id === section.id)
@@ -1308,6 +1309,7 @@ export default function Admin() {
               <button
                 type="button"
                 aria-label="Close category editor"
+                disabled={busy}
                 onClick={() => setSection(null)}
               >
                 <X />
@@ -1324,6 +1326,13 @@ export default function Admin() {
                 }
               />
             </label>
+            <DishPhotoEditor
+              categoryCard
+              photo={section.cardImage}
+              name={section.title}
+              onBusy={setBusy}
+              onChange={(cardImage) => setSection((current) => current ? { ...current, cardImage } : current)}
+            />
             <label>
               Subtitle
               <textarea
@@ -1364,6 +1373,7 @@ export default function Admin() {
             <div className="modal-actions">
               <button
                 className="danger"
+                disabled={busy}
                 type="button"
                 onClick={() => {
                   if (

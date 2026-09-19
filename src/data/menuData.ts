@@ -14,6 +14,7 @@ export interface MenuItem {
 }
 
 export interface MenuSection {
+  cardImage?: { url: string; alt: string } | null;
   id: string;
   title: string;
   subtitle?: string;

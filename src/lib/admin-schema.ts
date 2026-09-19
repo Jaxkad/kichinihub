@@ -16,6 +16,24 @@ const id = z
   .min(1)
   .max(128)
   .regex(/^[a-zA-Z0-9_-]+$/);
+export const menuPhotoSchema = z
+  .object({
+    url: z.url().refine((value) => {
+      try {
+        const url = new URL(value);
+        return (
+          url.protocol === "https:" &&
+          url.hostname === "firebasestorage.googleapis.com" &&
+          /^\/v0\/b\/kitchini-cf37a\.firebasestorage\.app\/o\/(event-media|event-images)%2F[^/]+\.(webp|jpg|jpeg|png|gif|avif)$/.test(
+            url.pathname,
+          )
+        );
+      } catch {
+        return false;
+      }
+    }, "Use a photo uploaded through the menu editor."),
+    alt: z.string().trim().min(1).max(200),
+  });
 export const menuSchema = z
   .object({
     typography: menuTypographySchema.optional(),
@@ -24,6 +42,7 @@ export const menuSchema = z
         z.object({
           id,
           title: z.string().trim().min(1).max(160),
+          cardImage: menuPhotoSchema.nullable().optional(),
           subtitle: z.string().max(1000).optional(),
           theme: z.enum([
             "red",
@@ -45,24 +64,7 @@ export const menuSchema = z
                 description: z.string().max(1000),
                 price: z.number().finite().min(0).max(100000000),
                 available: z.boolean().optional(),
-                photo: z
-                  .object({
-                    url: z.url().refine((value) => {
-                      try {
-                        const url = new URL(value);
-                        return (
-                          url.protocol === "https:" &&
-                          url.hostname === "firebasestorage.googleapis.com" &&
-                          /^\/v0\/b\/kitchini-cf37a\.firebasestorage\.app\/o\/(event-media|event-images)%2F[^/]+\.(webp|jpg|jpeg|png|gif|avif)$/.test(
-                            url.pathname,
-                          )
-                        );
-                      } catch {
-                        return false;
-                      }
-                    }, "Use a photo uploaded through the menu editor."),
-                    alt: z.string().trim().min(1).max(200),
-                  })
+                photo: menuPhotoSchema
                   .nullable()
                   .optional(),
                 dietary: z
