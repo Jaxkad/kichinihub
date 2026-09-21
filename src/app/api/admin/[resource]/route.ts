@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath, revalidateTag } from "next/cache";
+import { PUBLISHED_MENU_TAG } from "@/lib/published-menu-data";
 import { adminServices } from "@/lib/firebase-admin";
 import { menuSchema, userSchema } from "@/lib/admin-schema";
 import { menuData } from "@/data/menuData";
@@ -136,6 +138,11 @@ async function handle(
           at: new Date().toISOString(),
         });
       });
+      // Expire only after the transaction succeeds. Route Handlers cannot use
+      // updateTag; expire: 0 prevents serving old prices on the next request.
+      revalidateTag(PUBLISHED_MENU_TAG, { expire: 0 });
+      revalidatePath("/");
+      revalidatePath("/menu/[category]", "page");
       return NextResponse.json({ revision: revision + 1 });
     }
     if (resource === "users") {

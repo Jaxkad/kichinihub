@@ -2,9 +2,9 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { menuData } from "@/data/menuData";
+import type { MenuData } from "@/data/menuData";
+import { publishedMenuSchema, type PublishedMenu } from "@/lib/published-menu-data";
 import { menuTypographyStyle } from "@/lib/menu-typography";
-import { menuSchema } from "@/lib/admin-schema";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -63,7 +63,7 @@ const cardTextColor = (background: string) => {
   return luminance > 0.179 ? "#000000" : "#FFFFFF";
 };
 const socialLinks: {
-  key: keyof typeof menuData.social;
+  key: keyof MenuData["social"];
   url: (handle: string) => string;
   Icon: typeof FaInstagram;
   label: string;
@@ -98,11 +98,11 @@ const socialLinks: {
     socialId: "x",
   },
 ];
-export default function MenuExperience({ categoryId }: { categoryId?: string }) {
-  const [menu, setMenu] = useState(menuData),
+export default function MenuExperience({ categoryId, initialMenu }: { categoryId?: string; initialMenu: PublishedMenu }) {
+  const [menu, setMenu] = useState(initialMenu),
     [query, setQuery] = useState(""),
     [diet, setDiet] = useState("all"),
-    [connection, setConnection] = useState("loading");
+    [connection, setConnection] = useState("live");
   const category = categoryId;
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchToolbarRef = useRef<HTMLDivElement>(null);
@@ -132,9 +132,10 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
         doc(db, "menu/current"),
         (snapshot) => {
           if (snapshot.exists()) {
-            const parsed = menuSchema.safeParse(snapshot.data());
+            const parsed = publishedMenuSchema.safeParse(snapshot.data());
             if (parsed.success) {
-              setMenu(parsed.data as typeof menuData);
+              // A browser cache snapshot must never roll back the server-rendered menu.
+              setMenu((current) => parsed.data.revision > current.revision ? parsed.data : current);
               setConnection("live");
             } else {
               setConnection("fallback");
@@ -345,7 +346,7 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
               </div>
               {connection === "fallback" && (
                 <p className="kh-connection">
-                  Showing our saved menu. Please confirm current prices and
+                  Showing the last loaded menu. Please confirm current prices and
                   availability with the team.
                 </p>
               )}
