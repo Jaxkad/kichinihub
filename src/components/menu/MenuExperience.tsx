@@ -6,14 +6,14 @@ import type { MenuData } from "@/data/menuData";
 import { publishedMenuSchema, type PublishedMenu } from "@/lib/published-menu-data";
 import { menuTypographyStyle } from "@/lib/menu-typography";
 import Image from "next/image";
-import Link from "next/link";
+import { MenuLink as Link } from "./MenuLink";
+import { MenuHeader } from "./MenuHeader";
 import {
   ArrowUpRight,
   Search,
   X,
   Leaf,
   Flame,
-  Phone,
   SlidersHorizontal,
 } from "lucide-react";
 import { FaInstagram, FaFacebook, FaTiktok } from "react-icons/fa";
@@ -23,8 +23,6 @@ import { CategoryCard, CategoryHeader } from "@/components/menu/CategoryCard";
 import { DishPhoto } from "@/components/menu/DishPhoto";
 import { PublicEvents } from "@/components/events/PublicEvents";
 
-const sanitizePhone = (value: string) =>
-  value.replace(/[^0-9+]/g, "").slice(0, 20);
 const socialHandle = (value: string) =>
   encodeURIComponent(value.replace(/^@/, "").trim());
 /*
@@ -189,49 +187,11 @@ export default function MenuExperience({ categoryId, initialMenu }: { categoryId
     if (field instanceof HTMLElement) field.blur();
   };
   return (
-    <div className="kh-menu" id="top" style={menuTypographyStyle(menu.typography)}>
+    <div className="kh-menu kh-menu-ready" id="top" style={menuTypographyStyle(menu.typography)}>
       <a className="kh-skip" href="#menu">
         Skip to menu
       </a>
-      <div className={!categoryId ? "kh-header-image" : undefined}>
-      <header className={`kh-header${!categoryId ? " kh-header-overlay" : ""}`}>
-        {categoryId && <Link href="/" aria-label="Khichini Hub home">
-          <Image
-            src="/Khichinihublogo.png"
-            width={1280}
-            height={1280}
-            className="kh-logo"
-            alt="Khichini Hub"
-            priority
-            sizes="100px"
-          />
-        </Link>}
-        <nav aria-label="Main navigation">
-          <Link href="/#menu">The menu</Link>
-          <Link href="/#events">Events</Link>
-          <Link href={categoryId ? "/#plan-something-special" : "#plan-something-special"}>Plan something special here</Link>
-        </nav>
-        <a
-          className="kh-reserve"
-
-
-
-          href={`tel:${sanitizePhone(menu.social.rsvp)}`}
-        >
-          <Phone size={14} />
-          <span>Call us</span>
-          <ArrowUpRight size={16} />
-        </a>
-      </header>
-        {!categoryId && <Image
-          src="/header.jpg"
-          alt="Khichini Hub"
-          width={1343}
-          height={544}
-          className="kh-menu-banner"
-          priority
-        />}
-      </div>
+      <MenuHeader detail={!!categoryId} phone={menu.social.rsvp} />
       <main>
         <section
           className={`kh-menu-section${searching ? " kh-searching" : ""}`}

@@ -12,7 +12,7 @@ The landing page and category pages read `menu/current` on the server, validate 
 
 ## Loading and failures
 
-`loading.tsx` provides neutral, static 2:1 placeholders and an accessible status message when navigation needs to wait. Images also reserve their final proportions. No minimum loading delay or animation is imposed.
+`loading.tsx` provides neutral 2:1 placeholders, a shared page header, reserved search/dish rows, and an accessible status message when navigation needs to wait. Images also reserve their final proportions. No minimum loading delay is imposed. Placeholders pulse gently, and reduced-motion preferences disable motion. Link feedback follows Next.js useLinkStatus, appears after 150 ms only while navigation is pending, and occupies no layout space. Freshly loaded artwork fades in over 180 ms; already-loaded images do not replay that fade. Default framework prefetching, cancellation and scroll restoration are preserved.
 
 Cold data reads have an eight-second timeout. Missing/invalid published data and network errors propagate to a retry boundary; they are never replaced by sample prices or saved as successful fallback HTML. Next.js can continue serving an existing successful page during failed background regeneration. Browser subscription failures keep the last loaded published menu.
 
@@ -24,6 +24,7 @@ This application does not enable Cache Components. It uses the documented `fetch
 
 - [Next.js fetch caching, tags and revalidation](https://nextjs.org/docs/app/api-reference/functions/fetch)
 - [Next.js revalidateTag, including expire: 0 for Route Handlers](https://nextjs.org/docs/app/api-reference/functions/revalidateTag)
+- [Next.js navigation feedback](https://nextjs.org/docs/app/api-reference/functions/use-link-status)
 - [Next.js loading UI and streaming](https://nextjs.org/docs/app/api-reference/file-conventions/loading)
 - [Next.js error boundaries and retry](https://nextjs.org/docs/app/api-reference/file-conventions/error)
 - [Firebase REST API](https://firebase.google.com/docs/firestore/use-rest-api)

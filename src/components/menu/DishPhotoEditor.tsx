@@ -1,4 +1,5 @@
 "use client";
+import { feedbackMessage } from "@/lib/feedback";
 import Image from "next/image";
 import { useState } from "react";
 import { mediaTypes, mediaType } from "@/lib/media";
@@ -88,9 +89,7 @@ export function DishPhotoEditor({
               setProgress("Upload complete. Check the preview, then save to draft and publish your changes.");
             } catch (err) {
               setError(
-                err instanceof Error
-                  ? err.message
-                  : "We could not upload your photo. Please try again.",
+                feedbackMessage(err, "We couldn’t read or upload this photo. Try a JPG or PNG image instead."),
               );
             } finally {
               setUploading(false);

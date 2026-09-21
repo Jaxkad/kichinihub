@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { runInNewContext } from 'node:vm';
 import ts from 'typescript';
+import { validationFeedback } from '../src/lib/feedback.ts';
 import { menuData } from '../src/data/menuData.ts';
 import { parsePublishedMenuDocument, publishedMenuSchema, PUBLISHED_MENU_TAG } from '../src/lib/published-menu-data.ts';
 
@@ -70,6 +71,7 @@ function publishHandler({ fail = false, role = 'editor' } = {}) {
     '@/lib/admin-schema': requireSchema(),
     '@/data/menuData': {menuData},
     '@/lib/events': {},
+    '@/lib/feedback': {validationFeedback},
   });
   return { calls, send: (revision = 7) => route.PUT(new Request('http://localhost/api/admin/menu', {method:'PUT',headers:{authorization:'Bearer test'},body:JSON.stringify({...menuData,revision})}), {params:Promise.resolve({resource:'menu'})}) };
 }

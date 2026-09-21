@@ -5,6 +5,7 @@ import { adminServices } from "@/lib/firebase-admin";
 import { menuSchema, userSchema } from "@/lib/admin-schema";
 import { menuData } from "@/data/menuData";
 import { z } from "zod";
+import { validationFeedback } from "@/lib/feedback";
 import { eventSchema } from "@/lib/events";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -31,7 +32,7 @@ async function handle(
     try {
       uid = (await auth.verifyIdToken(token, true)).uid;
     } catch {
-      throw new ApiError(401, "Your session has expired. Please sign in again.");
+      throw new ApiError(401, "Please sign in again to continue.");
     }
     const actor = await auth.getUser(uid);
     const role = actor.customClaims?.role;
@@ -194,7 +195,7 @@ async function handle(
         return NextResponse.json({ ok: true });
       }
     }
-    throw new ApiError(405, "Method not allowed.");
+    throw new ApiError(405, "That action isn’t available here. Please refresh the page and try again.");
   } catch (error) {
     if (error instanceof ApiError)
       return NextResponse.json(
@@ -203,7 +204,7 @@ async function handle(
       );
     if (error instanceof z.ZodError)
       return NextResponse.json(
-        { error: error.issues.map((i) => i.message).join(" ") },
+        { error: validationFeedback(error.issues) },
         { status: 400 },
       );
     const code = (error as { code?: string }).code;

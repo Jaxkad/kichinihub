@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
         data.size > (data.type.startsWith("video/") ? VIDEO_LIMIT : IMAGE_LIMIT)
       )
         return NextResponse.json(
-          { error: "Media exceeds the upload size limit." },
+          { error: "This file is too large. Choose a photo under 25 MB or a video under 250 MB." },
           { status: 413 },
         );
       const day = new Date().toISOString().slice(0, 10);
@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
       ];
       if (!origin || !allowed.includes(origin))
         return NextResponse.json(
-          { error: "This site is not authorized to upload." },
+          { error: "Uploads aren’t available at this web address. Please use your usual staff workspace link." },
           { status: 403 },
         );
       const access = await getApp().options.credential?.getAccessToken();
@@ -115,7 +115,7 @@ export async function POST(req: NextRequest) {
       const data = doc.data();
       if (!data || data.uid !== uid || Date.now() - data.createdAt > 86400000)
         return NextResponse.json(
-          { error: "Your upload session has expired. Please try uploading again." },
+          { error: "This upload took too long. Please choose the file again and retry." },
           { status: 400 },
         );
       const file = bucket.file(data.path);
@@ -148,8 +148,8 @@ export async function POST(req: NextRequest) {
       {
         error:
           e instanceof z.ZodError
-            ? "Unsupported media or invalid upload request."
-            : "Upload could not be completed. Check your connection and Storage configuration.",
+            ? "We couldn’t use this file. Please choose a photo or video in one of the listed formats."
+            : "We couldn’t finish the upload. Please try again. If it keeps happening, contact the person who manages your website.",
       },
       { status: 400 },
     );

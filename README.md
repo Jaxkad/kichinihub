@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Khichini Hub
 
-## Getting Started
+Public restaurant menu and events site, with a staff workspace at `/admin` for menu editing, category artwork, events and team access.
 
-First, run the development server:
+## Local development
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Use a Node.js version supported by the installed Next.js release. Run `npm ci`, copy `.env.example` to `.env.local`, and configure the server's Firebase service account for staff features. Keep that private credential out of source control and never prefix it with `NEXT_PUBLIC_`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Run `npm run dev` and open http://localhost:3000. The published menu is publicly readable under the existing Firestore rules; admin operations require an authenticated account with the appropriate role. `scripts/set-admin.mjs` is a maintainer utility for initial account setup; review it before use.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Checks
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `node --experimental-strip-types --test tests/*.test.mjs`
+- `npx tsc --noEmit`
+- `npm run lint`
+- `npm run build`
+- `npm run start` to inspect the production build locally.
 
-## Learn More
+A production build reads the published menu. It must be available and valid; the build does not silently substitute sample content.
 
-To learn more about Next.js, take a look at the following resources:
+## Documentation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Published-menu caching, loading and verification](docs/menu-loading.md)
+- [Launch checks and client handoff](docs/client-handoff.md)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The final domain must be allowed by the upload endpoint, Storage CORS configuration and Firebase sign-in settings. Configure the hosting environment separately; do not deploy `.env` files or local emulator logs.

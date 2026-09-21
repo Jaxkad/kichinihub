@@ -1,4 +1,5 @@
 "use client";
+import { feedbackMessage } from "@/lib/feedback";
 import Link from "next/link";
 import { WorkspaceApp } from "@/components/workspace/WorkspaceApp";
 import { TypographySettings } from "@/components/menu/TypographySettings";
@@ -164,7 +165,7 @@ export default function Admin() {
     try {
       await fn();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "We encountered a problem. Please try again.");
+      setError(feedbackMessage(e));
     } finally {
       setBusy(false);
     }
@@ -180,7 +181,7 @@ export default function Admin() {
         }
       })
       .catch((e) => {
-        if (active) setError(e.message);
+        if (active) setError(feedbackMessage(e));
       });
     return () => {
       active = false;
@@ -197,7 +198,7 @@ export default function Admin() {
         }
       })
       .catch((e) => {
-        if (active) setError(e.message);
+        if (active) setError(feedbackMessage(e));
       });
     return () => {
       active = false;
@@ -1117,7 +1118,7 @@ export default function Admin() {
                       <b>Before you reach out</b>
                       <br />
                       Try signing out and back in, or refreshing the page.
-                      Most hiccups resolve themselves with a clean session.
+                      Publish any menu changes you want to keep before signing out or refreshing.
                     </p>
                   </div>
                 </section>

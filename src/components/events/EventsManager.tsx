@@ -1,4 +1,5 @@
 "use client";
+import { feedbackMessage } from "@/lib/feedback";
 import { uploadMedia } from "@/lib/upload-media";
 import { MEDIA_ACCEPT } from "@/lib/media";
 import Image from "next/image";
@@ -31,7 +32,7 @@ export function EventsManager({ api, canEdit }: Props) {
         if (active) setEvents(d as HubEvent[]);
       })
       .catch((e) => {
-        if (active) setError(e.message);
+        if (active) setError(feedbackMessage(e));
       })
       .finally(() => {
         if (active) setLoading(false);
@@ -47,7 +48,7 @@ export function EventsManager({ api, canEdit }: Props) {
     try {
       await fn();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "We could not save your event. Please try again.");
+      setError(feedbackMessage(e, "We couldn’t save your event. Please try again."));
     } finally {
       setBusy(false);
     }
@@ -177,13 +178,13 @@ export function EventsManager({ api, canEdit }: Props) {
             ))}
           </div>
           <fieldset className="event-images-editor">
-            <legend>Event media · up to 6</legend>
+            <legend>Photos and videos · up to 6</legend>
             <p className="muted">
               The first file is your cover. Images: JPG, PNG, WebP, GIF, AVIF,
               HEIC/HEIF, TIFF, BMP and SVG (25 MB max). Videos: MOV, MP4, M4V
-              and WebM (250 MB max). Apple photos are converted for web display;
-              some video codecs need H.264 MP4 for universal playback. Uploaded
-              media is public by link, including drafts.
+              and WebM (250 MB max). iPhone photos are prepared automatically.
+              If a video won’t play, try an MP4 version. Anyone with a direct link
+              can view an uploaded file, even before you publish the event.
             </p>
             <label>
               Add photos or videos

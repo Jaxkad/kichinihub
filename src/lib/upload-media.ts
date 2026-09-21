@@ -33,7 +33,7 @@ async function normalize(
     const width = tags.t256?.[0],
       height = tags.t257?.[0];
     if (!width || !height || width * height > 40000000)
-      throw new Error("This TIFF photo is too large. Please use a photo under 40 megapixels.");
+      throw new Error("This photo has too much detail to upload. Save a smaller copy and try again.");
     UTIF.decodeImage(bytes, frame);
     const canvas = document.createElement("canvas");
     canvas.width = frame.width;
@@ -59,7 +59,7 @@ async function normalize(
     image.src = url;
     await image.decode();
     if (image.naturalWidth * image.naturalHeight > 40000000)
-      throw new Error("This photo is too large. Please use a photo under 40 megapixels.");
+      throw new Error("This photo has too much detail to upload. Save a smaller copy and try again.");
     const ratio = Math.min(
       1,
       2400 / Math.max(image.naturalWidth, image.naturalHeight),
@@ -136,7 +136,7 @@ export async function uploadMedia(
         break;
       }
       if (state.status !== 308)
-        throw new Error("Your upload session has expired. Please try uploading again.");
+        throw new Error("This upload took too long. Please choose the file again and retry.");
       const last = state.headers.get("Range")?.match(/bytes=0-(\d+)/)?.[1];
       offset = last ? Number(last) + 1 : 0;
     }

@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
-import { useState, type CSSProperties, type ReactNode } from "react";
+import { MenuLink as Link } from "./MenuLink";
+import { useState, useRef, type CSSProperties, type ReactNode } from "react";
 import type { MenuSection } from "@/data/menuData";
 
 export function CategoryCard({ section, style, children }: {
@@ -10,6 +10,8 @@ export function CategoryCard({ section, style, children }: {
   children: ReactNode;
 }) {
   const [failedUrl, setFailedUrl] = useState<string | null>(null);
+  const [loadedUrl, setLoadedUrl] = useState<string | null>(null);
+  const alreadyVisible = useRef(new Set<string>());
   const photo = section.cardImage;
   const showImage = photo && photo.url !== failedUrl;
   return (
@@ -21,6 +23,9 @@ export function CategoryCard({ section, style, children }: {
     >
       {showImage ? <Image
         sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 1000px) calc((100vw - 78px) / 2), (max-width: 1320px) calc((100vw - 144px) / 3), 392px"
+        className={loadedUrl === photo.url ? "kh-artwork-loaded" : undefined}
+        ref={(image) => { if (image?.complete) alreadyVisible.current.add(photo.url); }}
+        onLoad={() => { if (!alreadyVisible.current.has(photo.url)) setLoadedUrl(photo.url); }}
         src={photo.url}
         alt={photo.alt}
         width={1200}
@@ -38,6 +43,8 @@ export function CategoryHeader({ section, style, children }: {
   children: ReactNode;
 }) {
   const [failedUrl, setFailedUrl] = useState<string | null>(null);
+  const [loadedUrl, setLoadedUrl] = useState<string | null>(null);
+  const alreadyVisible = useRef(new Set<string>());
   const photo = section?.cardImage;
   const showImage = photo && photo.url !== failedUrl;
   return (
@@ -45,6 +52,9 @@ export function CategoryHeader({ section, style, children }: {
       {showImage ? <>
         <h1 className="sr-only">{section.title}</h1>
         <Image
+          className={loadedUrl === photo.url ? "kh-artwork-loaded" : undefined}
+          ref={(image) => { if (image?.complete) alreadyVisible.current.add(photo.url); }}
+        onLoad={() => { if (!alreadyVisible.current.has(photo.url)) setLoadedUrl(photo.url); }}
           src={photo.url}
           alt={photo.alt}
           width={1200}

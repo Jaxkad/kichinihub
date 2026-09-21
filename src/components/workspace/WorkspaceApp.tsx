@@ -58,7 +58,7 @@ export function WorkspaceApp() {
     try {
       await event.prompt();
       const choice = await event.userChoice;
-      if (choice.outcome === "accepted") { setInstalled(true); setMessage("Workspace installation accepted."); }
+      if (choice.outcome === "accepted") { setInstalled(true); setMessage("Your workspace is being added. Look for it on your home screen."); }
       else setMessage("Installation cancelled. You can add it later from your browser menu.");
     } catch {
       setHelp(true);
