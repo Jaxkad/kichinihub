@@ -27,7 +27,7 @@ export function DishPhotoEditor({
       </legend>
       <p>
         {categoryCard
-          ? "This image fills the whole card on the main menu, replacing its title and text. Include the category name in your artwork. Clicking anywhere on the card opens this category. The detail page keeps its heading."
+          ? "This image fills the whole card on the main menu, replacing its title and text. Include the category name in your artwork. Clicking anywhere on the card opens this category. The same image also fills the header on the category page."
           : "Add a photo when you have one. Dishes without photos keep their clean text layout. Use a clear, centred shot of the actual dish."}
       </p>
       {categoryCard && <p><strong>Recommended: 1200 × 600 pixels (2:1).</strong> Cards resize to fit the screen. Other shapes are cropped at the centre; keep words away from the edges.</p>}

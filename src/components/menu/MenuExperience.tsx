@@ -19,7 +19,7 @@ import {
 import { FaInstagram, FaFacebook, FaTiktok } from "react-icons/fa";
 import "@/app/menu.css";
 import "@/app/menu-typography.css";
-import { CategoryCard } from "@/components/menu/CategoryCard";
+import { CategoryCard, CategoryHeader } from "@/components/menu/CategoryCard";
 import { DishPhoto } from "@/components/menu/DishPhoto";
 import { PublicEvents } from "@/components/events/PublicEvents";
 
@@ -257,10 +257,10 @@ export default function MenuExperience({ categoryId }: { categoryId?: string }) 
             <>
               <div className="kh-category-intro">
                 <Link className="kh-menu-back" href="/#menu">← All menus</Link>
-                <div className="kh-category-title" style={{ backgroundColor: categoryColors.bg, color: cardTextColor(categoryColors.bg) }}>
+                <CategoryHeader section={selectedCategory} style={{ backgroundColor: categoryColors.bg, color: cardTextColor(categoryColors.bg) }}>
                   <h1>{selectedCategory?.title || (connection === "loading" ? "Loading menu…" : "Menu unavailable")}</h1>
                   {selectedCategory?.subtitle && <p>{selectedCategory.subtitle}</p>}
-                </div>
+                </CategoryHeader>
               </div>
           <div className="kh-toolbar" ref={searchToolbarRef}>
             <form className="kh-search" role="search" onSubmit={commitSearch}

@@ -37,6 +37,17 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  images: {
+    // Uploaded files have unique URLs and a one-year upstream cache lifetime.
+    // Keep the global minimum shorter for local images replaced at the same path.
+    minimumCacheTTL: 86400,
+    formats: ["image/webp"],
+    remotePatterns: [{
+      protocol: "https",
+      hostname: "firebasestorage.googleapis.com",
+      pathname: "/v0/b/kitchini-cf37a.firebasestorage.app/o/**",
+    }],
+  },
   async headers() {
     return [
       {

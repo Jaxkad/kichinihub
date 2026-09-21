@@ -1274,3 +1274,6 @@
 /* Artwork has a predictable shape; text-only cards retain their original layout. */
 .kh-category-card.kh-category-card-image { padding: 0; border: 0; overflow: hidden; aspect-ratio: 2 / 1; align-self: start; }
 .kh-category-card-image > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.kh-category-title.kh-category-header-image { padding: 0; overflow: hidden; aspect-ratio: 2 / 1; }
+.kh-category-header-image > img { display: block; width: 100%; height: 100%; object-fit: cover; }

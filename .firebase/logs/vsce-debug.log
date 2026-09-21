@@ -57746,3 +57746,88 @@ E0919 16:33:34.919978   18218 watch.go:116] watchAllDir unable to walk dir `/Use
 [debug] [2026-09-19T14:34:34.920Z] E0919 16:34:34.920495   18218 watch.go:40] Failed to load config from "/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect": could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`
 E0919 16:34:34.920452   18218 watch.go:116] watchAllDir unable to walk dir `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`: lstat /Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect: no such file or directory
  {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0919 16:34:34.920495   18218 watch.go:40] Failed to load config from \"/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect\": could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`\nE0919 16:34:34.920452   18218 watch.go:116] watchAllDir unable to walk dir `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`: lstat /Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect: no such file or directory\n"}}
+[debug] [2026-09-19T14:34:44.920Z] E0919 16:34:44.920343   18218 watch.go:40] Failed to load config from "/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect": could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0919 16:34:44.920343   18218 watch.go:40] Failed to load config from \"/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect\": could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`\n"}}
+[debug] [2026-09-19T14:34:54.921Z] E0919 16:34:54.920843   18218 watch.go:40] Failed to load config from "/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect": could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0919 16:34:54.920843   18218 watch.go:40] Failed to load config from \"/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect\": could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`\n"}}
+[debug] [2026-09-19T14:35:04.920Z] E0919 16:35:04.920510   18218 watch.go:40] Failed to load config from "/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect": could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0919 16:35:04.920510   18218 watch.go:40] Failed to load config from \"/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect\": could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`\n"}}
+[debug] [2026-09-19T14:35:14.920Z] E0919 16:35:14.920651   18218 watch.go:40] Failed to load config from "/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect": could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0919 16:35:14.920651   18218 watch.go:40] Failed to load config from \"/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect\": could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`\n"}}
+[debug] [2026-09-19T14:35:24.921Z] E0919 16:35:24.920870   18218 watch.go:40] Failed to load config from "/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect": could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0919 16:35:24.920870   18218 watch.go:40] Failed to load config from \"/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect\": could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`\n"}}
+[debug] [2026-09-19T14:35:34.920Z] E0919 16:35:34.920454   18218 watch.go:40] Failed to load config from "/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect": could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`
+E0919 16:35:34.920412   18218 watch.go:116] watchAllDir unable to walk dir `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`: lstat /Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect: no such file or directory
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0919 16:35:34.920454   18218 watch.go:40] Failed to load config from \"/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect\": could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`\nE0919 16:35:34.920412   18218 watch.go:116] watchAllDir unable to walk dir `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`: lstat /Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect: no such file or directory\n"}}
+[info] [Firebase Plugin] Stopping SQL Connect toolkit
+[warn] ⚠  SQL Connect Emulator has exited upon receiving signal: SIGINT 
+[debug] [2026-09-19T15:07:50.193Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2026-09-19T15:07:53.022Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-09-19T15:07:53.023Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-09-19T15:07:53.023Z] > authorizing via signed-in user (jacksonk@25points.com)
+[debug] [2026-09-19T15:07:53.024Z] Checked if tokens are valid: false, expires at: 1789133539967
+[debug] [2026-09-19T15:07:53.024Z] Checked if tokens are valid: false, expires at: 1789133539967
+[debug] [2026-09-19T15:07:53.024Z] > refreshing access token with scopes: []
+[debug] [2026-09-19T15:07:53.025Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-09-19T15:07:53.025Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[info] [Firebase Plugin] Starting SQL Connect toolkit (version 3.4.16) on port 50002
+[debug] [2026-09-19T15:07:53.274Z] 'fdc build' failed with error: Unable to build your SQL Connect schema and connectors (exit code 1): E0919 17:07:53.272252   91341 cmd.go:43] Error loading data connect config: could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"'fdc build' failed with error: Unable to build your SQL Connect schema and connectors (exit code 1): E0919 17:07:53.272252   91341 cmd.go:43] Error loading data connect config: could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`\n"}}
+[debug] [2026-09-19T15:07:53.274Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-09-19T15:07:53.275Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-09-19T15:07:53.275Z] Starting SQL Connect Emulator with command {"binary":"/Users/jacksonkadyampakeni/.cache/firebase/emulators/dataconnect-emulator-3.4.16","args":["--logtostderr","-v=2","dev","--listen=localhost:50002","--config_dir=/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting SQL Connect Emulator with command {\"binary\":\"/Users/jacksonkadyampakeni/.cache/firebase/emulators/dataconnect-emulator-3.4.16\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50002\",\"--config_dir=/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: SQL Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"SQL Connect Emulator logging to dataconnect-debug.log"}}
+[debug] [2026-09-19T15:07:53.306Z] E0919 17:07:53.301676   91343 dev.go:80] Failed to load initial config from "/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect": could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`
+E0919 17:07:53.302135   91343 watch.go:116] watchAllDir unable to walk dir `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`: lstat /Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect: no such file or directory
+I0919 17:07:53.305320   91343 dev.go:101] Listening on address (HTTP + gRPC): 127.0.0.1:50002
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0919 17:07:53.301676   91343 dev.go:80] Failed to load initial config from \"/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect\": could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`\nE0919 17:07:53.302135   91343 watch.go:116] watchAllDir unable to walk dir `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`: lstat /Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect: no such file or directory\nI0919 17:07:53.305320   91343 dev.go:101] Listening on address (HTTP + gRPC): 127.0.0.1:50002\n"}}
+[debug] [2026-09-19T15:07:53.990Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2026-09-19T15:07:53.990Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[error] Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+[error] Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+[error] [Firebase Plugin] requireAuth error: Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+[info] [Firebase Plugin] Stopping SQL Connect toolkit
+[error] [Firebase Plugin]request to http://localhost:50002/v1/projects/p/locations/l/services/undefined:executeGraphqlRead failed, reason: socket hang up {"type":"system","errno":"ECONNRESET","code":"ECONNRESET"}
+[error] [Firebase Plugin] error:  {}
+[warn] ⚠  SQL Connect Emulator has exited upon receiving signal: SIGINT 
+[debug] [2026-09-21T12:54:47.139Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2026-09-21T12:54:49.393Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-09-21T12:54:49.394Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-09-21T12:54:49.394Z] > authorizing via signed-in user (jacksonk@25points.com)
+[debug] [2026-09-21T12:54:49.395Z] Checked if tokens are valid: false, expires at: 1789133539967
+[debug] [2026-09-21T12:54:49.396Z] Checked if tokens are valid: false, expires at: 1789133539967
+[debug] [2026-09-21T12:54:49.396Z] > refreshing access token with scopes: []
+[debug] [2026-09-21T12:54:49.397Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-09-21T12:54:49.397Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-09-21T12:54:49.401Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[info] [Firebase Plugin] Starting SQL Connect toolkit (version 3.4.16) on port 50001
+[debug] [2026-09-21T12:54:49.597Z] 'fdc build' failed with error: Unable to build your SQL Connect schema and connectors (exit code 1): E0921 14:54:49.595352   39647 cmd.go:43] Error loading data connect config: could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"'fdc build' failed with error: Unable to build your SQL Connect schema and connectors (exit code 1): E0921 14:54:49.595352   39647 cmd.go:43] Error loading data connect config: could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`\n"}}
+[debug] [2026-09-21T12:54:49.597Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-09-21T12:54:49.597Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-09-21T12:54:49.597Z] Starting SQL Connect Emulator with command {"binary":"/Users/jacksonkadyampakeni/.cache/firebase/emulators/dataconnect-emulator-3.4.16","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting SQL Connect Emulator with command {\"binary\":\"/Users/jacksonkadyampakeni/.cache/firebase/emulators/dataconnect-emulator-3.4.16\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: SQL Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"SQL Connect Emulator logging to dataconnect-debug.log"}}
+[debug] [2026-09-21T12:54:49.616Z] E0921 14:54:49.616252   39648 dev.go:80] Failed to load initial config from "/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect": could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0921 14:54:49.616252   39648 dev.go:80] Failed to load initial config from \"/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect\": could not find dataconnect.yaml in `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`\n"}}
+[debug] [2026-09-21T12:54:49.616Z] E0921 14:54:49.616800   39648 watch.go:116] watchAllDir unable to walk dir `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`: lstat /Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect: no such file or directory
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0921 14:54:49.616800   39648 watch.go:116] watchAllDir unable to walk dir `/Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect`: lstat /Users/jacksonkadyampakeni/development/fproj/kitchinhub/dataconnect: no such file or directory\n"}}
+[debug] [2026-09-21T12:54:49.618Z] I0921 14:54:49.618468   39648 dev.go:101] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0921 14:54:49.618468   39648 dev.go:101] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[error] [Firebase Plugin] error:  {}
+[debug] [2026-09-21T12:54:50.206Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2026-09-21T12:54:50.206Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[error] Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+[error] Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+[error] [Firebase Plugin] requireAuth error: Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
